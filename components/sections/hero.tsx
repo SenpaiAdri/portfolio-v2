@@ -1,4 +1,5 @@
 import { Activity, Maximize } from "lucide-react";
+import Image from "next/image";
 
 export default function Hero() {
   return (
@@ -12,9 +13,11 @@ export default function Hero() {
           </span>
         </div>
         <div className="w-[calc(8/21*100%)] h-full flex items-center justify-center">
-          <img
+          <Image
             src="/logo.svg"
             alt="profile"
+            width={250}
+            height={100}
             className="object-cover mx-auto"
           />
         </div>
@@ -27,8 +30,12 @@ export default function Hero() {
             <span className="text-red-500 text-2xl">---</span>
             <div className="flex flex-col ">
               <span className="text-red-500 text-2xl mb-2">[PATH]</span>
-              <span className="text-gray-500 text-2xl">Compute Science Student</span>
-              <span className="text-gray-500 text-2xl">Specialized in Mobile Programming</span>
+              <span className="text-gray-500 text-2xl">
+                Compute Science Student
+              </span>
+              <span className="text-gray-500 text-2xl">
+                Specialized in Mobile Programming
+              </span>
             </div>
           </div>
         </div>
@@ -36,33 +43,53 @@ export default function Hero() {
         <div className="w-[calc(8/21*100%)] h-full flex flex-col">
           <div className="w-full h-full flex flex-row border-b-red-600 border-b-4 border-dashed">
             <div className="w-full h-full flex flex-4 flex-col border-r-gray-600 border-r-4 border-dashed">
-              <div className="w-full h-full border-b-red-600 border-b-4 border-dashed">above</div>
+              <div className="w-full h-full border-b-red-600 border-b-4 border-dashed">
+                above
+              </div>
               <div className="w-full h-full">below</div>
             </div>
             <div className="w-content flex flex-5 flex-col text-right justify-center px-10 py-10">
-              <span className="text-gray-500 text-2xl
-              hover:text-red-500 hover:translate-x-[-10px] transition-all">[HOME]</span>
-              <span className="text-gray-500 text-2xl
-              hover:text-red-500 hover:translate-x-[-10px] transition-all">[PROJECTS]</span>
-              <span className="text-gray-500 text-2xl
-              hover:text-red-500 hover:translate-x-[-10px] transition-all">[ABOUT]</span>
-              <span className="text-gray-500 text-2xl
-              hover:text-red-500 hover:translate-x-[-10px] transition-all">[CONTACT]</span>
+              <span
+                className="text-gray-500 text-2xl
+              hover:text-red-500 hover:translate-x-2.5 transition-all"
+              >
+                [HOME]
+              </span>
+              <span
+                className="text-gray-500 text-2xl
+              hover:text-red-500 hover:translate-x-2.5 transition-all"
+              >
+                [PROJECTS]
+              </span>
+              <span
+                className="text-gray-500 text-2xl
+              hover:text-red-500 hover:translate-x-2.5 transition-all"
+              >
+                [ABOUT]
+              </span>
+              <span
+                className="text-gray-500 text-2xl
+              hover:text-red-500 hover:translate-x-2.5 transition-all"
+              >
+                [CONTACT]
+              </span>
             </div>
           </div>
           <div className="h-full flex items-end justify-end pr-15 pb-10">
             <Maximize className="text-red-500" size={35} />
           </div>
         </div>
-      </div >
+      </div>
       <div className="flex-[0.3] flex flex-col border-b-gray-600 border-b-4 border-dashed overflow-hidden relative">
-        <div className="absolute whitespace-nowrap animate-marquee text-[3rem] md:text-[6rem] text-[#18181c] select-none"
+        <div
+          className="absolute whitespace-nowrap animate-marquee text-[3rem] md:text-[6rem] text-[#18181c] select-none"
           style={{
-            WebkitTextStroke: '2px #333',
-            color: 'transparent',
+            WebkitTextStroke: "2px #333",
+            color: "transparent",
             left: 0,
-            minWidth: '100%',
-          }}>
+            minWidth: "100%",
+          }}
+        >
           ADRIAN ADRIAN ADRIAN ADRIAN ADRIAN ADRIAN ADRIAN
         </div>
         <style>
@@ -77,6 +104,6 @@ export default function Hero() {
           `}
         </style>
       </div>
-    </div >
+    </div>
   );
 }
