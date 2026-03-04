@@ -1,9 +1,10 @@
+import { RevealScrollTo } from "@/components/reveal-scroll";
 import { Activity, Maximize } from "lucide-react";
 import Image from "next/image";
 
 export default function Hero() {
   return (
-    <div className="h-screen w-screen flex flex-col overflow-x-hidden">
+    <div className="bg-[#0a0a0a] h-screen w-screen flex flex-col overflow-x-hidden">
       {/* row 1 */}
       <div className="flex-1 flex flex-row border-b-red-600 border-b-4 border-dashed">
         <div className="w-[calc(13/21*100%)] h-full border-r-gray-600 border-r-4 border-dashed flex items-end justify-end pb-10 pr-15">
@@ -53,25 +54,26 @@ export default function Hero() {
                 className="text-gray-500 text-2xl
               hover:text-red-500 hover:translate-x-2.5 transition-all"
               >
-                [HOME]
+                [ HOME ]
+              </span>
+              <RevealScrollTo
+                to={1}
+                className="text-gray-500 text-2xl
+              hover:text-red-500 hover:translate-x-2.5 transition-all cursor-pointer"
+              >
+                [ PROJECTS ]
+              </RevealScrollTo>
+              <span
+                className="text-gray-500 text-2xl
+              hover:text-red-500 hover:translate-x-2.5 transition-all"
+              >
+                [ ABOUT ]
               </span>
               <span
                 className="text-gray-500 text-2xl
               hover:text-red-500 hover:translate-x-2.5 transition-all"
               >
-                [PROJECTS]
-              </span>
-              <span
-                className="text-gray-500 text-2xl
-              hover:text-red-500 hover:translate-x-2.5 transition-all"
-              >
-                [ABOUT]
-              </span>
-              <span
-                className="text-gray-500 text-2xl
-              hover:text-red-500 hover:translate-x-2.5 transition-all"
-              >
-                [CONTACT]
+                [ CONTACT ]
               </span>
             </div>
           </div>

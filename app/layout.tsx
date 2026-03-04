@@ -20,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${brunoAceSC.className} antialiased`}>{children}</body>
+      <body className={`${brunoAceSC.className} antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }

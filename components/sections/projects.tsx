@@ -2,7 +2,10 @@ import Image from "next/image";
 
 export default function Projects() {
   return (
-    <div className="h-screen w-screen flex flex-col overflow-x-hidden">
+    <div
+      id="PROJECTS"
+      className="h-screen w-screen flex flex-col overflow-x-hidden"
+    >
       {/* row 1 */}
       <div className="flex-1 flex flex-row border-b-red-600 border-b-4 border-dashed">
         <div className="w-[calc(13/21*100%)] h-full border-r-gray-600 border-r-4 border-dashed flex items-center justify-center">
@@ -14,10 +17,11 @@ export default function Projects() {
         <div className="w-[calc(8/21*100%)] h-full flex items-center justify-center">
           <div className="relative w-[90%]">
             <Image
-              src="/logo.svg"
+              src="/pasada-driver-logo.svg"
               alt="profile"
-              fill
-              className="object-contain"
+              width={250}
+              height={100}
+              className="object-cover mx-auto"
             />
           </div>
         </div>
