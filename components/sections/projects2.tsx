@@ -1,13 +1,13 @@
 import Image from "next/image";
 
-export default function Projects() {
+export default function Projects2() {
   return (
     <div
       id="PROJECTS"
       className="bg-[#0a0a0a] h-screen w-screen flex flex-col overflow-x-hidden"
     >
       {/* row 1 */}
-      <div className="flex-1 flex flex-row border-b-red-600 border-b-4 border-dashed">
+      <div className="bg-[#0a0a0a] flex-1 flex flex-row border-b-red-600 border-b-4 border-dashed">
         <div className="w-[calc(13/21*100%)] h-full border-r-gray-600 border-r-4 border-dashed flex items-center justify-center">
           <span className="text-gray-500 text-3xl flex">
             [Projects Images Here]
@@ -20,7 +20,7 @@ export default function Projects() {
 
           <div className="relative w-[90%]">
             <Image
-              src="/pasada-driver-logo.svg"
+              src="/ai-blogpost-logo.svg"
               alt="profile"
               width={250}
               height={100}
@@ -36,16 +36,16 @@ export default function Projects() {
           {/* Title */}
           <div className="flex flex-col gap-10">
             <div className="flex justify-end">
-              <span className="text-green-400 text-[2.2rem] tracking-wider text-right font-black">
-                PASADA <span className="text-green-400">[DRIVER SIDE]</span>
+              <span className="text-red-400 text-[2.2rem] tracking-wider text-right font-black">
+                AI BLOGPOST <span className="text-red-400">[GENERATOR]</span>
               </span>
             </div>
             {/* Subtitle */}
             <div className="flex justify-end mt-5">
               <span className="text-gray-400 text-lg md:text-xl tracking-wide text-right leading-tight max-w-[90%]">
-                RIDE HAILING AND FLEET MANAGEMENT
+                AI-POWERED BLOGPOST GENERATOR
                 <br className="hidden md:block" />
-                PLATFORM FOR MODERNIZED JEEPNEY SERVICES
+                FOR CONTENT CREATORS
               </span>
             </div>
           </div>
@@ -53,11 +53,11 @@ export default function Projects() {
           {/* Date Row */}
           <div className="flex justify-between items-center mt-14 px-2">
             <span className="text-gray-400 text-lg tracking-widest">
-              SEPTEMBER-2024
+              JANUARY-2026
             </span>
             <span className="text-gray-400 text-lg tracking-widest">--</span>
             <span className="text-gray-400 text-lg tracking-widest">
-              NOVEMBER-2025
+              PRESENT
             </span>
           </div>
         </div>
@@ -65,12 +65,12 @@ export default function Projects() {
         <div className="w-[calc(8/21*100%)] h-full flex flex-col">
           <div className="w-full h-full flex flex-row border-b-red-600 border-b-4 border-dashed">
             <div className="w-full h-full flex flex-4 flex-col border-r-gray-600 border-r-4 border-dashed">
-              <div className="w-full h-1/2 flex items-center justify-center border-b-red-600 border-b-4 border-dashed text-green-400">
+              <div className="w-full h-1/2 flex items-center justify-center border-b-red-600 border-b-4 border-dashed text-red-400">
                 #
               </div>
               {/* slide up this part on next page */}
-              <div className="w-full h-1/2 flex items-center justify-center text-green-400">
-                1
+              <div className="w-full h-1/2 flex items-center justify-center text-red-400">
+                2
               </div>
             </div>
             <div className="w-content flex flex-5 flex-col text-center justify-center">

@@ -9,22 +9,45 @@ export default function RevealScroll({ children }: { children: React.ReactNode }
   const sections = React.Children.toArray(children);
   const sectionCount = sections.length;
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [leavingIndex, setLeavingIndex] = useState<number | null>(null);
+  const [enteringIndex, setEnteringIndex] = useState<number | null>(null);
+  const [direction, setDirection] = useState<"down" | "up">("down");
+  const [phase, setPhase] = useState<"idle" | "enter">("idle");
   const isAnimatingRef = useRef(false);
   const lastWheelRef = useRef(0);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const goToSection = useCallback(
     (nextIndex: number) => {
       if (nextIndex < 0 || nextIndex >= sectionCount) return;
       if (isAnimatingRef.current) return;
       isAnimatingRef.current = true;
+      
+      const dir = nextIndex > currentIndex ? "down" : "up";
+      setDirection(dir);
+      setLeavingIndex(currentIndex);
+      setEnteringIndex(nextIndex);
       setCurrentIndex(nextIndex);
-      const t = setTimeout(() => {
+      setPhase("idle");
+      
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(() => {
+        setLeavingIndex(null);
+        setEnteringIndex(null);
         isAnimatingRef.current = false;
       }, SECTION_TRANSITION_MS);
-      return () => clearTimeout(t);
     },
-    [sectionCount]
+    [sectionCount, currentIndex]
   );
+
+  useEffect(() => {
+    if (enteringIndex !== null && direction === "up") {
+      const timer = setTimeout(() => {
+        setPhase("enter");
+      }, 20);
+      return () => clearTimeout(timer);
+    }
+  }, [enteringIndex, direction]);
 
   const goNext = useCallback(() => {
     goToSection(currentIndex + 1);
@@ -43,6 +66,7 @@ export default function RevealScroll({ children }: { children: React.ReactNode }
     return () => {
       document.documentElement.style.overflow = prevOverflow;
       document.body.style.overflow = prevBodyOverflow;
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);
 
@@ -127,19 +151,35 @@ export default function RevealScroll({ children }: { children: React.ReactNode }
       className="bg-[#0a0a0a] fixed inset-0 overflow-hidden touch-none"
       style={{ touchAction: "none" }}
     >
-      {sections.map((section, i) => (
-        <div
-          key={i}
-          className="absolute inset-0 w-full h-full transition-transform ease-[cubic-bezier(0.33,1,0.68,1)]"
-          style={{
-            transform: `translateY(${i < currentIndex ? "-100%" : "0%"})`,
-            transitionDuration: `${SECTION_TRANSITION_MS}ms`,
-            zIndex: currentIndex === i ? sectionCount + 1 : sectionCount - i,
-          }}
-        >
-          {section}
-        </div>
-      ))}
+      {sections.map((section, i) => {
+        let translateY = "0%";
+
+        if (i === enteringIndex && direction === "up") {
+          translateY = phase === "enter" ? "0%" : "-100%";
+        } else if (i === leavingIndex && direction === "down") {
+          translateY = "-100%";
+        } else if (i < currentIndex) {
+          translateY = "-100%";
+        }
+
+        const isAnimating = 
+          (i === leavingIndex && direction === "down") || 
+          (i === enteringIndex && direction === "up" && phase === "enter");
+
+        return (
+          <div
+            key={i}
+            className={`absolute inset-0 w-full h-full ${isAnimating ? 'transition-transform ease-[cubic-bezier(0.33,1,0.68,1)]' : ''}`}
+            style={{
+              transform: `translateY(${translateY})`,
+              transitionDuration: isAnimating ? `${SECTION_TRANSITION_MS}ms` : '0ms',
+              zIndex: sectionCount - i,
+            }}
+          >
+            {section}
+          </div>
+        );
+      })}
     </div>
   );
 }
