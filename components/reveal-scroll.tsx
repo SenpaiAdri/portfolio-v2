@@ -1,9 +1,30 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 const SECTION_TRANSITION_MS = 700;
 const WHEEL_THROTTLE_MS = 800;
+
+export type ScrollDirection = "next" | "prev";
+export type SectionScrollHandler = (direction: ScrollDirection) => boolean;
+
+type ScrollContextValue = {
+  registerHandler: (index: number, handler: SectionScrollHandler) => void;
+  unregisterHandler: (index: number) => void;
+  currentIndex: number;
+};
+
+const ScrollContext = React.createContext<ScrollContextValue | null>(null);
+
+export function useSectionScroll(index: number, handler: SectionScrollHandler) {
+  const ctx = React.useContext(ScrollContext);
+
+  useEffect(() => {
+    if (!ctx) return;
+    ctx.registerHandler(index, handler);
+    return () => ctx.unregisterHandler(index);
+  }, [ctx, index, handler]);
+}
 
 export default function RevealScroll({ children }: { children: React.ReactNode }) {
   const sections = React.Children.toArray(children);
@@ -16,20 +37,21 @@ export default function RevealScroll({ children }: { children: React.ReactNode }
   const isAnimatingRef = useRef(false);
   const lastWheelRef = useRef(0);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const handlersRef = useRef<Record<number, SectionScrollHandler>>({});
 
   const goToSection = useCallback(
     (nextIndex: number) => {
       if (nextIndex < 0 || nextIndex >= sectionCount) return;
       if (isAnimatingRef.current) return;
       isAnimatingRef.current = true;
-      
+
       const dir = nextIndex > currentIndex ? "down" : "up";
       setDirection(dir);
       setLeavingIndex(currentIndex);
       setEnteringIndex(nextIndex);
       setCurrentIndex(nextIndex);
       setPhase("idle");
-      
+
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
         setLeavingIndex(null);
@@ -49,13 +71,37 @@ export default function RevealScroll({ children }: { children: React.ReactNode }
     }
   }, [enteringIndex, direction]);
 
-  const goNext = useCallback(() => {
+  const goNextSection = useCallback(() => {
     goToSection(currentIndex + 1);
   }, [currentIndex, goToSection]);
 
-  const goPrev = useCallback(() => {
+  const goPrevSection = useCallback(() => {
     goToSection(currentIndex - 1);
   }, [currentIndex, goToSection]);
+
+  const registerHandler = useCallback((index: number, handler: SectionScrollHandler) => {
+    handlersRef.current[index] = handler;
+  }, []);
+
+  const unregisterHandler = useCallback((index: number) => {
+    delete handlersRef.current[index];
+  }, []);
+
+  const handleIntent = useCallback(
+    (intentDirection: ScrollDirection) => {
+      const handler = handlersRef.current[currentIndex];
+      if (handler) {
+        const consumed = handler(intentDirection);
+        if (consumed) return;
+      }
+      if (intentDirection === "next") {
+        goNextSection();
+      } else {
+        goPrevSection();
+      }
+    },
+    [currentIndex, goNextSection, goPrevSection]
+  );
 
   // Lock body scroll so only section reveal is used
   useEffect(() => {
@@ -77,10 +123,10 @@ export default function RevealScroll({ children }: { children: React.ReactNode }
       if (now - lastWheelRef.current < WHEEL_THROTTLE_MS) return;
       if (e.deltaY > 20) {
         lastWheelRef.current = now;
-        goNext();
+        handleIntent("next");
       } else if (e.deltaY < -20) {
         lastWheelRef.current = now;
-        goPrev();
+        handleIntent("prev");
       }
     };
 
@@ -89,22 +135,22 @@ export default function RevealScroll({ children }: { children: React.ReactNode }
     container.addEventListener("wheel", handleWheel, { passive: false });
 
     return () => container.removeEventListener("wheel", handleWheel);
-  }, [goNext, goPrev]);
+  }, [handleIntent]);
 
   // Keyboard: ArrowDown / ArrowUp
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowDown") {
         e.preventDefault();
-        goNext();
+        handleIntent("next");
       } else if (e.key === "ArrowUp") {
         e.preventDefault();
-        goPrev();
+        handleIntent("prev");
       }
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [goNext, goPrev]);
+  }, [handleIntent]);
 
   // Touch: swipe up = next, swipe down = prev
   const touchStartY = useRef(0);
@@ -118,8 +164,8 @@ export default function RevealScroll({ children }: { children: React.ReactNode }
       if (isAnimatingRef.current) return;
       const delta = touchStartY.current - e.changedTouches[0].clientY;
       const threshold = 50;
-      if (delta > threshold) goNext();
-      else if (delta < -threshold) goPrev();
+      if (delta > threshold) handleIntent("next");
+      else if (delta < -threshold) handleIntent("prev");
     };
     container.addEventListener("touchstart", handleTouchStart, { passive: true });
     container.addEventListener("touchend", handleTouchEnd, { passive: true });
@@ -127,7 +173,7 @@ export default function RevealScroll({ children }: { children: React.ReactNode }
       container.removeEventListener("touchstart", handleTouchStart);
       container.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [goNext, goPrev]);
+  }, [handleIntent]);
 
   // Allow sections to request navigation (e.g. nav links)
   useEffect(() => {
@@ -145,42 +191,58 @@ export default function RevealScroll({ children }: { children: React.ReactNode }
       );
   }, [goToSection]);
 
+  const contextValue = useMemo(
+    () => ({
+      registerHandler,
+      unregisterHandler,
+      currentIndex,
+    }),
+    [registerHandler, unregisterHandler, currentIndex]
+  );
+
   return (
-    <div
-      id="reveal-scroll-container"
-      className="bg-[#0a0a0a] fixed inset-0 overflow-hidden touch-none"
-      style={{ touchAction: "none" }}
-    >
-      {sections.map((section, i) => {
-        let translateY = "0%";
+    <ScrollContext.Provider value={contextValue}>
+      <div
+        id="reveal-scroll-container"
+        className="bg-[#0a0a0a] fixed inset-0 overflow-hidden touch-none"
+        style={{ touchAction: "none" }}
+      >
+        {sections.map((section, i) => {
+          let translateY = "0%";
 
-        if (i === enteringIndex && direction === "up") {
-          translateY = phase === "enter" ? "0%" : "-100%";
-        } else if (i === leavingIndex && direction === "down") {
-          translateY = "-100%";
-        } else if (i < currentIndex) {
-          translateY = "-100%";
-        }
+          if (i === enteringIndex && direction === "up") {
+            translateY = phase === "enter" ? "0%" : "-100%";
+          } else if (i === leavingIndex && direction === "down") {
+            translateY = "-100%";
+          } else if (i < currentIndex) {
+            translateY = "-100%";
+          }
 
-        const isAnimating = 
-          (i === leavingIndex && direction === "down") || 
-          (i === enteringIndex && direction === "up" && phase === "enter");
+          const isAnimating =
+            (i === leavingIndex && direction === "down") ||
+            (i === enteringIndex && direction === "up" && phase === "enter");
 
-        return (
-          <div
-            key={i}
-            className={`absolute inset-0 w-full h-full ${isAnimating ? 'transition-transform ease-[cubic-bezier(0.33,1,0.68,1)]' : ''}`}
-            style={{
-              transform: `translateY(${translateY})`,
-              transitionDuration: isAnimating ? `${SECTION_TRANSITION_MS}ms` : '0ms',
-              zIndex: sectionCount - i,
-            }}
-          >
-            {section}
-          </div>
-        );
-      })}
-    </div>
+          return (
+            <div
+              key={i}
+              className={`absolute inset-0 w-full h-full ${isAnimating
+                  ? "transition-transform ease-[cubic-bezier(0.33,1,0.68,1)]"
+                  : ""
+                }`}
+              style={{
+                transform: `translateY(${translateY})`,
+                transitionDuration: isAnimating
+                  ? `${SECTION_TRANSITION_MS}ms`
+                  : "0ms",
+                zIndex: sectionCount - i,
+              }}
+            >
+              {section}
+            </div>
+          );
+        })}
+      </div>
+    </ScrollContext.Provider>
   );
 }
 
@@ -222,3 +284,4 @@ export function RevealScrollTo({
     </Tag>
   );
 }
+

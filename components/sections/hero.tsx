@@ -1,4 +1,4 @@
-import { RevealScrollTo } from "@/components/reveal-scroll";
+import { RevealScrollTo } from "../reveal-scroll";
 import { Activity, Maximize } from "lucide-react";
 import Image from "next/image";
 
@@ -49,29 +49,29 @@ export default function Hero() {
               </div>
               <div className="w-full h-full">below</div>
             </div>
-            <div className="w-content flex flex-5 flex-col text-right justify-center px-10 py-10">
+            <div className="w-content flex flex-5 flex-col text-right  gap-1 justify-center px-10 py-10">
               <span
-                className="text-gray-500 text-2xl
-              hover:text-red-500 hover:translate-x-2.5 transition-all"
+                className="text-2xl
+              text-red-500 -translate-x-4 transition-all"
               >
                 [ HOME ]
               </span>
               <RevealScrollTo
                 to={1}
                 className="text-gray-500 text-2xl
-              hover:text-red-500 hover:translate-x-2.5 transition-all cursor-pointer"
+              hover:text-red-500 hover:-translate-x-4 transition-all cursor-pointer"
               >
                 [ PROJECTS ]
               </RevealScrollTo>
               <span
                 className="text-gray-500 text-2xl
-              hover:text-red-500 hover:translate-x-2.5 transition-all"
+              hover:text-red-500 hover:-translate-x-4 transition-all"
               >
                 [ ABOUT ]
               </span>
               <span
                 className="text-gray-500 text-2xl
-              hover:text-red-500 hover:translate-x-2.5 transition-all"
+              hover:text-red-500 hover:-translate-x-4 transition-all"
               >
                 [ CONTACT ]
               </span>
