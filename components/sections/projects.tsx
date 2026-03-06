@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Github, Link } from "lucide-react";
 import { useCallback, useState } from "react";
 import { projects } from "@/data/projects";
 import {
@@ -158,34 +159,74 @@ export default function Projects() {
               transition: "all 0.7s ease-in-out"
             }}>
             <div className="w-full h-full flex flex-4 flex-col border-r-gray-600 border-r-4 border-dashed">
-              <div className={`w-full h-1/2 flex items-center justify-center border-b-4 border-dashed text-4xl font-black`}
+              <div className="w-full h-1/2 flex flex-col items-center justify-center overflow-hidden py-5 gap-5 border-b-4 border-dashed"
                 style={{
-                  color: projects[currentProject].color,
+                  borderColor: projects[currentProject].color,
                   transition: "all 0.7s ease-in-out",
-                  borderColor: projects[currentProject].color
                 }}>
-                #
+                {/* Website slider (top) */}
+                <div className="relative w-full flex-[.5] overflow-hidden m-x-auto">
+                  {projects.map((project, index) => (
+                    <div
+                      key={`${project.name}-website`}
+                      className="absolute inset-0 flex items-center justify-center transition-transform"
+                      style={{
+                        transform: `translateY(${(index - currentProject) * 100}%)`,
+                        transition: "all 0.7s ease-in-out",
+                      }}
+                    >
+                      {project.website ? (
+                        <a
+                          href={project.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-gray-400 hover:underline flex items-center gap-2"
+                        >
+                          <Link />Website
+                        </a>
+                      ) : (
+                        <span className="text-sm text-gray-600 select-none">
+                          Website
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
-
-              {/* Project number slider */}
-              <div className="relative w-full h-1/2 overflow-hidden">
-                {projects.map((project, index) => (
-                  <div
-                    key={project.name}
-                    className={`absolute inset-0 flex items-center justify-center transition-transform text-4xl font-black`}
-                    style={{
-                      transform: `translateY(${(index - currentProject) * 100}%)`,
-                      color: project.color,
-                      transition: "all 0.7s ease-in-out",
-                    }}
-                  >
-                    {index + 1}
-                  </div>
-                ))}
+              {/* GitHub link slider */}
+              <div className="w-full h-1/2 flex flex-col items-center justify-center overflow-hidden py-5 gap-5">
+                {/* GitHub slider (bottom) */}
+                <div className="relative w-full flex-[.5] overflow-hidden">
+                  {projects.map((project, index) => (
+                    <div
+                      key={`${project.name}-github`}
+                      className="absolute inset-0 flex items-center justify-center transition-transform"
+                      style={{
+                        transform: `translateY(${(index - currentProject) * 100}%)`,
+                        transition: "all 0.7s ease-in-out",
+                      }}
+                    >
+                      {project.github ? (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-400 hover:underline flex items-center gap-2"
+                        >
+                          <Github /> GitHub
+                        </a>
+                      ) : (
+                        <span className="text-sm text-gray-600 select-none">
+                          GitHub
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className="w-content flex flex-5 flex-col text-center justify-center">
+            <div className="w-content flex flex-5 flex-col text-center justify-center gap-5">
               <span
                 className="text-4xl"
                 style={{
@@ -196,6 +237,33 @@ export default function Projects() {
               >
                 PROJECT
               </span>
+              <div className="flex items-center justify-center">
+                <div className={`text-4xl font-black`}
+                  style={{
+                    color: projects[currentProject].color,
+                    transition: "all 0.7s ease-in-out",
+                    borderColor: projects[currentProject].color
+                  }}>
+                  #
+                </div>
+                {/* Project number slider */}
+                <div className="relative inline-flex items-center justify-center overflow-hidden tabular-nums">
+                  <span className="invisible text-4xl font-black">88</span>
+                  {projects.map((project, index) => (
+                    <div
+                      key={project.name}
+                      className={`absolute inset-0 flex items-center justify-center transition-transform text-4xl font-black`}
+                      style={{
+                        transform: `translateY(${(index - currentProject) * 100}%)`,
+                        color: project.color,
+                        transition: "all 0.7s ease-in-out",
+                      }}
+                    >
+                      {index + 1}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
