@@ -165,63 +165,85 @@ export default function Projects() {
                   transition: "all 0.7s ease-in-out",
                 }}>
                 {/* Website slider (top) */}
-                <div className="relative w-full flex-[.5] overflow-hidden m-x-auto">
-                  {projects.map((project, index) => (
-                    <div
-                      key={`${project.name}-website`}
-                      className="absolute inset-0 flex items-center justify-center transition-transform"
-                      style={{
-                        transform: `translateY(${(index - currentProject) * 100}%)`,
-                        transition: "all 0.7s ease-in-out",
-                      }}
-                    >
-                      {project.website ? (
-                        <a
-                          href={project.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm text-gray-400 hover:underline flex items-center gap-2"
-                        >
-                          <Link />Website
-                        </a>
-                      ) : (
-                        <span className="text-sm text-gray-600 select-none">
-                          Website
-                        </span>
-                      )}
-                    </div>
-                  ))}
+                <div className="flex items-center justify-center gap-2">
+                  <Link
+                    size={20}
+                    className="shrink-0"
+                    style={{
+                      color: projects[currentProject].color,
+                      transition: "all 0.7s ease-in-out"
+                    }}
+                  />
+                  <div className="relative min-h-6 min-w-20 flex-1 overflow-hidden">
+                    {projects.map((project, index) => (
+                      <div
+                        key={`${project.name}-website`}
+                        className="absolute inset-0 flex items-center justify-center transition-transform"
+                        style={{
+                          transform: `translateY(${(index - currentProject) * 100}%)`,
+                          transition: "all 0.7s ease-in-out",
+                        }}
+                      >
+                        {project.website ? (
+                          <a
+                            href={project.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-gray-400 hover:underline flex items-center gap-2"
+                          >
+
+                            Website
+                          </a>
+                        ) : (
+                          <span className="text-gray-600 select-none">
+                            Website
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
               {/* GitHub link slider */}
               <div className="w-full h-1/2 flex flex-col items-center justify-center overflow-hidden py-5 gap-5">
                 {/* GitHub slider (bottom) */}
-                <div className="relative w-full flex-[.5] overflow-hidden">
-                  {projects.map((project, index) => (
-                    <div
-                      key={`${project.name}-github`}
-                      className="absolute inset-0 flex items-center justify-center transition-transform"
-                      style={{
-                        transform: `translateY(${(index - currentProject) * 100}%)`,
-                        transition: "all 0.7s ease-in-out",
-                      }}
-                    >
-                      {project.github ? (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-gray-400 hover:underline flex items-center gap-2"
-                        >
-                          <Github /> GitHub
-                        </a>
-                      ) : (
-                        <span className="text-sm text-gray-600 select-none">
-                          GitHub
-                        </span>
-                      )}
-                    </div>
-                  ))}
+                <div className="flex items-center justify-center gap-2">
+                  <Github
+                    size={20}
+                    className="shrink-0"
+                    style={{
+                      color: projects[currentProject].color,
+                      transition: "all 0.7s ease-in-out"
+                    }}
+                  />
+                  <div className="relative min-h-6 min-w-20 flex-1 overflow-hidden">
+                    {projects.map((project, index) => (
+                      <div
+                        key={`${project.name}-github`}
+                        className="absolute inset-0 flex items-center justify-center transition-transform"
+                        style={{
+                          transform: `translateY(${(index - currentProject) * 100}%)`,
+                          transition: "all 0.7s ease-in-out",
+                        }}
+                      >
+                        {project.github ? (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-gray-400 hover:underline flex items-center gap-2"
+                          >
+
+                            GitHub
+                          </a>
+                        ) : (
+                          <span className="text-gray-600 select-none">
+                            GitHub
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
