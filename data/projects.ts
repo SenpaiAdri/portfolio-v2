@@ -8,11 +8,11 @@ export const projects = [
     color: "#00CC58",
   },
   {
-    name: "AI Blogpost Generator",
-    description: "AI-powered blogpost generator for content creators",
+    name: "AI Blog Post",
+    description: "An AI-Powered Blogging Channel for Latest Tech News and Updates",
     image: "/ai-blogpost-logo.svg",
     date: "January 2026 - Present",
-    role: "Mobile Developer",
+    role: "Full Stack Developer",
     color: "#ff0000",
   },
 ];

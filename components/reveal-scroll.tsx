@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-const SECTION_TRANSITION_MS = 700;
+const SECTION_TRANSITION_MS = 1000;
 const WHEEL_THROTTLE_MS = 800;
 
 export type ScrollDirection = "next" | "prev";
@@ -226,7 +226,8 @@ export default function RevealScroll({ children }: { children: React.ReactNode }
             <div
               key={i}
               className={`absolute inset-0 w-full h-full ${isAnimating
-                  ? "transition-transform ease-[cubic-bezier(0.33,1,0.68,1)]"
+                  ? "transition-transform ease-in-out"
+                // [cubic - bezier(0.33, 1, 0.68, 1)]
                   : ""
                 }`}
               style={{

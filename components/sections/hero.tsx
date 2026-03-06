@@ -7,10 +7,10 @@ export default function Hero() {
     <div className="bg-[#0a0a0a] h-screen w-screen flex flex-col overflow-x-hidden">
       {/* row 1 */}
       <div className="flex-1 flex flex-row border-b-red-600 border-b-4 border-dashed">
-        <div className="w-[calc(13/21*100%)] h-full border-r-gray-600 border-r-4 border-dashed flex items-end justify-end pb-10 pr-15">
-          <span className="text-gray-500 text-3xl flex">
+        <div className="w-[calc(13/21*100%)] h-full border-r-gray-600 border-r-4 border-dashed flex items-end justify-end pb-20 pr-40">
+          <span className="text-gray-500 text-4xl flex font-medium tracking-widest">
             <Activity className="mr-4 text-red-500" size={35} />
-            Welcome to my Portfolio
+            WELCOME TO MY PORTFOLIO
           </span>
         </div>
         <div className="w-[calc(8/21*100%)] h-full flex items-center justify-center">
@@ -26,8 +26,22 @@ export default function Hero() {
 
       {/* row 2 */}
       <div className="flex-1 flex flex-row border-b-gray-600 border-b-4 border-dashed">
-        <div className="w-[calc(13/21*100%)] h-full flex flex-row items-end justify-end gap-10 p-10  border-r-gray-600 border-r-4 border-dashed f">
-          <div className="flex flex-row items-start justify-end gap-10">
+        <div
+          className="w-[calc(13/21*100%)] h-full flex flex-row items-end justify-end gap-10 p-10 border-r-gray-600 border-r-4 border-dashed relative overflow-hidden"
+        >
+          {/* Grid lines background using a pseudo-grid SVG pattern */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 z-0 pointer-events-none select-none"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, rgba(255,25,25,0.1) 2px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,25,25,0.1) 2px, transparent 1px)
+              `,
+              backgroundSize: '60px 60px',
+            }}
+          />
+          <div className="flex flex-row items-start justify-end gap-10 z-10 relative">
             <span className="text-red-500 text-2xl">---</span>
             <div className="flex flex-col ">
               <span className="text-red-500 text-2xl mb-2">[PATH]</span>

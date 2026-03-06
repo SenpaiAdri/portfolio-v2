@@ -43,7 +43,11 @@ export default function Projects() {
       className="bg-[#0a0a0a] h-screen w-screen flex flex-col overflow-x-hidden"
     >
       {/* row 1 */}
-      <div className="flex-1 flex flex-row border-b-red-600 border-b-4 border-dashed">
+      <div className="flex-1 flex flex-row border-b-4 border-dashed"
+        style={{
+          borderColor: projects[currentProject].color,
+          transition: "all 0.7s ease-in-out"
+        }}>
         <div className="w-[calc(13/21*100%)] h-full border-r-gray-600 border-r-4 border-dashed flex items-center justify-center">
           <span className="text-gray-500 text-3xl flex">
             [Projects Images Here]
@@ -52,11 +56,11 @@ export default function Projects() {
 
         {/* Project Logo slider */}
         <div className="w-[calc(8/21*100%)] h-full flex items-center justify-center">
-          <div className="relative w-[90%] h-[60%] overflow-hidden">
+          <div className="relative w-[90%] h-[15%] overflow-hidden">
             {projects.map((project, index) => (
               <div
                 key={project.name}
-                className="absolute inset-0 flex items-center justify-center transition-transform duration-700 ease-[cubic-bezier(0.33,1,0.68,1)]"
+                className="absolute inset-0 flex items-center justify-center transition-transform duration-1000 ease-in-out"
                 style={{
                   transform: `translateY(${(index - currentProject) * 100}%)`,
                 }}
@@ -77,13 +81,13 @@ export default function Projects() {
       {/* row 2 */}
       <div className="flex-1 flex flex-row border-b-gray-600 border-b-4 border-dashed">
         {/* Left: title, description, date */}
-        <div className="w-[calc(13/21*100%)] h-full flex flex-col justify-between border-r-gray-600 border-r-4 border-dashed py-10 px-15">
-          {/* Title + description slider */}
-          <div className="relative flex-1 overflow-hidden">
+        <div className="w-[calc(13/21*100%)] h-full flex flex-col  border-r-gray-600 border-r-4 border-dashed py-10 px-15">
+          {/* Title slider */}
+          <div className="relative flex-[.12] overflow-hidden">
             {projects.map((project, index) => (
               <div
                 key={project.name}
-                className="absolute inset-0 flex flex-col gap-10 transition-transform duration-700 ease-[cubic-bezier(0.33,1,0.68,1)]"
+                className="absolute inset-0 flex flex-col transition-transform ease-in-out duration-1000"
                 style={{
                   transform: `translateY(${(index - currentProject) * 100}%)`,
                   color: project.color,
@@ -95,7 +99,22 @@ export default function Projects() {
                     {project.name.toUpperCase()}
                   </span>
                 </div>
-                <div className="flex justify-end mt-5">
+              </div>
+            ))}
+          </div>
+
+          {/* Description slider */}
+          <div className="relative flex-[.12] mt-5 overflow-hidden">
+            {projects.map((project, index) => (
+              <div
+                key={project.name}
+                className="absolute inset-0 flex flex-col transition-transform ease-in-out duration-1000"
+                style={{
+                  transform: `translateY(${(index - currentProject) * 100}%)`,
+                  color: project.color,
+                }}
+              >
+                <div className="flex justify-end">
                   <span className="text-gray-400 text-lg md:text-xl tracking-wide text-right leading-tight max-w-[90%]">
                     {project.description.toUpperCase()}
                   </span>
@@ -104,14 +123,14 @@ export default function Projects() {
             ))}
           </div>
 
-          {/* Date row slider */}
-          <div className="relative h-[3rem] mt-6 overflow-hidden">
+          {/* Timeline slider */}
+          <div className="relative h-8 overflow-hidden mt-auto">
             {projects.map((project, index) => {
               const [start, end] = project.date.split(" - ");
               return (
                 <div
                   key={project.name}
-                  className="absolute inset-0 flex justify-between items-center px-2 transition-transform duration-700 ease-[cubic-bezier(0.33,1,0.68,1)]"
+                  className="absolute inset-0 flex justify-between items-center transition-transform duration-1000 ease-in-out"
                   style={{
                     transform: `translateY(${(index - currentProject) * 100}%)`,
                   }}
@@ -133,10 +152,18 @@ export default function Projects() {
 
         {/* Right: project index + role */}
         <div className="w-[calc(8/21*100%)] h-full flex flex-col">
-          <div className="w-full h-full flex flex-row border-b-red-600 border-b-4 border-dashed">
+          <div className="w-full h-full flex flex-row border-b-4 border-dashed"
+            style={{
+              borderColor: projects[currentProject].color,
+              transition: "all 0.7s ease-in-out"
+            }}>
             <div className="w-full h-full flex flex-4 flex-col border-r-gray-600 border-r-4 border-dashed">
-              <div className={`w-full h-1/2 flex items-center justify-center border-b-red-600 border-b-4 border-dashed`}
-                style={{ color: projects[currentProject].color }}>
+              <div className={`w-full h-1/2 flex items-center justify-center border-b-4 border-dashed text-4xl font-black`}
+                style={{
+                  color: projects[currentProject].color,
+                  transition: "all 0.7s ease-in-out",
+                  borderColor: projects[currentProject].color
+                }}>
                 #
               </div>
 
@@ -145,10 +172,11 @@ export default function Projects() {
                 {projects.map((project, index) => (
                   <div
                     key={project.name}
-                    className={`absolute inset-0 flex items-center justify-center transition-transform duration-700 ease-[cubic-bezier(0.33,1,0.68,1)]`}
+                    className={`absolute inset-0 flex items-center justify-center transition-transform text-4xl font-black`}
                     style={{
                       transform: `translateY(${(index - currentProject) * 100}%)`,
                       color: project.color,
+                      transition: "all 0.7s ease-in-out",
                     }}
                   >
                     {index + 1}
@@ -158,25 +186,36 @@ export default function Projects() {
             </div>
 
             <div className="w-content flex flex-5 flex-col text-center justify-center">
-              <span className="text-3xl text-gray-400 font-black">PROJECT</span>
+              <span
+                className="text-4xl"
+                style={{
+                  WebkitTextStroke: `2px ${projects[currentProject].color}`,
+                  color: "transparent",
+                  transition: "all 0.7s ease-in-out",
+                }}
+              >
+                PROJECT
+              </span>
             </div>
           </div>
 
           {/* Role slider */}
           <div className="relative h-full overflow-hidden">
-            {projects.map((project, index) => (
-              <div
-                key={project.name}
-                className="absolute inset-0 flex items-center justify-center transition-transform duration-700 ease-[cubic-bezier(0.33,1,0.68,1)]"
-                style={{
-                  transform: `translateY(${(index - currentProject) * 100}%)`,
-                }}
-              >
-                <span className="text-3xl text-gray-400">
-                  {project.role.toUpperCase()}
-                </span>
-              </div>
-            ))}
+            <div className="h-10 w-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden ">
+              {projects.map((project, index) => (
+                <div
+                  key={project.name}
+                  className="absolute inset-0 flex items-center justify-center transition-transform duration-1000 ease-in-out"
+                  style={{
+                    transform: `translateY(${(index - currentProject) * 100}%)`,
+                  }}
+                >
+                  <span className="text-3xl text-gray-400">
+                    {project.role.toUpperCase()}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
