@@ -66,7 +66,7 @@ export default function Projects() {
                 alt={projects[currentProject].name}
                 width={250}
                 height={100}
-                className="object-cover mx-auto"
+                className=""
               />
             </div>
 
@@ -108,6 +108,7 @@ export default function Projects() {
               transition: '--grid-color 0.7s ease-in-out',
             } as React.CSSProperties}
           />
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] bg-black/20" />
           {/* Title slider */}
           <div className="relative flex-[.12] overflow-hidden">
             {projects.map((project, index) => (

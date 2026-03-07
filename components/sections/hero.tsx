@@ -1,19 +1,32 @@
 import { RevealScrollTo } from "../reveal-scroll";
 import { Activity, Maximize } from "lucide-react";
 import Image from "next/image";
+import TextType from "../TextType";
 
 export default function Hero() {
   return (
     <div className="bg-[#0a0a0a] h-screen w-screen flex flex-col overflow-x-hidden">
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black/40" />
       {/* row 1 */}
       <div className="flex-1 flex flex-row border-b-red-600 border-b-4 border-dashed">
-        <div className="w-[calc(13/21*100%)] h-full border-r-gray-600 border-r-4 border-dashed flex items-end justify-end pb-20 pr-40">
-          <span className="text-gray-500 text-4xl flex font-medium tracking-widest">
+
+        {/* Welcome message */}
+        <div className="w-[calc(13/21*100%)] h-full border-r-gray-600 border-r-4 border-dashed flex items-end pb-20 pr-20">
+          <span className="flex items-center justify-start text-gray-500 text-4xl ml-auto font-medium tracking-widest whitespace-nowrap text-left">
             <Activity className="mr-4 text-red-500" size={35} />
-            WELCOME TO MY PORTFOLIO
+            <TextType
+              text={["WELCOME TO MY PORTFOLIO!", "I'M ADRIAN", "A COMPUTER SCIENCE STUDENT", "Full-Stack Developer"]}
+              typingSpeed={200}
+              pauseDuration={2100}
+              showCursor
+              cursorCharacter="▎"
+              deletingSpeed={30}
+              variableSpeed={{ min: 55, max: 125 }}
+              cursorBlinkDuration={0.5}
+            />
           </span>
         </div>
+
+        {/* Profile image */}
         <div className="w-[calc(8/21*100%)] h-full flex items-center justify-center">
           <Image
             src="/logo.svg"
@@ -30,7 +43,7 @@ export default function Hero() {
         <div
           className="w-[calc(13/21*100%)] h-full flex flex-row items-end justify-end gap-10 p-10 border-r-gray-600 border-r-4 border-dashed relative overflow-hidden"
         >
-          {/* Grid lines background using a pseudo-grid SVG pattern */}
+          {/* Grid lines background */}
           <div
             aria-hidden="true"
             className="absolute inset-0 z-0 pointer-events-none select-none"
@@ -42,13 +55,17 @@ export default function Hero() {
               backgroundSize: '60px 60px',
             }}
           />
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black/20" />
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] bg-black/20" />
 
+          {/* Path */}
           <div className="flex flex-row items-start justify-end gap-10 z-10 relative">
 
             <span className="text-red-500 text-2xl">---</span>
             <div className="flex flex-col ">
-              <span className="text-red-500 text-2xl mb-2">[PATH]</span>
+              <TextType text="[PATH]"
+                loop={false}
+                typingSpeed={200}
+                className="text-red-500 text-2xl mb-2" />
               <span className="text-gray-500 text-2xl">
                 Compute Science Student
               </span>
@@ -59,6 +76,7 @@ export default function Hero() {
           </div>
         </div>
 
+        {/* Navigation */}
         <div className="w-[calc(8/21*100%)] h-full flex flex-col">
           <div className="w-full h-full flex flex-row border-b-red-600 border-b-4 border-dashed">
             <div className="w-full h-full flex flex-4 flex-col border-r-gray-600 border-r-4 border-dashed">
@@ -68,12 +86,11 @@ export default function Hero() {
               <div className="w-full h-full">below</div>
             </div>
             <div className="w-content flex flex-5 flex-col text-right  gap-1 justify-center px-10 py-10">
-              <span
-                className="text-2xl
-              text-red-500 -translate-x-4 transition-all"
-              >
-                [ HOME ]
-              </span>
+              <TextType
+                text="[ HOME ]"
+                loop={false}
+                typingSpeed={200}
+                className="text-red-500 text-2xl mb-2" />
               <RevealScrollTo
                 to={1}
                 className="text-gray-500 text-2xl
@@ -100,6 +117,8 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
+      {/* Marquee */}
       <div className="flex-[0.3] flex flex-col border-b-gray-600 border-b-4 border-dashed overflow-hidden relative">
         <div
           className="absolute whitespace-nowrap animate-marquee text-[3rem] md:text-[6rem] text-[#18181c] select-none"
