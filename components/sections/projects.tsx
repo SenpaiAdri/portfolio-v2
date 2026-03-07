@@ -57,7 +57,19 @@ export default function Projects() {
 
         {/* Project Logo slider */}
         <div className="w-[calc(8/21*100%)] h-full flex items-center justify-center">
-          <div className="relative w-[90%] h-[15%] overflow-hidden">
+          {/* Container shrinks to the logo content using an invisible sizing placeholder */}
+          <div className="relative w-fit h-[15%] max-w-full overflow-hidden flex items-center justify-center">
+            {/* Invisible element that defines the container's intrinsic size */}
+            <div className="invisible">
+              <Image
+                src={projects[currentProject].image}
+                alt={projects[currentProject].name}
+                width={250}
+                height={100}
+                className="object-cover mx-auto"
+              />
+            </div>
+
             {projects.map((project, index) => (
               <div
                 key={project.name}
@@ -82,7 +94,20 @@ export default function Projects() {
       {/* row 2 */}
       <div className="flex-1 flex flex-row border-b-gray-600 border-b-4 border-dashed">
         {/* Left: title, description, date */}
-        <div className="w-[calc(13/21*100%)] h-full flex flex-col  border-r-gray-600 border-r-4 border-dashed py-10 px-15">
+        <div className="relative w-[calc(13/21*100%)] h-full flex flex-col  border-r-gray-600 border-r-4 border-dashed py-10 px-15">
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 z-0 pointer-events-none select-none"
+            style={{
+              '--grid-color': `${projects[currentProject].color}26`,
+              backgroundImage: `
+                linear-gradient(to right, var(--grid-color) 2px, transparent 2px),
+                linear-gradient(to bottom, var(--grid-color) 2px, transparent 2px)
+              `,
+              backgroundSize: '60px 60px',
+              transition: '--grid-color 0.7s ease-in-out',
+            } as React.CSSProperties}
+          />
           {/* Title slider */}
           <div className="relative flex-[.12] overflow-hidden">
             {projects.map((project, index) => (

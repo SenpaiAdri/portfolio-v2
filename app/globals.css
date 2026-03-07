@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@property --grid-color {
+  syntax: "<color>";
+  initial-value: transparent;
+  inherits: false;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

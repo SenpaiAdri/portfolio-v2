@@ -5,6 +5,7 @@ import Image from "next/image";
 export default function Hero() {
   return (
     <div className="bg-[#0a0a0a] h-screen w-screen flex flex-col overflow-x-hidden">
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black/40" />
       {/* row 1 */}
       <div className="flex-1 flex flex-row border-b-red-600 border-b-4 border-dashed">
         <div className="w-[calc(13/21*100%)] h-full border-r-gray-600 border-r-4 border-dashed flex items-end justify-end pb-20 pr-40">
@@ -41,7 +42,10 @@ export default function Hero() {
               backgroundSize: '60px 60px',
             }}
           />
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black/20" />
+
           <div className="flex flex-row items-start justify-end gap-10 z-10 relative">
+
             <span className="text-red-500 text-2xl">---</span>
             <div className="flex flex-col ">
               <span className="text-red-500 text-2xl mb-2">[PATH]</span>
