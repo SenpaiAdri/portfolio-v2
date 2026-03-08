@@ -1,5 +1,5 @@
 import { RevealScrollTo } from "../reveal-scroll";
-import { Activity, Maximize } from "lucide-react";
+import { Activity, Github, Linkedin, Maximize } from "lucide-react";
 import Image from "next/image";
 import TextType from "../TextType";
 
@@ -57,7 +57,7 @@ export default function Hero() {
           />
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] bg-black/20" />
 
-          {/* Path */}
+          {/* Path/Education Background */}
           <div className="flex flex-row items-start justify-end gap-10 z-10 relative">
 
             <span className="text-red-500 text-2xl">---</span>
@@ -76,15 +76,25 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Navigation */}
+        {/* Navigation and Socials */}
         <div className="w-[calc(8/21*100%)] h-full flex flex-col">
           <div className="w-full h-full flex flex-row border-b-red-600 border-b-4 border-dashed">
+            
+            {/* Socials */}
             <div className="w-full h-full flex flex-4 flex-col border-r-gray-600 border-r-4 border-dashed">
-              <div className="w-full h-full border-b-red-600 border-b-4 border-dashed">
-                above
+              <div className="w-full h-full flex items-center justify-center border-b-red-600 border-b-4 border-dashed ">
+                <a href="https://github.com/SenpaiAdri" target="_blank" rel="noopener noreferrer">
+                  <Github className="text-red-500" size={35} />
+                </a>
               </div>
-              <div className="w-full h-full">below</div>
+              <div className="w-full h-full flex items-center justify-center">
+                <a href="https://www.linkedin.com/in/eydriannn/" target="_blank" rel="noopener noreferrer">
+                  <Linkedin className="text-red-500" size={35} />
+                </a>
+              </div>
             </div>
+
+            {/* Navigation */}
             <div className="w-content flex flex-5 flex-col text-right  gap-1 justify-center px-10 py-10">
               <TextType
                 text="[ HOME ]"
