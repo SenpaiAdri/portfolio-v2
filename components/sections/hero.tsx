@@ -79,9 +79,9 @@ export default function Hero() {
         {/* Navigation and Socials */}
         <div className="w-[calc(8/21*100%)] h-full flex flex-col">
           <div className="w-full h-full flex flex-row border-b-red-600 border-b-4 border-dashed">
-            
+
             {/* Socials */}
-            <div className="w-full h-full flex flex-4 flex-col border-r-gray-600 border-r-4 border-dashed">
+            <div className="w-full h-full flex flex-col items-center justify-center overflow-hidden border-r-gray-600 border-r-4 border-dashed">
               <div className="w-full h-full flex items-center justify-center border-b-red-600 border-b-4 border-dashed ">
                 <a href="https://github.com/SenpaiAdri" target="_blank" rel="noopener noreferrer">
                   <Github className="text-red-500" size={35} />
@@ -95,32 +95,34 @@ export default function Hero() {
             </div>
 
             {/* Navigation */}
-            <div className="w-content flex flex-5 flex-col text-right  gap-1 justify-center px-10 py-10">
-              <TextType
-                text="[ HOME ]"
-                loop={false}
-                typingSpeed={200}
-                className="text-red-500 text-2xl mb-2" />
-              <RevealScrollTo
-                to={1}
-                className="text-gray-500 text-2xl
+            <section className="w-full h-full flex flex-col items-end justify-center overflow-hidden gap-5">
+              <div className="w-full h-full flex flex-col items-end justify-center overflow-hidden gap-2 pr-10">
+                <TextType
+                  text="[ HOME ]"
+                  loop={false}
+                  typingSpeed={200}
+                  className="text-red-500 text-2xl" />
+                <RevealScrollTo
+                  to={1}
+                  className="text-gray-500 text-2xl
               hover:text-red-500 hover:-translate-x-4 transition-all cursor-pointer"
-              >
-                [ PROJECTS ]
-              </RevealScrollTo>
-              <span
-                className="text-gray-500 text-2xl
+                >
+                  [ PROJECTS ]
+                </RevealScrollTo>
+                <span
+                  className="text-gray-500 text-2xl
               hover:text-red-500 hover:-translate-x-4 transition-all"
-              >
-                [ ABOUT ]
-              </span>
-              <span
-                className="text-gray-500 text-2xl
+                >
+                  [ ABOUT ]
+                </span>
+                <span
+                  className="text-gray-500 text-2xl
               hover:text-red-500 hover:-translate-x-4 transition-all"
-              >
-                [ CONTACT ]
-              </span>
-            </div>
+                >
+                  [ CONTACT ]
+                </span>
+              </div>
+            </section>
           </div>
           <div className="h-full flex items-end justify-end pr-15 pb-10">
             <Maximize className="text-red-500" size={35} />

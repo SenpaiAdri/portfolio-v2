@@ -184,13 +184,15 @@ export default function Projects() {
               borderColor: projects[currentProject].color,
               transition: "all 0.7s ease-in-out"
             }}>
-            <div className="w-full h-full flex flex-4 flex-col border-r-gray-600 border-r-4 border-dashed">
-              <div className="w-full h-1/2 flex flex-col items-center justify-center overflow-hidden py-5 gap-5 border-b-4 border-dashed"
+
+            {/* Project Links */}
+            <div className="w-full h-full flex flex-5 flex-col border-r-gray-600 border-r-4 border-dashed">
+              <div className="w-full h-full flex flex-col items-center justify-center overflow-hidden py-5 gap-5 border-b-4 border-dashed"
                 style={{
                   borderColor: projects[currentProject].color,
                   transition: "all 0.7s ease-in-out",
                 }}>
-                {/* Website slider (top) */}
+                {/* Website Content */}
                 <div className="flex items-center justify-center gap-2">
                   <Link
                     size={20}
@@ -231,8 +233,7 @@ export default function Projects() {
                 </div>
               </div>
               {/* GitHub link slider */}
-              <div className="w-full h-1/2 flex flex-col items-center justify-center overflow-hidden py-5 gap-5">
-                {/* GitHub slider (bottom) */}
+              <div className="w-full h-full flex flex-col items-center justify-center overflow-hidden py-5 gap-5">
                 <div className="flex items-center justify-center gap-2">
                   <Github
                     size={20}
@@ -274,7 +275,8 @@ export default function Projects() {
               </div>
             </div>
 
-            <div className="w-content flex flex-5 flex-col text-center justify-center gap-5">
+            {/* Project Index */}
+            <div className="flex flex-5 flex-col text-center justify-center gap-5">
               <span
                 className="text-4xl"
                 style={{
