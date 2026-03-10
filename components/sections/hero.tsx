@@ -1,9 +1,14 @@
+"use client";
+
 import { RevealScrollTo } from "../reveal-scroll";
 import { Activity, Github, Linkedin, Maximize } from "lucide-react";
-import Image from "next/image";
+import { useRef } from "react";
 import TextType from "../TextType";
+import { LogoAnimated } from "../LogoAnimated";
 
 export default function Hero() {
+  const logoRef = useRef<HTMLDivElement>(null);
+
   return (
     <div className="bg-[#0a0a0a] h-screen w-screen flex flex-col overflow-x-hidden">
       {/* row 1 */}
@@ -26,15 +31,9 @@ export default function Hero() {
           </span>
         </div>
 
-        {/* Profile image */}
-        <div className="w-[calc(8/21*100%)] h-full flex items-center justify-center">
-          <Image
-            src="/logo.svg"
-            alt="profile"
-            width={250}
-            height={100}
-            className="object-cover mx-auto"
-          />
+        {/* Profile image / Logo with DrawSVG animation */}
+        <div className="w-[calc(8/21*100%)] h-full flex items-center justify-center" ref={logoRef}>
+          <LogoAnimated />
         </div>
       </div>
 
@@ -84,12 +83,12 @@ export default function Hero() {
             <div className="w-full h-full flex flex-col items-center justify-center overflow-hidden border-r-gray-600 border-r-4 border-dashed">
               <div className="w-full h-full flex items-center justify-center border-b-red-600 border-b-4 border-dashed ">
                 <a href="https://github.com/SenpaiAdri" target="_blank" rel="noopener noreferrer">
-                  <Github className="text-red-500" size={35} />
+                  <Github className="text-red-500 hover:text-red-400 hover:scale-110 transition-all cursor-pointer" size={35} />
                 </a>
               </div>
               <div className="w-full h-full flex items-center justify-center">
                 <a href="https://www.linkedin.com/in/eydriannn/" target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="text-red-500" size={35} />
+                  <Linkedin className="text-red-500 hover:text-red-400 hover:scale-110 transition-all cursor-pointer" size={35} />
                 </a>
               </div>
             </div>
@@ -155,6 +154,6 @@ export default function Hero() {
           `}
         </style>
       </div>
-    </div>
+    </div >
   );
 }
