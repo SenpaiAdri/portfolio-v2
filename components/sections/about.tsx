@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { Layers } from "lucide-react";
 import { LogoAnimated } from "../LogoAnimated";
 
 export default function About() {
@@ -10,7 +11,7 @@ export default function About() {
     >
       <div className="relative h-full w-full">
         {/* Global 3x3 grid so all vertical lines align */}
-        <div className="grid h-full w-full grid-cols-[1.618fr_1fr_.618fr] grid-rows-[1.618fr_1fr_.618fr] text-gray-400">
+        <div className="grid h-full w-full grid-cols-[1fr_1fr_.618fr] grid-rows-[0.618fr_1fr_.618fr] text-gray-400">
           {/* Row 1 - logical 2 columns via col-span */}
           {/* Logo + name (spans first two columns) */}
           <div className="col-span-2 row-start-1 row-end-2 border-b-4 border-b-red-500 border-r-4 border-r-gray-600 border-dashed flex items-center justify-center">
@@ -24,13 +25,12 @@ export default function About() {
 
           {/* Photo (right column) */}
           <div className="col-start-3 row-start-1 row-end-2 border-b-4 border-b-red-500 border-dashed flex items-center justify-center">
-            <div className="relative h-28 w-28 md:h-32 md:w-32 lg:h-40 lg:w-40 overflow-hidden rounded-3xl border border-gray-600/70">
+            <div className="relative h-28 w-28 md:h-32 md:w-32 lg:h-60 lg:w-50 overflow-hidden rounded-3xl border border-gray-600/70">
               <Image
                 src="/profile.png"
                 alt="Adrian M. De Guzman"
                 fill
                 className="object-cover"
-                sizes="(min-width: 1024px) 10rem, 8rem"
               />
             </div>
           </div>
@@ -50,18 +50,14 @@ export default function About() {
                 on crafting smooth, detail-oriented experiences across web and
                 mobile.
               </p>
-              {/* <p className="text-sm md:text-base text-gray-500 leading-snug">
-                I enjoy designing systems that feel deliberate—from layout grids
-                inspired by the golden ratio to performant, maintainable code
-                that scales with the product.
-              </p> */}
+             
             </div>
           </div>
 
           {/* Row 2 - Right panel */}
           <div className="col-start-3 row-start-2 row-end-3 border-b-4 border-b-red-500 border-dashed px-10 py-8 flex items-center">
             <p className="text-sm md:text-base text-gray-400 leading-snug">
-              I enjoy designing systems that feel deliberate—from layout grids
+              <span className="text-red-500">-  </span>I enjoy designing systems that feel deliberate—from layout grids
               inspired by the golden ratio to performant, maintainable code
               that scales with the product.
             </p>
@@ -73,8 +69,8 @@ export default function About() {
 
           {/* Tagline spans columns 2-3 */}
           <div className="col-start-2 col-end-4 row-start-3 row-end-4  flex items-center justify-center px-8">
-            <span className="text-[0.75rem] md:text-sm lg:text-2xl lg:font-black tracking-[0.6em] text-gray-500 uppercase">
-              Full Stack Developer
+            <span className="text-[0.75rem] md:text-sm lg:text-2xl lg:font-black tracking-[0.6em] text-gray-500 uppercase flex items-center gap-5">
+              <Layers className="w-8 h-8 text-red-500" />Full Stack Developer
             </span>
           </div>
         </div>

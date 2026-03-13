@@ -108,12 +108,13 @@ export default function Hero() {
                 >
                   [ PROJECTS ]
                 </RevealScrollTo>
-                <span
+                <RevealScrollTo
+                  to={2}
                   className="text-gray-500 text-2xl
               hover:text-red-500 hover:-translate-x-4 transition-all"
                 >
                   [ ABOUT ]
-                </span>
+                </RevealScrollTo>
                 <span
                   className="text-gray-500 text-2xl
               hover:text-red-500 hover:-translate-x-4 transition-all"

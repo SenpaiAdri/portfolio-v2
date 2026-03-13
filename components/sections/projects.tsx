@@ -41,24 +41,24 @@ export default function Projects() {
   return (
     <div
       id="PROJECTS"
-      className="bg-[#0a0a0a] h-screen w-screen flex flex-col overflow-x-hidden"
+      className="bg-[#0a0a0a] h-screen md:min-h-screen w-screen flex flex-col overflow-x-hidden"
     >
       {/* row 1 */}
-      <div className="flex-1 flex flex-row border-b-4 border-dashed"
+      <div className="flex-1 flex flex-row border-b-2 md:border-b-4 border-dashed"
         style={{
           borderColor: projects[currentProject].color,
           transition: "all 0.7s ease-in-out"
         }}>
-        <div className="w-[calc(13/21*100%)] h-full border-r-gray-600 border-r-4 border-dashed flex items-center justify-center">
-          <span className="text-gray-500 text-3xl flex">
+        <div className="w-[calc(13/21*100%)] h-full border-r-gray-600 border-r-2 md:border-r-4 border-dashed flex items-center justify-center">
+          <span className="text-gray-500 text-xl md:text-3xl flex">
             [Projects Images Here]
           </span>
         </div>
 
         {/* Project Logo slider */}
-        <div className="w-[calc(8/21*100%)] h-full flex items-center justify-center">
+        <div className="w-[calc(8/21*100%)] h-full flex items-center justify-center p-2 md:p-4">
           {/* Container shrinks to the logo content using an invisible sizing placeholder */}
-          <div className="relative w-fit h-[15%] max-w-full overflow-hidden flex items-center justify-center">
+          <div className="relative w-fit h-16 md:h-20 lg:h-24 max-w-full overflow-hidden flex items-center justify-center">
             {/* Invisible element that defines the container's intrinsic size */}
             <div className="invisible">
               <Image
@@ -92,9 +92,9 @@ export default function Projects() {
       </div>
 
       {/* row 2 */}
-      <div className="flex-1 flex flex-row border-b-gray-600 border-b-4 border-dashed">
+      <div className="flex-1 flex flex-row border-b-2 md:border-b-4 border-gray-600 border-dashed">
         {/* Left: title, description, date */}
-        <div className="relative w-[calc(13/21*100%)] h-full flex flex-col  border-r-gray-600 border-r-4 border-dashed py-10 px-15">
+        <div className="w-[calc(13/21*100%)] h-full flex flex-col  border-r-gray-600 border-r-2 md:border-r-4 border-dashed py-5 md:py-10 px-8 md:px-12 lg:px-15">
           <div
             aria-hidden="true"
             className="absolute inset-0 z-0 pointer-events-none select-none"
@@ -110,7 +110,7 @@ export default function Projects() {
           />
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] bg-black/20" />
           {/* Title slider */}
-          <div className="relative flex-[.12] overflow-hidden">
+          <div className="relative flex-[.2] overflow-hidden">
             {projects.map((project, index) => (
               <div
                 key={project.name}
@@ -121,7 +121,7 @@ export default function Projects() {
                 }}
               >
                 <div className="flex justify-end">
-                  <span className="text-[2.2rem] tracking-wider text-right font-black"
+                  <span className="text-xl md:text-2xl lg:text-[2.2rem] tracking-wider text-right font-black"
                     style={{ color: project.color }}>
                     {project.name.toUpperCase()}
                   </span>
@@ -131,7 +131,7 @@ export default function Projects() {
           </div>
 
           {/* Description slider */}
-          <div className="relative flex-[.12] mt-5 overflow-hidden">
+          <div className="relative flex-[.2] mt-5 overflow-hidden">
             {projects.map((project, index) => (
               <div
                 key={project.name}
@@ -142,7 +142,7 @@ export default function Projects() {
                 }}
               >
                 <div className="flex justify-end">
-                  <span className="text-gray-400 text-lg md:text-xl tracking-wide text-right leading-tight max-w-[90%]">
+                  <span className="text-gray-400 text-sm md:text-lg lg:text-xl tracking-wide text-right leading-tight max-w-[90%]">
                     {project.description.toUpperCase()}
                   </span>
                 </div>
@@ -151,7 +151,7 @@ export default function Projects() {
           </div>
 
           {/* Timeline slider */}
-          <div className="relative h-8 overflow-hidden mt-auto">
+          <div className="relative h-10 md:h-12 lg:h-14 overflow-hidden mt-auto">
             {projects.map((project, index) => {
               const [start, end] = project.date.split(" - ");
               return (
@@ -162,13 +162,13 @@ export default function Projects() {
                     transform: `translateY(${(index - currentProject) * 100}%)`,
                   }}
                 >
-                  <span className="text-gray-400 text-lg tracking-widest">
+                  <span className="text-gray-400 text-xs md:text-sm lg:text-base tracking-widest">
                     {start?.toUpperCase()}
                   </span>
-                  <span className="text-gray-400 text-lg tracking-widest">
+                  <span className="text-gray-400 text-xs md:text-sm lg:text-base tracking-widest">
                     --
                   </span>
-                  <span className="text-gray-400 text-lg tracking-widest">
+                  <span className="text-gray-400 text-xs md:text-sm lg:text-base tracking-widest">
                     {end?.toUpperCase()}
                   </span>
                 </div>
@@ -179,15 +179,15 @@ export default function Projects() {
 
         {/* Right: project index + role */}
         <div className="w-[calc(8/21*100%)] h-full flex flex-col">
-          <div className="w-full h-full flex flex-row border-b-4 border-dashed"
+          <div className="w-full h-full flex flex-row border-b-2 md:border-b-4 border-dashed"
             style={{
               borderColor: projects[currentProject].color,
               transition: "all 0.7s ease-in-out"
             }}>
 
             {/* Project Links */}
-            <div className="w-full h-full flex flex-5 flex-col border-r-gray-600 border-r-4 border-dashed">
-              <div className="w-full h-full flex flex-col items-center justify-center overflow-hidden py-5 gap-5 border-b-4 border-dashed"
+            <div className="w-full h-full flex flex-5 flex-col border-r-gray-600 border-r-2 md:border-r-4 border-dashed">
+              <div className="w-full h-full flex flex-col items-center justify-center overflow-hidden py-3 md:py-5 gap-3 md:gap-5 border-b-2 md:border-b-4 border-dashed"
                 style={{
                   borderColor: projects[currentProject].color,
                   transition: "all 0.7s ease-in-out",
@@ -195,14 +195,14 @@ export default function Projects() {
                 {/* Website Content */}
                 <div className="flex items-center justify-center gap-2">
                   <Link
-                    size={20}
+                    size={16}
                     className="shrink-0"
                     style={{
                       color: projects[currentProject].color,
                       transition: "all 0.7s ease-in-out"
                     }}
                   />
-                  <div className="relative min-h-6 min-w-20 flex-1 overflow-hidden">
+                  <div className="relative min-h-6 md:min-h-8 min-w-20 flex-1 overflow-hidden">
                     {projects.map((project, index) => (
                       <div
                         key={`${project.name}-website`}
@@ -236,14 +236,14 @@ export default function Projects() {
               <div className="w-full h-full flex flex-col items-center justify-center overflow-hidden py-5 gap-5">
                 <div className="flex items-center justify-center gap-2">
                   <Github
-                    size={20}
+                    size={16}
                     className="shrink-0"
                     style={{
                       color: projects[currentProject].color,
                       transition: "all 0.7s ease-in-out"
                     }}
                   />
-                  <div className="relative min-h-6 min-w-20 flex-1 overflow-hidden">
+                  <div className="relative min-h-6 md:min-h-8 min-w-20 flex-1 overflow-hidden">
                     {projects.map((project, index) => (
                       <div
                         key={`${project.name}-github`}
@@ -278,7 +278,7 @@ export default function Projects() {
             {/* Project Index */}
             <div className="flex flex-5 flex-col text-center justify-center gap-5">
               <span
-                className="text-4xl"
+                className="text-2xl md:text-3xl lg:text-4xl"
                 style={{
                   WebkitTextStroke: `2px ${projects[currentProject].color}`,
                   color: "transparent",
@@ -288,7 +288,7 @@ export default function Projects() {
                 PROJECT
               </span>
               <div className="flex items-center justify-center">
-                <div className={`text-4xl font-black`}
+                <div className={`text-2xl md:text-3xl lg:text-4xl font-black`}
                   style={{
                     color: projects[currentProject].color,
                     transition: "all 0.7s ease-in-out",
@@ -298,11 +298,11 @@ export default function Projects() {
                 </div>
                 {/* Project number slider */}
                 <div className="relative inline-flex items-center justify-center overflow-hidden tabular-nums">
-                  <span className="invisible text-4xl font-black">88</span>
+                  <span className="invisible text-2xl md:text-3xl lg:text-4xl font-black">88</span>
                   {projects.map((project, index) => (
                     <div
                       key={project.name}
-                      className={`absolute inset-0 flex items-center justify-center transition-transform text-4xl font-black`}
+                      className={`absolute inset-0 flex items-center justify-center transition-transform text-2xl md:text-3xl lg:text-4xl font-black`}
                       style={{
                         transform: `translateY(${(index - currentProject) * 100}%)`,
                         color: project.color,
@@ -319,7 +319,7 @@ export default function Projects() {
 
           {/* Role slider */}
           <div className="relative h-full overflow-hidden">
-            <div className="h-10 w-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden ">
+            <div className="h-12 md:h-14 lg:h-16 w-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden ">
               {projects.map((project, index) => (
                 <div
                   key={project.name}
@@ -328,7 +328,7 @@ export default function Projects() {
                     transform: `translateY(${(index - currentProject) * 100}%)`,
                   }}
                 >
-                  <span className="text-3xl text-gray-400">
+                  <span className="text-lg md:text-2xl lg:text-3xl text-gray-400">
                     {project.role.toUpperCase()}
                   </span>
                 </div>
