@@ -4,13 +4,52 @@ import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 
 gsap.registerPlugin(DrawSVGPlugin);
 
+type ResponsiveSize = number | { base?: number; sm?: number; md?: number; lg?: number; xl?: number };
+
 type LogoAnimatedProps = {
-  width?: number;
-  height?: number;
+  width?: ResponsiveSize;
+  height?: ResponsiveSize;
   className?: string;
 };
 
-export function LogoAnimated({ width = 350, height = 128, className }: LogoAnimatedProps) {
+function getSizeValue(size: ResponsiveSize | undefined, defaultValue: number): number {
+  if (size === undefined) return defaultValue;
+  if (typeof size === "number") return size;
+  return size.base ?? size.sm ?? size.md ?? size.lg ?? size.xl ?? defaultValue;
+}
+
+function useResponsiveSize(size: ResponsiveSize | undefined, defaultValue: number): number {
+  const [responsiveWidth, setResponsiveWidth] = useState(() => getSizeValue(size, defaultValue));
+
+  useEffect(() => {
+    const updateSize = () => {
+      const w = typeof window !== "undefined" ? window.innerWidth : 1024;
+      if (typeof size === "number") {
+        setResponsiveWidth(size);
+      } else if (size) {
+        if (w >= 1280 && size.xl) setResponsiveWidth(size.xl);
+        else if (w >= 1024 && size.lg) setResponsiveWidth(size.lg);
+        else if (w >= 768 && size.md) setResponsiveWidth(size.md);
+        else if (w >= 640 && size.sm) setResponsiveWidth(size.sm);
+        else setResponsiveWidth(size.base ?? defaultValue);
+      } else {
+        setResponsiveWidth(defaultValue);
+      }
+    };
+
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, [size, defaultValue]);
+
+  return responsiveWidth;
+}
+
+export function LogoAnimated({ width, height, className }: LogoAnimatedProps) {
+  const defaultWidth = 350;
+  const defaultHeight = 128;
+  const currentWidth = useResponsiveSize(width, defaultWidth);
+  const currentHeight = useResponsiveSize(height, defaultHeight);
   const containerRef = useRef<HTMLDivElement>(null);
   const [logoSvg, setLogoSvg] = useState<string>("");
   const strokeColor = "#FF0000";
@@ -169,7 +208,7 @@ export function LogoAnimated({ width = 350, height = 128, className }: LogoAnima
     <div
       ref={containerRef}
       className={`flex items-center justify-center ${className ?? ""}`}
-      style={{ width, height }}
+      style={{ width: currentWidth, height: currentHeight }}
       aria-label="profile logo"
       // SVG is loaded from /public/logo.svg so updates auto-apply
       dangerouslySetInnerHTML={logoSvg ? { __html: logoSvg } : undefined}

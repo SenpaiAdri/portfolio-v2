@@ -12,12 +12,14 @@ export default function Hero() {
   return (
     <div className="bg-[#0a0a0a] h-screen w-screen flex flex-col overflow-x-hidden">
       {/* row 1 */}
-      <div className="flex-1 flex flex-row border-b-red-600 border-b-4 border-dashed">
+      <div className="flex-[0.4] border-b-red-600 border-b-4 border-dashed
+      md:flex-1 flex flex-col-reverse md:flex-row">
 
         {/* Welcome message */}
-        <div className="w-[calc(13/21*100%)] h-full border-r-gray-600 border-r-4 border-dashed flex items-end pb-20 pr-20">
-          <span className="flex items-center justify-start text-gray-500 text-4xl ml-auto font-medium tracking-widest whitespace-nowrap text-left">
-            <Activity className="mr-4 text-red-500" size={35} />
+        <div className="w-full h-full px-5 md:border-r-gray-600 md:border-r-4 border-dashed flex justify-start items-center 
+          md:pr-20 md:w-[calc(13/21*100%)] md:items-end md:pb-20 md:px-0">
+          <span className="flex items-center text-gray-500 text-md md:text-2xl lg:text-4xl font-medium tracking-widest whitespace-nowrap md:ml-auto text-left my-5">
+            <Activity className="mr-2 md:mr-4 text-red-500 w-5 md:w-7 lg:w-9" />
             <TextType
               text={["WELCOME TO MY PORTFOLIO!", "I'M ADRIAN", "A COMPUTER SCIENCE STUDENT", "Full-Stack Developer"]}
               typingSpeed={200}
@@ -32,15 +34,19 @@ export default function Hero() {
         </div>
 
         {/* Profile image / Logo with DrawSVG animation */}
-        <div className="w-[calc(8/21*100%)] h-full flex items-center justify-center" ref={logoRef}>
-          <LogoAnimated />
+        <div className="h-full my-2 flex items-center justify-center 
+        md:w-[calc(8/21*100%)] md:my-0"
+          ref={logoRef}>
+          <LogoAnimated width={{ base: 200, sm: 250, md: 300, lg: 350 }} />
         </div>
       </div>
 
       {/* row 2 */}
-      <div className="flex-1 flex flex-row border-b-gray-600 border-b-4 border-dashed">
+      <div className="flex-1 flex flex-col-reverse md:flex-row border-b-gray-600 border-b-4 border-dashed">
         <div
-          className="w-[calc(13/21*100%)] h-full flex flex-row items-end justify-end gap-10 p-10 border-r-gray-600 border-r-4 border-dashed relative overflow-hidden"
+          className="md:w-[calc(13/21*100%)] h-full flex flex-row items-end
+          justify-end gap-10 p-10 border-dashed relative overflow-hidden
+        md:border-r-gray-600 md:border-r-4"
         >
           {/* Grid lines background */}
           <div
@@ -57,18 +63,20 @@ export default function Hero() {
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] bg-black/20" />
 
           {/* Path/Education Background */}
-          <div className="flex flex-row items-start justify-end gap-10 z-10 relative">
+          <div className="flex flex-row items-start justify-end gap-0 md:gap-10 z-10">
 
-            <span className="text-red-500 text-2xl">---</span>
+            <span className="text-red-500 text-xl md:text-2xl">
+              ---
+            </span>
             <div className="flex flex-col ">
               <TextType text="[PATH]"
                 loop={false}
                 typingSpeed={200}
-                className="text-red-500 text-2xl mb-2" />
-              <span className="text-gray-500 text-2xl">
+                className="text-red-500 text-xl md:text-2xl mb-2" />
+              <span className="text-gray-500 text-lg md:text-2xl">
                 Compute Science Student
               </span>
-              <span className="text-gray-500 text-2xl">
+              <span className="text-gray-500 text-base md:text-2xl">
                 Specialized in Mobile Programming
               </span>
             </div>
@@ -76,12 +84,12 @@ export default function Hero() {
         </div>
 
         {/* Navigation and Socials */}
-        <div className="w-[calc(8/21*100%)] h-full flex flex-col">
+        <div className="md:w-[calc(8/21*100%)] h-full flex flex-col">
           <div className="w-full h-full flex flex-row border-b-red-600 border-b-4 border-dashed">
 
             {/* Socials */}
-            <div className="w-full h-full flex flex-col items-center justify-center overflow-hidden border-r-gray-600 border-r-4 border-dashed">
-              <div className="w-full h-full flex items-center justify-center border-b-red-600 border-b-4 border-dashed ">
+            <div className="w-full h-full flex md:flex-col items-center justify-center overflow-hidden border-r-gray-600 border-r-4 border-dashed">
+              <div className="w-full h-full flex items-center justify-center md:border-b-red-600 md:border-b-4 border-dashed ">
                 <a href="https://github.com/SenpaiAdri" target="_blank" rel="noopener noreferrer">
                   <Github className="text-red-500 hover:text-red-400 hover:scale-110 transition-all cursor-pointer" size={35} />
                 </a>
@@ -100,23 +108,23 @@ export default function Hero() {
                   text="[ HOME ]"
                   loop={false}
                   typingSpeed={200}
-                  className="text-red-500 text-2xl" />
+                  className="text-red-500 text-base md:text-lg xl:text-2xl" />
                 <RevealScrollTo
                   to={1}
-                  className="text-gray-500 text-2xl
+                  className="text-gray-500 text-base md:text-lg xl:text-2xl
               hover:text-red-500 hover:-translate-x-4 transition-all cursor-pointer"
                 >
                   [ PROJECTS ]
                 </RevealScrollTo>
                 <RevealScrollTo
                   to={2}
-                  className="text-gray-500 text-2xl
+                  className="text-gray-500 text-base md:text-lg xl:text-2xl
               hover:text-red-500 hover:-translate-x-4 transition-all"
                 >
                   [ ABOUT ]
                 </RevealScrollTo>
                 <span
-                  className="text-gray-500 text-2xl
+                  className="text-gray-500 text-base md:text-lg xl:text-2xl
               hover:text-red-500 hover:-translate-x-4 transition-all"
                 >
                   [ CONTACT ]
@@ -124,14 +132,14 @@ export default function Hero() {
               </div>
             </section>
           </div>
-          <div className="h-full flex items-end justify-end pr-15 pb-10">
+          <div className="hidden md:flex h-full items-end justify-end pr-15 pb-10">
             <Maximize className="text-red-500" size={35} />
           </div>
         </div>
       </div>
 
       {/* Marquee */}
-      <div className="flex-[0.3] flex flex-col border-b-gray-600 border-b-4 border-dashed overflow-hidden relative">
+      <div className="flex-[0.12] md:flex-[0.3] flex flex-col border-b-gray-600 border-b-4 border-dashed overflow-hidden relative">
         <div
           className="absolute whitespace-nowrap animate-marquee text-[3rem] md:text-[6rem] text-[#18181c] select-none"
           style={{
