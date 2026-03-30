@@ -94,7 +94,7 @@ export default function Projects() {
       {/* row 2 */}
       <div className="flex-1 flex flex-row border-b-2 md:border-b-4 border-gray-600 border-dashed">
         {/* Left: title, description, date */}
-        <div className="w-[calc(13/21*100%)] h-full flex flex-col  border-r-gray-600 border-r-2 md:border-r-4 border-dashed py-5 md:py-10 px-8 md:px-12 lg:px-15">
+        <div className="relative w-[calc(13/21*100%)] h-full flex flex-col  border-r-gray-600 border-r-2 md:border-r-4 border-dashed py-5 md:py-10 px-8 md:px-12 lg:px-15">
           <div
             aria-hidden="true"
             className="absolute inset-0 z-0 pointer-events-none select-none"
