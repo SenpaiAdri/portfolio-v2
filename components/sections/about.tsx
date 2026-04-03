@@ -7,25 +7,32 @@ export default function About() {
   return (
     <div
       id="ABOUT"
-      className="bg-[#0a0a0a] h-screen w-screen flex items-center justify-center overflow-x-hidden"
+      className="bg-[#0a0a0a] h-screen w-screen overflow-x-hidden"
     >
       <div className="relative h-full w-full">
-        {/* Global 3x3 grid so all vertical lines align */}
-        <div className="grid h-full w-full grid-cols-[1fr_1fr_.618fr] grid-rows-[0.618fr_1fr_.618fr] text-gray-400">
-          {/* Row 1 - logical 2 columns via col-span */}
-          {/* Logo + name (spans first two columns) */}
-          <div className="col-span-2 row-start-1 row-end-2 border-b-4 border-b-red-500 border-r-4 border-r-gray-600 border-dashed flex items-center justify-center">
-            <div className="flex items-center gap-20">
-              <LogoAnimated />
-              <div className="text-[1rem] text-xs md:text-sm lg:text-2xl lg:font-black tracking-[0.5em] text-gray-500 uppercase">
-                Adrian M. De Guzman
-              </div>
+        {/* Mobile: flex column fill | Desktop: 3x3 grid */}
+        <div className="flex flex-col md:grid h-full w-full md:grid-cols-[1fr_1fr_.618fr] md:grid-rows-[0.618fr_1fr_.618fr] text-gray-400">
+          {/* MOBILE: Header section */}
+          {/* DESKTOP: Row 1 - Logo + name (spans first two columns) */}
+          <div className="md:col-span-2 md:row-start-1 md:row-end-2 md:border-b-4 md:border-b-red-500 md:border-r-4 md:border-r-gray-600 md:border-dashed flex flex-col md:flex-row items-center justify-center md:justify-center gap-4 md:gap-20 py-6 px-4 border-b-4 border-b-red-500 border-dashed flex-1 md:flex-auto">
+            {/* Mobile: Photo first */}
+            {/* <div className="relative h-32 w-32 md:hidden overflow-hidden rounded-3xl border border-gray-600/70">
+              <Image
+                src="/profile.png"
+                alt="Adrian M. De Guzman"
+                fill
+                className="object-cover"
+              />
+            </div> */}
+            {/* <LogoAnimated width={{ base: 150, md: 200, lg: 250 }} /> */}
+            <div className="text-sm lg:text-2xl lg:font-black tracking-[0.5em] text-gray-500 uppercase text-center md:text-left">
+              Adrian M. De Guzman
             </div>
           </div>
 
-          {/* Photo (right column) */}
-          <div className="col-start-3 row-start-1 row-end-2 border-b-4 border-b-red-500 border-dashed flex items-center justify-center">
-            <div className="relative h-28 w-28 md:h-32 md:w-32 lg:h-60 lg:w-50 overflow-hidden rounded-3xl border border-gray-600/70">
+          {/* MOBILE: Hidden | DESKTOP: Photo (right column row 1) */}
+          <div className="hidden md:flex col-start-3 row-start-1 row-end-2 border-b-4 border-b-red-500 border-dashed items-center justify-center">
+            <div className="relative aspect-square h-28 md:h-30 lg:h-50 overflow-hidden border-4 border-dashed border-red-500">
               <Image
                 src="/profile.png"
                 alt="Adrian M. De Guzman"
@@ -35,42 +42,43 @@ export default function About() {
             </div>
           </div>
 
-          {/* Row 2 - true 3 columns */}
-          {/* Left empty panel */}
-          <div className="col-start-1 row-start-2 row-end-3 border-b-4 border-b-red-500 border-r-4 border-r-gray-600 border-dashed" />
+          {/* MOBILE: Hidden | DESKTOP: Row 2 - Left empty panel */}
+          <div className="hidden md:flex col-start-1 row-start-2 row-end-3 border-b-4 border-b-red-500 border-r-4 border-r-gray-600 border-dashed items-center justify-center">
+            <LogoAnimated width={{ base: 150, md: 200, lg: 250 }} />
+          </div>
 
-          {/* About text center */}
-          <div className="col-start-2 row-start-2 row-end-3 border-b-4 border-b-red-500 border-r-4 border-r-gray-600 border-dashed px-10 py-8 flex items-center">
-            <div className="space-y-3 max-w-xl ml-auto text-right">
-              <p className="text-2xl tracking-[0.25em] text-red-500 uppercase">
+          {/* MOBILE: About section */}
+          {/* DESKTOP: About text center */}
+          <div className="md:col-start-2 md:row-start-2 md:row-end-3 md:border-b-4 md:border-b-red-500 md:border-r-4 md:border-r-gray-600 md:border-dashed px-6 py-6 md:px-10 md:py-8 flex items-center flex-1 md:flex-auto">
+            <div className="space-y-3 max-w-xl mx-auto md:ml-auto md:mr-0 text-center md:text-right">
+              <p className="text-xl sm:text-2xl md:text-2xl tracking-[0.25em] text-red-500 uppercase">
                 -- [About]
               </p>
-              <p className="text-lg md:text-xl text-gray-300 leading-tight tracking-widest">
+              <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-tight tracking-widest">
                 Full-stack developer and Computer Science student with a focus
                 on crafting smooth, detail-oriented experiences across web and
                 mobile.
               </p>
-             
             </div>
           </div>
 
-          {/* Row 2 - Right panel */}
-          <div className="col-start-3 row-start-2 row-end-3 border-b-4 border-b-red-500 border-dashed px-10 py-8 flex items-center">
-            <p className="text-sm md:text-base text-gray-400 leading-snug">
-              <span className="text-red-500">-  </span>I enjoy designing systems that feel deliberate—from layout grids
+          {/* MOBILE: Right panel text */}
+          {/* DESKTOP: Row 2 - Right panel */}
+          <div className="md:col-start-3 md:row-start-2 md:row-end-3 md:border-b-4 md:border-b-red-500 md:border-dashed px-6 py-6 md:px-10 md:py-8 flex items-center border-t-4 border-t-gray-600 border-dashed md:border-t-0 flex-1 md:flex-auto">
+            <p className="text-sm sm:text-base md:text-base text-gray-400 leading-snug text-center md:text-left">
+              <span className="text-red-500">- </span>I enjoy designing systems that feel deliberate—from layout grids
               inspired by the golden ratio to performant, maintainable code
               that scales with the product.
             </p>
           </div>
 
-          {/* Row 3 - align to Row 2 col-1 right grid line */}
-          {/* Bottom-left empty area (only first column) */}
-          <div className="col-start-1 row-start-3 row-end-4 border-r-4 border-r-gray-600 border-dashed" />
+          {/* MOBILE: Hidden | DESKTOP: Bottom-left empty area (only first column) */}
+          <div className="hidden md:block col-start-1 row-start-3 row-end-4 border-r-4 border-r-gray-600 border-dashed" />
 
-          {/* Tagline spans columns 2-3 */}
-          <div className="col-start-2 col-end-4 row-start-3 row-end-4  flex items-center justify-center px-8">
-            <span className="text-[0.75rem] md:text-sm lg:text-2xl lg:font-black tracking-[0.6em] text-gray-500 uppercase flex items-center gap-5">
-              <Layers className="w-8 h-8 text-red-500" />Full Stack Developer
+          {/* Tagline - full width on mobile, spans cols 2-3 on desktop */}
+          <div className="col-span-1 md:col-start-2 md:col-end-4 row-start-3 md:row-start-3 md:row-end-4 flex items-center justify-center px-6 py-4 md:py-0 md:px-8 border-t-4 border-t-red-500 border-dashed md:border-t-0 flex-1 md:flex-auto">
+            <span className="text-sm lg:text-2xl lg:font-black tracking-[0.5em] text-gray-500 uppercase flex items-center gap-3 sm:gap-5">
+              <Layers className="w-5 h-5 sm:w-8 sm:h-8 text-red-500" />Full Stack Developer
             </span>
           </div>
         </div>

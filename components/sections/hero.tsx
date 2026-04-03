@@ -12,8 +12,8 @@ export default function Hero() {
   return (
     <div className="bg-[#0a0a0a] h-screen w-screen flex flex-col overflow-x-hidden">
       {/* row 1 */}
-      <div className="flex-[0.4] border-b-red-600 border-b-4 border-dashed
-      md:flex-1 flex flex-col-reverse md:flex-row">
+      <div className="flex-[0.5] border-b-red-600 border-b-4 border-dashed
+      md:flex-1 flex flex-col-reverse md:flex-row mt-10 md:mt-0">
 
         {/* Welcome message */}
         <div className="w-full h-full px-5 md:border-r-gray-600 md:border-r-4 border-dashed flex justify-start items-center 
@@ -88,7 +88,7 @@ export default function Hero() {
           <div className="w-full h-full flex flex-row border-b-red-600 border-b-4 border-dashed">
 
             {/* Socials */}
-            <div className="w-full h-full flex md:flex-col items-center justify-center overflow-hidden border-r-gray-600 border-r-4 border-dashed">
+            <div className="w-full h-full flex flex-col items-center justify-center overflow-hidden border-r-gray-600 border-r-4 border-dashed">
               <div className="w-full h-full flex items-center justify-center md:border-b-red-600 md:border-b-4 border-dashed ">
                 <a href="https://github.com/SenpaiAdri" target="_blank" rel="noopener noreferrer">
                   <Github className="text-red-500 hover:text-red-400 hover:scale-110 transition-all cursor-pointer" size={35} />
