@@ -8,6 +8,7 @@ import {
   type ScrollDirection,
   useSectionScroll,
 } from "../reveal-scroll";
+import ProjectCarousel from "./project-carousel";
 
 export default function Projects() {
   const [currentProject, setCurrentProject] = useState(0);
@@ -77,9 +78,13 @@ export default function Projects() {
 
       {/* Mobile Row 2: Project Images (hidden on md+) */}
       <div className="flex-1 md:hidden flex items-center justify-center border-b-2 border-gray-600 border-dashed">
-        <span className="text-gray-500 text-xl">
-          [Projects Images Here]
-        </span>
+        <ProjectCarousel
+          images={projects[currentProject].images}
+          projectName={projects[currentProject].name}
+          accentColor={projects[currentProject].color}
+          allImages={projects.map((p) => p.images)}
+          currentProject={currentProject}
+        />
       </div>
 
       {/* Mobile Row 3: Website + GitHub Links | Project Number (hidden on md+) */}
@@ -287,9 +292,13 @@ export default function Projects() {
           transition: "all 0.7s ease-in-out"
         }}>
         <div className="w-[calc(13/21*100%)] h-full border-r-gray-600 border-r-2 md:border-r-4 border-dashed flex items-center justify-center">
-          <span className="text-gray-500 text-xl md:text-3xl flex">
-            [Projects Images Here]
-          </span>
+          <ProjectCarousel
+            images={projects[currentProject].images}
+            projectName={projects[currentProject].name}
+            accentColor={projects[currentProject].color}
+            allImages={projects.map((p) => p.images)}
+            currentProject={currentProject}
+          />
         </div>
 
         <div className="w-[calc(8/21*100%)] h-full flex items-center justify-center p-2 md:p-4">
@@ -305,7 +314,7 @@ export default function Projects() {
 
             {projects.map((project, index) => (
               <div
-                key={project.name}
+                key={project.name}  
                 className="absolute inset-0 flex items-center justify-center transition-transform duration-1000 ease-in-out"
                 style={{
                   transform: `translateY(${(index - currentProject) * 100}%)`,
