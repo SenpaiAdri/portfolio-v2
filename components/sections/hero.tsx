@@ -123,12 +123,13 @@ export default function Hero() {
                 >
                   [ ABOUT ]
                 </RevealScrollTo>
-                <span
+                <RevealScrollTo
+                  to={3}
                   className="text-gray-500 text-base md:text-lg xl:text-2xl
               hover:text-red-500 hover:-translate-x-4 transition-all"
                 >
                   [ CONTACT ]
-                </span>
+                </RevealScrollTo>
               </div>
             </section>
           </div>
