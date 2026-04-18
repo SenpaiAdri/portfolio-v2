@@ -2,7 +2,7 @@ export const projects = [
   {
     name: "Pasada [Driver Side]",
     description: "Ride hailing and fleet management platform for modernized jeepney services",
-    image: "/pasada-driver-logo.svg",
+    image: "/pasada_driver_logo.svg",
     images: [
       "/pasada_driver/pasada_driver_home_view.jpg",
       "/pasada_driver/pasada_driver_main_screen.jpg",
