@@ -27,10 +27,13 @@ const SOCIALS = [
   },
 ] as const;
 
+const MAX_CHARS = { name: 50, email: 50, message: 250 };
+
+const ASCII_REGEX = /^[\x20-\x7E\r\n]+$/;
+
 export default function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -40,13 +43,18 @@ export default function Contact() {
     setStatus("loading");
     setErrorMessage("");
 
-    const result = await sendEmail({ name, email, subject, message });
+    if (!ASCII_REGEX.test(name) || !ASCII_REGEX.test(email) || !ASCII_REGEX.test(message)) {
+      setStatus("error");
+      setErrorMessage("Invalid characters detected");
+      return;
+    }
+
+    const result = await sendEmail({ name, email, message });
 
     if (result.success) {
       setStatus("success");
       setName("");
       setEmail("");
-      setSubject("");
       setMessage("");
     } else {
       setStatus("error");
@@ -83,6 +91,7 @@ export default function Contact() {
             <input
               type="text"
               required
+              maxLength={MAX_CHARS.name}
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="John Doe"
@@ -105,6 +114,7 @@ export default function Contact() {
           <input
             type="email"
             required
+            maxLength={MAX_CHARS.email}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="johndoe@gmail.com"
@@ -143,6 +153,7 @@ export default function Contact() {
           <FieldLabel>Payload Content:</FieldLabel>
           <textarea
             required
+            maxLength={MAX_CHARS.message}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Your portfolio looks great! I'd like to share business with you"
