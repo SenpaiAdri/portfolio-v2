@@ -15,6 +15,7 @@ type SendEmailParams = {
   email: string;
   subject?: string;
   message: string;
+  honeypot?: string;
 };
 
 function sanitize(input: string): string {
@@ -45,7 +46,11 @@ export async function sendEmail(data: SendEmailParams) {
     return { success: false, error: "Server configuration error" };
   }
 
-  const { name = "", email, message, subject = "A visitor sent a message" } = data;
+  const { name = "", email, message, subject = "A visitor sent a message", honeypot } = data;
+
+  if (honeypot && honeypot.length > 0) {
+    return { success: false };
+  }
 
   const sanitizedName = sanitize(name);
   const sanitizedMessage = sanitize(message);

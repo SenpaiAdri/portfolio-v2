@@ -43,13 +43,16 @@ export default function Contact() {
     setStatus("loading");
     setErrorMessage("");
 
+    const form = event.currentTarget;
+    const honeypot = form.elements.namedItem("website_url") as HTMLInputElement;
+
     if (!ASCII_REGEX.test(name) || !ASCII_REGEX.test(email) || !ASCII_REGEX.test(message)) {
       setStatus("error");
       setErrorMessage("Invalid characters detected");
       return;
     }
 
-    const result = await sendEmail({ name, email, message });
+    const result = await sendEmail({ name, email, message, honeypot: honeypot?.value });
 
     if (result.success) {
       setStatus("success");
@@ -163,6 +166,13 @@ export default function Contact() {
               focus:outline-none focus:border-red-500 focus:text-red-400
               placeholder:text-gray-500 p-4"
           />
+          <input
+              type="text"
+              name="website_url"
+              tabIndex={-1}
+              autoComplete="off"
+              className="hidden"
+            />
           <div className="mt-4 flex justify-center md:justify-end">
             <button
               type="submit"
