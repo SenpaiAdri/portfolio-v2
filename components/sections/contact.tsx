@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, type FormEvent, type ReactNode } from "react";
-import { Facebook, Github, Instagram, Linkedin, Send } from "lucide-react";
+import { Facebook, Github, Instagram, Linkedin, Send, Loader2 } from "lucide-react";
+import { sendEmail } from "@/app/actions/send-email";
 
 const SOCIALS = [
   {
@@ -27,18 +28,30 @@ const SOCIALS = [
 ] as const;
 
 export default function Contact() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const to = "eydriannn@gmail.com";
-    const body = `From: ${email}\n\n${message}`;
-    const href = `mailto:${to}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-    window.location.href = href;
+    setStatus("loading");
+    setErrorMessage("");
+
+    const result = await sendEmail({ name, email, subject, message });
+
+    if (result.success) {
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setSubject("");
+      setMessage("");
+    } else {
+      setStatus("error");
+      setErrorMessage(result.error ?? "Failed to send message");
+    }
   }
 
   return (
@@ -60,24 +73,23 @@ export default function Contact() {
           </h2>
         </div>
 
-        {/* Row 1: Sender email (left) | empty right with vertical divider */}
+        {/* Row 1: Name (left) | empty right with vertical divider */}
         <div className="flex flex-col justify-center sm:justify-between px-6 py-6 border-b-3 sm:border-b-4 border-b-gray-600 border-dashed md:border-r-4 md:border-r-red-500 md:py-20 md:px-18 md:row-start-1 md:col-start-1">
           <h2 className="hidden md:block text-2xl tracking-[0.35em] text-red-500 uppercase sm:text-3xl md:text-5xl text-center md:text-left">
             [<span className="text-gray-500">Contact</span>]
           </h2>
           <div className="flex flex-col justify-between">
-            <FieldLabel>Sender Email:</FieldLabel>
+            <FieldLabel>Name:</FieldLabel>
             <input
-              type="email"
+              type="text"
               required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="johndoe@gmail.com"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="John Doe"
               className="w-full bg-transparent text-gray-300 text-[10px] md:text-base tracking-[0.2em] uppercase
               border-0 border-b-2 border-dashed border-red-500
               focus:outline-none focus:border-red-500 focus:text-red-400
-              placeholder:text-gray-600 py-2 px-0
-               md:text-base"
+              placeholder:text-gray-600 py-2 px-0"
             />
           </div>
 
@@ -87,15 +99,15 @@ export default function Contact() {
           className="hidden md:block border-b-3 sm:border-b-4 border-b-gray-600 border-dashed md:row-start-1 md:col-start-2"
         />
 
-        {/* Row 2: Payload header (left) | Socials (right on desktop) */}
+        {/* Row 2: Sender email (left) | Socials (right on desktop) */}
         <div className="flex flex-col justify-center px-6 md:px-18 py-6 md:py-20 border-b-3 sm:border-b-4 border-b-gray-600 border-dashed md:border-r-4 md:border-r-red-500 md:row-start-2 md:col-start-1">
-          <FieldLabel>Payload Header:</FieldLabel>
+          <FieldLabel>Sender Email:</FieldLabel>
           <input
-            type="text"
+            type="email"
             required
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            placeholder="I'd like to share business with you"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="johndoe@gmail.com"
             className="w-full bg-transparent text-gray-300 text-[10px] md:text-base tracking-[0.2em] uppercase
               border-0 border-b-2 border-dashed border-red-500
               focus:outline-none focus:border-red-500 focus:text-red-400
@@ -143,20 +155,40 @@ export default function Contact() {
           <div className="mt-4 flex justify-center md:justify-end">
             <button
               type="submit"
-              className="group w-full justify-center inline-flex items-center gap-3
+              disabled={status === "loading" || status === "success"}
+              className="group w-full sm:w-1/3 justify-center inline-flex items-center gap-3
                 border-2 border-dashed border-gray-500
                 px-5 md:px-6 py-2 md:py-3
                 text-gray-400 hover:text-red-500 hover:border-red-500
                 text-[10px] md:text-sm tracking-[0.3em] uppercase
-                transition-colors"
+                transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Launch Payload
-              <Send
-                className="h-4 w-4 md:h-5 md:w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                aria-hidden="true"
-              />
+              {status === "loading" ? (
+                <>
+                  Sending...
+                  <Loader2 className="h-4 w-4 md:h-5 md:w-5 animate-spin" />
+                </>
+              ) : status === "success" ? (
+                <>
+                  Sent!
+                  <Send className="h-4 w-4 md:h-5 md:w-5" />
+                </>
+              ) : (
+                <>
+                  Launch Payload
+                  <Send
+                    className="h-4 w-4 md:h-5 md:w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    aria-hidden="true"
+                  />
+                </>
+              )}
             </button>
           </div>
+          {status === "error" && (
+            <p className="mt-2 text-center text-red-500 text-xs tracking-[0.2em] uppercase">
+              {errorMessage}
+            </p>
+          )}
         </div>
 
         {/* Mobile-only socials row */}
