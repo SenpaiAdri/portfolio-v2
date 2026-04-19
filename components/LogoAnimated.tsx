@@ -47,7 +47,7 @@ function useResponsiveSize(size: ResponsiveSize | undefined, defaultValue: numbe
 
 export function LogoAnimated({ width, height, className }: LogoAnimatedProps) {
   const defaultWidth = 350;
-  const defaultHeight = 128;
+  const defaultHeight = 100;
   const currentWidth = useResponsiveSize(width, defaultWidth);
   const currentHeight = useResponsiveSize(height, defaultHeight);
   const containerRef = useRef<HTMLDivElement>(null);

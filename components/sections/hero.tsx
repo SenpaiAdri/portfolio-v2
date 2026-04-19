@@ -10,16 +10,16 @@ export default function Hero() {
   const logoRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="bg-[#0a0a0a] h-screen w-screen flex flex-col overflow-x-hidden">
+    <div className="bg-[#0a0a0a] h-dvh w-screen flex flex-col overflow-x-hidden">
       {/* row 1 */}
-      <div className="flex-[0.5] border-b-red-600 border-b-4 border-dashed
-      md:flex-1 flex flex-col-reverse md:flex-row mt-10 md:mt-0">
+      <div className="flex-[0.1] border-b-red-600 border-b-4 border-dashed
+      md:flex-1 flex flex-col-reverse md:flex-row mt-1 md:mt-0">
 
         {/* Welcome message */}
-        <div className="w-full h-full px-5 md:border-r-gray-600 md:border-r-4 border-dashed flex justify-start items-center 
+        <div className="w-full h-7 sm:h-full px-5 pb-2 md:border-r-gray-600 md:border-r-4 border-dashed flex justify-start items-center 
           md:pr-20 md:w-[calc(13/21*100%)] md:items-end md:pb-20 md:px-0">
           <span className="flex items-center text-gray-500 text-md md:text-2xl lg:text-4xl font-medium tracking-widest whitespace-nowrap md:ml-auto text-left my-5">
-            <Activity className="mr-2 md:mr-4 text-red-500 w-5 md:w-7 lg:w-9" />
+            <Activity className="mx-2 md:mx-4 text-red-500 w-5 md:w-7 lg:w-9" />
             <TextType
               text={["WELCOME TO MY PORTFOLIO!", "I'M ADRIAN", "A COMPUTER SCIENCE STUDENT", "Full-Stack Developer"]}
               typingSpeed={200}
@@ -29,15 +29,16 @@ export default function Hero() {
               deletingSpeed={30}
               variableSpeed={{ min: 55, max: 125 }}
               cursorBlinkDuration={0.5}
+              className="text-xs sm:text-3xl"
             />
           </span>
         </div>
 
         {/* Profile image / Logo with DrawSVG animation */}
-        <div className="h-full my-2 flex items-center justify-center 
-        md:w-[calc(8/21*100%)] md:my-0"
+        <div className="flex items-center justify-center 
+        md:w-[calc(8/21*100%)]"
           ref={logoRef}>
-          <LogoAnimated width={{ base: 200, sm: 250, md: 300, lg: 350 }} />
+          <LogoAnimated width={{ base: 100, md: 200, lg: 250 }} />
         </div>
       </div>
 
@@ -73,7 +74,7 @@ export default function Hero() {
                 loop={false}
                 typingSpeed={200}
                 className="text-red-500 text-xl md:text-2xl mb-2" />
-              <span className="text-gray-500 text-lg md:text-2xl">
+              <span className="text-gray-500 text-base md:text-2xl">
                 Compute Science Student
               </span>
               <span className="text-gray-500 text-base md:text-2xl">
@@ -84,7 +85,7 @@ export default function Hero() {
         </div>
 
         {/* Navigation and Socials */}
-        <div className="md:w-[calc(8/21*100%)] h-full flex flex-col">
+        <div className="md:w-[calc(8/21*100%)] h-3/4 sm:h-full flex flex-col">
           <div className="w-full h-full flex flex-row border-b-red-600 border-b-4 border-dashed">
 
             {/* Socials */}
@@ -103,7 +104,7 @@ export default function Hero() {
 
             {/* Navigation */}
             <section className="w-full h-full flex flex-col items-end justify-center overflow-hidden gap-5">
-              <div className="w-full h-full flex flex-col items-end justify-center overflow-hidden gap-2 pr-10">
+              <div className="w-full h-full flex flex-col items-end justify-center overflow-hidden gap-2 pr-5 sm:pr-10">
                 <TextType
                   text="[ HOME ]"
                   loop={false}
@@ -140,7 +141,7 @@ export default function Hero() {
       </div>
 
       {/* Marquee */}
-      <div className="flex-[0.12] md:flex-[0.3] flex flex-col border-b-gray-600 border-b-4 border-dashed overflow-hidden relative">
+      <div className="flex-[0.15] md:flex-[0.3] flex flex-col border-b-gray-600 border-b-4 border-dashed overflow-hidden relative">
         <div
           className="absolute whitespace-nowrap animate-marquee text-[3rem] md:text-[6rem] text-[#18181c] select-none"
           style={{

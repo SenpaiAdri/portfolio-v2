@@ -224,8 +224,8 @@ export default function Projects() {
         {/* Radial Gradient */}
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] bg-black/20" />
 
-        {/* Project Name */}
-        <div className="relative flex-[.2] overflow-hidden">
+        {/* Project Title */}
+        <div className="relative flex-[.25] overflow-hidden">
           {projects.map((project, index) => (
             <div
               key={project.name}
@@ -246,7 +246,7 @@ export default function Projects() {
         </div>
 
         {/* Project Description */}
-        <div className="relative flex-[.3] mt-5 overflow-hidden">
+        <div className="relative flex-[.5] mt-5 overflow-hidden">
           {projects.map((project, index) => (
             <div
               key={project.name}
@@ -257,7 +257,7 @@ export default function Projects() {
               }}
             >
               <div className="flex justify-end">
-                <span className="text-gray-400 text-sm tracking-wide text-right leading-tight max-w-[90%]">
+                <span className="text-gray-400 text-xs sm:text-sm tracking-wide text-right leading-tight max-w-[90%]">
                   {project.description.toUpperCase()}
                 </span>
               </div>
@@ -293,7 +293,7 @@ export default function Projects() {
       <div className="hidden md:flex flex-1 flex-row border-b-2 md:border-b-4 border-dashed"
         style={{
           borderColor: projects[currentProject].color,
-          transition: "all 0.7s ease-in-out"
+          transition: "all 1s ease-in-out"
         }}>
         <div className="w-[calc(13/21*100%)] h-full border-r-gray-600 border-r-2 md:border-r-4 border-dashed flex items-center justify-center">
           <ProjectCarousel
