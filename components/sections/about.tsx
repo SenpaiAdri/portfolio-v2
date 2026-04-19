@@ -34,14 +34,14 @@ export default function About() {
 
           {/* MOBILE: Hidden | DESKTOP: Photo (right column row 1) */}
           <div className="hidden md:flex col-start-3 row-start-1 row-end-2 border-b-4 border-b-red-500 border-dashed items-center justify-center" aria-hidden="true">
-            <div className="relative aspect-square h-28 md:h-32 lg:h-48 overflow-hidden border-4 border-dashed border-red-500">
+            {/* <div className="relative aspect-square h-28 md:h-32 lg:h-48 overflow-hidden border-4 border-dashed border-red-500">
               <Image
                 src="/profile.png"
                 alt="Adrian M. De Guzman"
                 fill
                 className="object-cover"
               />
-            </div>
+            </div> */}
           </div>
 
           {/* MOBILE: Hidden | DESKTOP: Row 2 - Left empty panel */}
