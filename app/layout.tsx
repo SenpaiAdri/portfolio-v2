@@ -30,8 +30,8 @@ export const metadata: Metadata = {
   authors: [{ name: "Adrian" }],
   creator: "Adrian",
   icons: {
-    icon: "/logo.svg",
-    apple: "/logo.svg",
+    icon: "/my_logo.svg",
+    apple: "/my_logo.png",
   },
   openGraph: {
     title: "Eydriannn",
@@ -40,9 +40,9 @@ export const metadata: Metadata = {
     siteName: "Eydriannn",
     images: [
       {
-        url: "/logo.svg",
-        width: 600,
-        height: 600,
+        url: "/my_logo.png",
+        width: 512,
+        height: 512,
         alt: "Eydriannn Portfolio Logo",
       },
     ],
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Eydriannn",
     description: "Personal website of Adrian",
-    images: ["/logo.svg"],
+    images: ["/my_logo.png"],
   },
   robots: {
     index: true,
