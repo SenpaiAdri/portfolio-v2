@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useState, useRef, type FormEvent, type ReactNode } from "react";
 import { Facebook, Github, Instagram, Linkedin, Send, Loader2 } from "lucide-react";
 import { sendEmail } from "@/app/actions/send-email";
 
@@ -37,6 +37,7 @@ export default function Contact() {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const formRef = useRef<HTMLFormElement>(null);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -45,6 +46,7 @@ export default function Contact() {
 
     const form = event.currentTarget;
     const honeypot = form.elements.namedItem("website_url") as HTMLInputElement;
+    const timestamp = Date.now();
 
     if (!ASCII_REGEX.test(name) || !ASCII_REGEX.test(email) || !ASCII_REGEX.test(message)) {
       setStatus("error");
@@ -52,7 +54,7 @@ export default function Contact() {
       return;
     }
 
-    const result = await sendEmail({ name, email, message, honeypot: honeypot?.value });
+    const result = await sendEmail({ name, email, message, honeypot: honeypot?.value, timestamp });
 
     if (result.success) {
       setStatus("success");
@@ -73,6 +75,7 @@ export default function Contact() {
       className="bg-[#0a0a0a] h-dvh w-screen overflow-hidden text-gray-400"
     >
       <form
+        ref={formRef}
         onSubmit={handleSubmit}
         className="relative h-dvh w-full grid grid-cols-1 md:grid-cols-[5fr_2.5fr]
           md:grid-rows-[5fr_3fr_5fr]"

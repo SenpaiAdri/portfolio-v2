@@ -1,5 +1,6 @@
 "use server";
 
+import { headers } from "next/headers";
 import { Resend } from "resend";
 import { ContactEmail } from "@/app/emails/contact-template";
 
@@ -8,7 +9,9 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const MAX_CHARS = { name: 50, email: 50, message: 250 };
 const ASCII_REGEX = /^[\x20-\x7E\r\n]+$/;
 const RATE_LIMIT_MS = 60_000;
-const lastSubmitTime = { value: 0 };
+const MIN_SUBMIT_MS = 1000;
+
+const ipRateLimits = new Map<string, number>();
 
 type SendEmailParams = {
   name: string;
@@ -16,6 +19,7 @@ type SendEmailParams = {
   subject?: string;
   message: string;
   honeypot?: string;
+  timestamp?: number;
 };
 
 function sanitize(input: string): string {
@@ -33,10 +37,29 @@ function validateInput(input: string, maxLen: number): string | null {
 }
 
 export async function sendEmail(data: SendEmailParams) {
+  const headersList = await headers();
+  const origin = headersList.get("origin") || headersList.get("referer");
+
+  if (!origin) {
+    return { success: false };
+  }
+
+  const forwarded = headersList.get("x-forwarded-for");
+  const realIP = headersList.get("x-real-ip");
+  const clientIP = forwarded?.split(",")[0].trim() || realIP || "unknown";
+
   const now = Date.now();
 
-  if (now - lastSubmitTime.value < RATE_LIMIT_MS) {
+  const lastSubmit = ipRateLimits.get(clientIP);
+  if (lastSubmit && now - lastSubmit < RATE_LIMIT_MS) {
     return { success: false, error: "Please wait before sending another message" };
+  }
+
+  if (data.timestamp) {
+    const elapsed = now - data.timestamp;
+    if (elapsed < MIN_SUBMIT_MS) {
+      return { success: false };
+    }
   }
 
   const apiKey = process.env.RESEND_API_KEY;
@@ -67,7 +90,7 @@ export async function sendEmail(data: SendEmailParams) {
     return { success: false, error: "Email and message are required" };
   }
 
-  lastSubmitTime.value = now;
+  ipRateLimits.set(clientIP, now);
 
   try {
     const { data: emailData, error } = await resend.emails.send({
