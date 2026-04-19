@@ -79,8 +79,9 @@ export default function About() {
 
           {/* Tagline - full width on mobile, spans cols 2-3 on desktop */}
           <div className="col-span-1 md:col-start-2 md:col-end-4 row-start-3 md:row-start-3 md:row-end-4 flex items-center justify-center px-6 py-4 md:py-0 md:px-8 border-t-4 border-t-red-500 border-dashed md:border-t-0 flex-1 md:flex-auto">
-            <h2 className="text-sm lg:text-2xl lg:font-black tracking-[0.5em] text-gray-500 uppercase flex items-center gap-3 sm:gap-5">
-              <Layers className="w-5 h-5 sm:w-8 sm:h-8 text-red-500" aria-hidden="true" />Full Stack Developer
+            <h2 className="text-xs lg:text-2xl lg:font-black tracking-[0.2em] text-gray-500 uppercase flex items-center gap-3 sm:gap-5">
+              <Layers className="w-4 h-4 sm:w-8 sm:h-8 text-red-500" aria-hidden="true" />
+              Full Stack Developer
             </h2>
           </div>
         </div>
