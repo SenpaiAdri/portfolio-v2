@@ -13,10 +13,10 @@ export default function Hero() {
     <div className="bg-[#0a0a0a] h-dvh w-screen flex flex-col overflow-x-hidden">
       {/* row 1 */}
       <div className="flex-[0.1] border-b-red-600 border-b-4 border-dashed
-      md:flex-1 flex flex-col-reverse md:flex-row mt-1 md:mt-0">
+      md:flex-1 flex flex-col-reverse md:flex-row mt-3 md:mt-0">
 
         {/* Welcome message */}
-        <div className="w-full h-7 sm:h-full px-5 pb-2 md:border-r-gray-600 md:border-r-4 border-dashed flex justify-start items-center 
+        <div className="w-full h-10 sm:h-full px-5 pb-2 md:border-r-gray-600 md:border-r-4 border-dashed flex justify-start items-center 
           md:pr-20 md:w-[calc(13/21*100%)] md:items-end md:pb-20 md:px-0">
           <span className="flex items-center text-gray-500 text-md md:text-2xl lg:text-4xl font-medium tracking-widest whitespace-nowrap md:ml-auto text-left my-5">
             <Activity className="mx-2 md:mx-4 text-red-500 w-5 md:w-7 lg:w-9" />
@@ -29,7 +29,7 @@ export default function Hero() {
               deletingSpeed={30}
               variableSpeed={{ min: 55, max: 125 }}
               cursorBlinkDuration={0.5}
-              className="text-xs sm:text-3xl"
+              className="text-sm sm:text-3xl"
             />
           </span>
         </div>
@@ -38,14 +38,14 @@ export default function Hero() {
         <div className="flex items-center justify-center 
         md:w-[calc(8/21*100%)]"
           ref={logoRef}>
-          <LogoAnimated width={{ base: 100, md: 200, lg: 250 }} />
+          <LogoAnimated width={{ base: 150, md: 200, lg: 250 }} />
         </div>
       </div>
 
       {/* row 2 */}
       <div className="flex-1 flex flex-col-reverse md:flex-row border-b-gray-600 border-b-4 border-dashed">
         <div
-          className="md:w-[calc(13/21*100%)] h-full flex flex-row items-end
+          className="md:w-[calc(13/21*100%)] h-3/4 flex flex-row items-end
           justify-end gap-10 p-10 border-dashed relative overflow-hidden
         md:border-r-gray-600 md:border-r-4"
         >
@@ -61,6 +61,7 @@ export default function Hero() {
               backgroundSize: '60px 60px',
             }}
           />
+          {/* Radial Gradient */}
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] bg-black/20" />
 
           {/* Path/Education Background */}
