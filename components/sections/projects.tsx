@@ -69,7 +69,7 @@ export default function Projects() {
                 alt={project.name}
                 width={250}
                 height={100}
-                className="object-cover mx-auto"
+                className="object-contain max-h-full max-w-full"
               />
             </div>
           ))}
@@ -329,7 +329,7 @@ export default function Projects() {
                   alt={project.name}
                   width={250}
                   height={100}
-                  className="object-cover mx-auto"
+                  className="object-contain max-h-full max-w-full"
                 />
               </div>
             ))}

@@ -45,4 +45,21 @@ export const projects = [
     website: "https://ai-blogpost.vercel.app/",
     github: "https://github.com/SenpaiAdri/AI-Blogpost",
   },
+  {
+    name: "Lootbx",
+    description: "A Gamified Live Streaming Platform",
+    image: "/lootbx-logo.svg",
+    images: [
+      "/lootbx/lootbx_landing_1.png",
+      "/lootbx/lootbx_landing_2.png",
+      "/lootbx/lootbx_landing_3.png",
+      "/lootbx/lootbx_home_1.png",
+      "/lootbx/lootbx_home_2.png",
+    ],
+    date: "February 2026 - Present",
+    role: "Full Stack Developer",
+    color: "#FFD149",
+    website: "https://lootbx.com/",
+    github: "",
+  }
 ];
