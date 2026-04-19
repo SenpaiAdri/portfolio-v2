@@ -9,7 +9,6 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const MAX_CHARS = { name: 50, email: 50, message: 250 };
 const ASCII_REGEX = /^[\x20-\x7E\r\n]+$/;
 const RATE_LIMIT_MS = 60_000;
-const MIN_SUBMIT_MS = 1000;
 
 const ipRateLimits = new Map<string, number>();
 
@@ -49,17 +48,10 @@ export async function sendEmail(data: SendEmailParams) {
   const clientIP = forwarded?.split(",")[0].trim() || realIP || "unknown";
 
   const now = Date.now();
-
   const lastSubmit = ipRateLimits.get(clientIP);
+
   if (lastSubmit && now - lastSubmit < RATE_LIMIT_MS) {
     return { success: false, error: "Please wait before sending another message" };
-  }
-
-  if (data.timestamp) {
-    const elapsed = now - data.timestamp;
-    if (elapsed < MIN_SUBMIT_MS) {
-      return { success: false };
-    }
   }
 
   const apiKey = process.env.RESEND_API_KEY;
@@ -84,10 +76,6 @@ export async function sendEmail(data: SendEmailParams) {
 
   if (!validatedName || !validatedEmail || !validatedMessage) {
     return { success: false, error: "Invalid input detected" };
-  }
-
-  if (!validatedEmail || !validatedMessage) {
-    return { success: false, error: "Email and message are required" };
   }
 
   ipRateLimits.set(clientIP, now);
