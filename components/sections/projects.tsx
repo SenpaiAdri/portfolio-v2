@@ -77,7 +77,7 @@ export default function Projects() {
       </div>
 
       {/* Mobile Row 2: Project Images (hidden on md+) */}
-      <div className="flex-1 md:hidden flex items-center justify-center border-b-2 border-gray-600 border-dashed">
+      <div className="flex-[0.9] md:hidden flex items-center justify-center border-b-2 border-gray-600 border-dashed">
         <ProjectCarousel
           images={projects[currentProject].images}
           projectName={projects[currentProject].name}
@@ -207,6 +207,7 @@ export default function Projects() {
 
       {/* Mobile Row 4: Title, Description, Timeline with Grid (hidden on md+) */}
       <div className="md:hidden relative flex-1 flex flex-col py-5 px-6 border-b-2 border-gray-600 border-dashed">
+        {/* Grid Background */}
         <div
           aria-hidden="true"
           className="absolute inset-0 z-0 pointer-events-none select-none"
@@ -220,8 +221,10 @@ export default function Projects() {
             transition: '--grid-color 0.7s ease-in-out',
           } as React.CSSProperties}
         />
+        {/* Radial Gradient */}
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] bg-black/20" />
 
+        {/* Project Name */}
         <div className="relative flex-[.2] overflow-hidden">
           {projects.map((project, index) => (
             <div
@@ -242,7 +245,8 @@ export default function Projects() {
           ))}
         </div>
 
-        <div className="relative flex-[.2] mt-5 overflow-hidden">
+        {/* Project Description */}
+        <div className="relative flex-[.3] mt-5 overflow-hidden">
           {projects.map((project, index) => (
             <div
               key={project.name}

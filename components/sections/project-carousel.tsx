@@ -66,15 +66,15 @@ function ProjectCarouselInner({
   }, [emblaApi]);
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center gap-2">
+    <div className="w-full h-full flex flex-col items-center justify-center">
       <div className="relative w-full h-full flex items-center">
         <button
           onClick={prevButton}
-          className="absolute left-1 z-10 p-1 ml-10 rounded-full border-2 border-dashed hover:border-black/70 transition-colors duration-300 ease-in-out delay-300"
+          className="absolute left-1 z-10 p-1 ml-5 sm:ml-10 rounded-full border-2 border-dashed hover:border-black/70 transition-colors duration-300 ease-in-out delay-300"
           style={{ color: accentColor, borderColor: accentColor }}
           aria-label="Previous slide"
         >
-          <ChevronLeft size={20} />
+          <ChevronLeft className="w-[15px] h-[15px] sm:w-[20px] sm:h-[20px]" />
         </button>
 
         <div
@@ -103,15 +103,16 @@ function ProjectCarouselInner({
 
         <button
           onClick={nextButton}
-          className="absolute right-1 z-10 p-1 mr-10 rounded-full border-2 border-dashed hover:border-black/70 transition-colors duration-300 ease-in-out delay-300"
+          className="absolute right-1 z-10 p-1 mr-5 sm:mr-10 rounded-full border-2 border-dashed hover:border-black/70 transition-colors duration-300 ease-in-out delay-300"
           style={{ color: accentColor, borderColor: accentColor }}
           aria-label="Next slide"
         >
-          <ChevronRight size={20} />
+          <ChevronRight className="w-[15px] h-[15px] sm:w-[20px] sm:h-[20px]" />
+     
         </button>
       </div>
 
-      <div className="flex items-center justify-center gap-1.5 py-2">
+      <div className="flex items-center justify-center gap-1.5 pb-2">
         {images.map((_, index) => (
           <button
             key={index}
