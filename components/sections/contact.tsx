@@ -101,10 +101,10 @@ export default function Contact() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="John Doe"
-              className="w-full bg-transparent text-gray-300 text-[10px] md:text-base tracking-[0.2em] uppercase
+              className="w-full bg-transparent text-gray-400 text-[10px] md:text-base tracking-[0.2em] uppercase
               border-0 border-b-2 border-dashed border-red-500
               focus:outline-none focus:border-red-500 focus:text-red-400
-              placeholder:text-gray-600 py-2 px-0"
+              placeholder:text-gray-800 py-2 px-0"
             />
           </div>
 
@@ -124,10 +124,10 @@ export default function Contact() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="johndoe@gmail.com"
-            className="w-full bg-transparent text-gray-300 text-[10px] md:text-base tracking-[0.2em] uppercase
+            className="w-full bg-transparent text-gray-400 text-[10px] md:text-base tracking-[0.2em] uppercase
               border-0 border-b-2 border-dashed border-red-500
               focus:outline-none focus:border-red-500 focus:text-red-400
-              placeholder:text-gray-500 py-2 px-0"
+              placeholder:text-gray-800 py-2 px-0"
           />
         </div>
         <div className="hidden md:flex px-6 md:px-10 py-6 md:py-8 border-b-3 sm:border-b-4 border-b-gray-600 border-dashed items-center justify-center md:row-start-2 md:col-start-2">
@@ -164,10 +164,10 @@ export default function Contact() {
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Your portfolio looks great! I'd like to share business with you"
             className="flex-1 min-h-[90px] w-full resize-none bg-transparent
-              text-gray-300 text-[10px] md:text-base tracking-[0.15em] uppercase leading-relaxed
+              text-gray-400 text-[10px] md:text-base tracking-[0.15em] uppercase leading-relaxed
               border-2 border-dashed border-red-500
               focus:outline-none focus:border-red-500 focus:text-red-400
-              placeholder:text-gray-500 p-4"
+              placeholder:text-gray-800 p-4"
           />
           <input
               type="text"
@@ -216,7 +216,7 @@ export default function Contact() {
         </div>
 
         {/* Mobile-only socials row */}
-        <div className="px-6 py-7 border-b-4 border-b-gray-600 border-dashed flex items-center justify-center md:hidden">
+        <div className="px-6 py-7 border-b-3 sm:border-b-4 border-b-gray-600 border-dashed flex items-center justify-center md:hidden">
           <ul className="flex items-center">
             {SOCIALS.map(({ href, label, Icon }) => (
               <li key={label} className="-mx-px">
