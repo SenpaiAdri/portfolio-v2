@@ -45,7 +45,7 @@ export default function Hero() {
       {/* row 2 */}
       <div className="flex-1 flex flex-col-reverse md:flex-row border-b-gray-600 border-b-4 border-dashed">
         <div
-          className="md:w-[calc(13/21*100%)] h-3/4 flex flex-row items-end
+          className="md:w-[calc(13/21*100%)] h-3/4 sm:h-full flex flex-row items-end
           justify-end gap-10 p-10 border-dashed relative overflow-hidden
         md:border-r-gray-600 md:border-r-4"
         >
@@ -65,9 +65,9 @@ export default function Hero() {
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] bg-black/20" />
 
           {/* Path/Education Background */}
-          <div className="flex flex-row items-start justify-end gap-0 md:gap-10 z-10">
+          <div className="flex flex-row items-start justify-end gap-3 md:gap-10 z-10">
 
-            <span className="text-red-500 text-xl md:text-2xl">
+            <span className="text-red-500 text-xl text-nowrap md:text-2xl">
               ---
             </span>
             <div className="flex flex-col ">
