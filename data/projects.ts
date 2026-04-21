@@ -47,7 +47,7 @@ export const projects = [
   },
   {
     name: "Lootbx",
-    description: "A Gamified Live Streaming Platform",
+    description: "A Live Streaming Platform",
     image: "/lootbx-logo.svg",
     images: [
       "/lootbx/lootbx_landing_1.png",
