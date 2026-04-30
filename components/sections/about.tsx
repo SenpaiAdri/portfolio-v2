@@ -58,7 +58,7 @@ export default function About() {
               </p>
               <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-tight tracking-widest">
                 Full-stack developer and Computer Science student with a focus
-                on crafting smooth, detail-oriented experiences across web and
+                on crafting unique, detail-oriented experiences across web and
                 mobile.
               </p>
             </div>
@@ -68,9 +68,7 @@ export default function About() {
           {/* DESKTOP: Row 2 - Right panel */}
           <div className="md:col-start-3 md:row-start-2 md:row-end-3 md:border-b-4 md:border-b-red-500 md:border-dashed px-6 py-6 md:px-10 md:py-8 flex items-center border-t-4 border-t-gray-600 border-dashed md:border-t-0 flex-1 md:flex-auto">
             <p className="text-sm sm:text-base md:text-base text-gray-400 leading-snug text-center md:text-left">
-              <span className="text-red-500">- </span>I enjoy designing systems that feel deliberate—from layout grids
-              inspired by the golden ratio to performant, maintainable code
-              that scales with the product.
+              <span className="text-red-500">- </span>This is actually the version 2 of my portfolio and still working on the design and content. To see the old version, you can check out my v0 portfolio <a href="https://eydriannn-v0.vercel.app" className="text-red-500 underline" target="_blank" rel="noopener noreferrer">here</a>.  
             </p>
           </div>
 
