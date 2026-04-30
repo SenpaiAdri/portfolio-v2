@@ -1,4 +1,16 @@
-export const projects = [
+export interface Project {
+  name: string;
+  description: string;
+  image: string;
+  images: string[];
+  date: string;
+  role: string;
+  color: string;
+  website: string;
+  github: string;
+}
+
+export const projects: Project[] = [
   {
     name: "Pasada [Driver Side]",
     description: "Ride hailing and fleet management platform for modernized jeepney services",

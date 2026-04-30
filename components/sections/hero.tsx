@@ -44,6 +44,7 @@ export default function Hero() {
 
       {/* row 2 */}
       <div className="flex-1 flex flex-col-reverse md:flex-row border-b-gray-600 border-b-4 border-dashed">
+        {/* Introduction */}
         <div
           className="md:w-[calc(13/21*100%)] h-3/4 sm:h-full flex flex-row items-end
           justify-end gap-10 p-10 border-dashed relative overflow-hidden
@@ -91,7 +92,7 @@ export default function Hero() {
 
             {/* Socials */}
             <div className="w-full h-full flex flex-col items-center justify-center overflow-hidden border-r-gray-600 border-r-4 border-dashed">
-              <div className="w-full h-full flex items-center justify-center md:border-b-red-600 md:border-b-4 border-dashed ">
+              <div className="w-full h-full flex items-center justify-center border-b-red-600 border-b-4 border-dashed ">
                 <a href="https://github.com/SenpaiAdri" target="_blank" rel="noopener noreferrer">
                   <Github className="text-red-500 hover:text-red-400 hover:scale-110 transition-all cursor-pointer" size={35} />
                 </a>
@@ -123,10 +124,24 @@ export default function Hero() {
                   className="text-gray-500 text-base md:text-lg xl:text-2xl
               hover:text-red-500 hover:-translate-x-4 transition-all"
                 >
-                  [ ABOUT ]
+                  [ SKILLS ]
                 </RevealScrollTo>
                 <RevealScrollTo
                   to={3}
+                  className="text-gray-500 text-base md:text-lg xl:text-2xl
+              hover:text-red-500 hover:-translate-x-4 transition-all"
+                >
+                  [ EXPERIENCE ]
+                </RevealScrollTo>
+                <RevealScrollTo
+                  to={4}
+                  className="text-gray-500 text-base md:text-lg xl:text-2xl
+              hover:text-red-500 hover:-translate-x-4 transition-all"
+                >
+                  [ ABOUT ]
+                </RevealScrollTo>
+                <RevealScrollTo
+                  to={5}
                   className="text-gray-500 text-base md:text-lg xl:text-2xl
               hover:text-red-500 hover:-translate-x-4 transition-all"
                 >
@@ -135,7 +150,7 @@ export default function Hero() {
               </div>
             </section>
           </div>
-          <div className="hidden md:flex h-full items-end justify-end pr-15 pb-10">
+          <div className="hidden md:flex h-3/5 items-end justify-end pr-15 pb-10">
             <Maximize className="text-red-500" size={35} />
           </div>
         </div>

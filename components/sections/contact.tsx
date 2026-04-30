@@ -131,7 +131,7 @@ export default function Contact() {
           />
         </div>
         <div className="hidden md:flex px-6 md:px-10 py-6 md:py-8 border-b-3 sm:border-b-4 border-b-gray-600 border-dashed items-center justify-center md:row-start-2 md:col-start-2">
-          <ul className="flex items-center">
+          <ul className="flex items-center ">
             {SOCIALS.map(({ href, label, Icon }) => (
               <li key={label} className="-mx-[2px]">
                 <a
@@ -139,10 +139,8 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="group relative inline-flex items-center justify-center
-                    h-15 w-15 md:h-22  md:w-22
-                    border-4 border-dashed border-gray-600
-                    text-red-500 hover:border-red-500 transition-colors z-10 hover:z-50"
+                  tabIndex={-1}
+                  className="group relative inline-flex items-center justify-center h-15 w-15 md:h-22  md:w-22 border-4 border-dashed border-gray-600 text-red-500 hover:border-red-500 transition-colors z-10 hover:z-50 focus:outline-none"
                 >
                   <Icon
                     className="h-7 w-7 md:h-10 md:w-10 transition-transform group-hover:scale-110"
@@ -170,12 +168,12 @@ export default function Contact() {
               placeholder:text-gray-800 p-4"
           />
           <input
-              type="text"
-              name="website_url"
-              tabIndex={-1}
-              autoComplete="off"
-              className="hidden"
-            />
+            type="text"
+            name="website_url"
+            tabIndex={-1}
+            autoComplete="off"
+            className="hidden"
+          />
           <div className="mt-4 flex justify-center md:justify-end">
             <button
               type="submit"
@@ -225,7 +223,8 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="group relative inline-flex items-center justify-center h-12 w-12 border-3 border-dashed border-gray-600 text-red-500 hover:border-red-500 transition-colors z-10 hover:z-50"
+                  tabIndex={-1}
+                  className="group relative inline-flex items-center justify-center h-12 w-12 border-3 border-dashed border-gray-600 text-red-500 hover:border-red-500 transition-colors z-10 hover:z-50 focus:outline-none"
                 >
                   <Icon
                     className="h-7 w-7 transition-transform group-hover:scale-110"
