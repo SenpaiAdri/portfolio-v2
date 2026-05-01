@@ -119,29 +119,29 @@ export default function Hero() {
                 >
                   [ PROJECTS ]
                 </RevealScrollTo>
-                <RevealScrollTo
+                {/*<RevealScrollTo
                   to={2}
                   className="text-gray-500 text-base md:text-lg xl:text-2xl
               hover:text-red-500 hover:-translate-x-4 transition-all"
                 >
                   [ SKILLS ]
-                </RevealScrollTo>
+                </RevealScrollTo>*/}
                 <RevealScrollTo
-                  to={3}
+                  to={2}
                   className="text-gray-500 text-base md:text-lg xl:text-2xl
               hover:text-red-500 hover:-translate-x-4 transition-all"
                 >
                   [ EXPERIENCE ]
                 </RevealScrollTo>
                 <RevealScrollTo
-                  to={4}
+                  to={3}
                   className="text-gray-500 text-base md:text-lg xl:text-2xl
               hover:text-red-500 hover:-translate-x-4 transition-all"
                 >
                   [ ABOUT ]
                 </RevealScrollTo>
                 <RevealScrollTo
-                  to={5}
+                  to={4}
                   className="text-gray-500 text-base md:text-lg xl:text-2xl
               hover:text-red-500 hover:-translate-x-4 transition-all"
                 >

@@ -11,7 +11,7 @@ export default function Home() {
     <RevealScroll>
       <Hero />
       <Projects />
-      <Skills />
+      {/*<Skills />*/}
       <Experience />
       <About />
       <Contact />

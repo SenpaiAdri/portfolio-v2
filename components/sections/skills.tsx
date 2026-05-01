@@ -1,6 +1,6 @@
 "use client";
 
-import { Code2 } from "lucide-react";
+import { Code2, Database } from "lucide-react";
 import { skillCategories } from "@/data/skills";
 
 export default function Skills() {
@@ -26,7 +26,21 @@ export default function Skills() {
           </div>
 
           {/* Main content - Skill categories */}
-          <div className="md:col-start-1 md:col-end-4 md:row-start-2 md:row-end-3 md:border-b-4 md:border-dashed md:border-b-red-500 flex items-center justify-center px-6 py-6 md:px-10 md:py-8 flex-1 md:flex-auto overflow-y-auto">
+          <div className="relative md:col-start-1 md:col-end-3 md:row-start-2 md:row-end-4 md:border-b-4 md:border-dashed md:border-r-4 border-r-gray-500 md:border-b-red-500 flex items-center justify-center px-6 py-6 md:px-10 md:py-8 flex-1 md:flex-auto overflow-y-auto">
+            {/* Grid lines background */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 z-0 pointer-events-none select-none"
+              style={{
+                backgroundImage: `
+                  linear-gradient(to right, rgba(255,25,25,0.1) 2px, transparent 1px),
+                  linear-gradient(to bottom, rgba(255,25,25,0.1) 2px, transparent 1px)
+                `,
+                backgroundSize: '60px 60px',
+              }}
+            />
+            {/* Radial Gradient */}
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] bg-black/20" />
             <div className="w-full mx-auto md:mx-10">
               {skillCategories.length === 0 ? (
                 <p className="text-center text-gray-500 tracking-widest">No skills added yet.</p>
@@ -50,10 +64,10 @@ export default function Skills() {
           </div>
 
           {/* Bottom tagline */}
-          <div className="col-span-1 md:col-start-2 md:col-end-4 row-start-3 md:row-start-3 md:row-end-4 flex items-center justify-center px-6 py-4 border-t-4 border-t-red-500 border-dashed md:border-t-0 flex-[0.1] md:flex-auto">
-            <h2 className="text-xs lg:text-2xl lg:font-black tracking-[0.2em] text-gray-500 uppercase flex items-center gap-3">
-              <Code2 className="w-4 h-4 sm:w-8 sm:h-8 text-red-500" aria-hidden="true" />
-              Tech Stack
+          <div className="col-span-1 md:col-start-3 md:col-end-3 row-start-3 md:row-start-2 md:row-end-4 flex items-center justify-center px-6 py-4 border-b-4 border-b-red-500 border-t-4 border-t-red-500 border-dashed md:border-t-0 flex-[0.1] md:flex-auto">
+            <h2 className="text-xs lg:text-xl lg:font-black tracking-[0.1em] text-gray-500 uppercase flex items-center justify-center gap-3">
+              <Database className="w-4 h-4 sm:w-8 sm:h-8 text-red-500" aria-hidden="true" />
+              Knowledge Database
             </h2>
           </div>
         </div>
