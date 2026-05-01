@@ -22,26 +22,23 @@ export const skillCategories: SkillCategory[] = [
   {
     category: "Backend",
     skills: [
+      { name: "Java" },
       { name: "Node.js" },
       { name: "Python" },
+      { name: "REST" },
       { name: "PostgreSQL" },
       { name: "Supabase" },
     ],
   },
   {
-    category: "Mobile",
+    category: "Cloud and DevOps",
     skills: [
-      { name: "Android Studio" },
-      { name: "Flutter" },
+      { name: "GCP" },
+      { name: "Firebase" },
+      { name: "Cloudflare" },
+      { name: "GitHub Actions" },
+      { name: "Docker" },
     ],
-  },
-  {
-    category: "Frameworks",
-    skills: [
-      { name: "React" },
-      { name: "Next.js" },
-      { name: "Shadcn UI" },
-      { name: "Tailwind CSS" },
-    ],
+    
   },
 ];
