@@ -6,6 +6,7 @@ import { useCallback, useState } from "react";
 import { projects } from "@/data/projects";
 import {
   type ScrollDirection,
+  useSectionProgress,
   useSectionScroll,
 } from "../reveal-scroll";
 import ProjectCarousel from "./project-carousel";
@@ -38,6 +39,7 @@ export default function Projects() {
   );
 
   useSectionScroll(1, handleSectionScroll);
+  useSectionProgress(1, currentProject, projects.length);
 
   return (
     <div
@@ -318,7 +320,7 @@ export default function Projects() {
 
             {projects.map((project, index) => (
               <div
-                key={project.name}  
+                key={project.name}
                 className="absolute inset-0 flex items-center justify-center transition-transform duration-1000 ease-in-out"
                 style={{
                   transform: `translateY(${(index - currentProject) * 100}%)`,

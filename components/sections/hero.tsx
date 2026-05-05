@@ -10,7 +10,12 @@ export default function Hero() {
   const logoRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="bg-[#0a0a0a] h-dvh w-screen flex flex-col overflow-x-hidden">
+    <section
+      id="HOME"
+      role="region"
+      aria-label="Home"
+      className="bg-[#0a0a0a] h-dvh w-screen flex flex-col overflow-x-hidden"
+    >
       {/* row 1 */}
       <div className="flex-[0.1] border-b-red-600 border-b-4 border-dashed
       md:flex-1 flex flex-col-reverse md:flex-row mt-3 md:mt-0">
@@ -181,6 +186,6 @@ export default function Hero() {
           `}
         </style>
       </div>
-    </div >
+    </section>
   );
 }

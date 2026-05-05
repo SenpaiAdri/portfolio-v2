@@ -23,7 +23,7 @@ export default function Experience() {
 
           {/* Right panel header */}
           <div className="hidden md:flex col-start-3 row-start-1 row-end-2 border-b-4 border-b-red-500 border-dashed items-center justify-center" aria-hidden="true">
-            <Briefcase className="w-6 h-6 lg:w-10 lg:h-10 text-red-500" />
+            {/* <Briefcase className="w-6 h-6 lg:w-10 lg:h-10 text-red-500" /> */}
           </div>
 
           {/* Main content - Experience entries */}
