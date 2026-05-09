@@ -13,7 +13,7 @@ export default function Experience() {
       className="bg-[#0a0a0a] h-dvh w-screen overflow-x-hidden"
     >
       <div className="relative h-full w-full">
-        <div className="flex flex-col md:grid h-dvh w-full md:grid-cols-[1fr_1fr_.618fr] md:grid-rows-[0.618fr_1fr_.618fr] text-gray-400">
+        <div className="flex flex-col md:grid h-dvh w-full md:grid-cols-[1fr_1fr_.618fr] md:grid-rows-[1fr_4fr_.618fr] text-gray-400">
           {/* Header */}
           <div className="md:col-span-2 md:row-start-1 md:row-end-2 md:border-r-4 md:border-r-gray-600 md:border-dashed flex flex-[0.2] items-center justify-center gap-4 py-6 px-4 border-b-4 border-b-red-500 border-dashed">
             <h2 className="text-sm lg:text-2xl lg:font-black tracking-[0.5em] text-gray-500 uppercase text-center">
@@ -78,13 +78,13 @@ export default function Experience() {
               Work History
             </h2>
             {/* skills section */}
-            <div className="hidden md:block w-full mx-auto md:px-6">
+            <div className="hidden md:block w-full mx-auto md:px-4">
               {skillCategories.length === 0 ? (
                 <p className="text-center text-gray-500 tracking-widest">No skills added yet.</p>
               ) : (
                 <div className="grid grid-cols-1 gap-5 md:gap-6">
                   {skillCategories.map((cat, i) => (
-                    <div key={i} className="w-full border-l-2 border-b-2 md:border-l-4 md:border-b-4 border-gray-600 border-dashed p-2 md:p-6 rounded">
+                    <div key={i} className="w-full border-l-2 border-b-2 md:border-l-4 md:border-b-4 border-gray-600 border-dashed p-2 md:pl-6 md:pb-6 rounded">
                       <h3 className="text-red-500 text-xs font-bold tracking-[0.3em] uppercase mb-2 ml-2 md:mb-4">{cat.category}</h3>
                       <div className="flex flex-wrap gap-2">
                         {cat.skills.map((skill, j) => (

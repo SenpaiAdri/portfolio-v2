@@ -179,8 +179,7 @@ export default function Contact() {
               type="submit"
               disabled={status === "loading" || status === "success"}
               className="group w-full sm:w-1/3 justify-center inline-flex items-center gap-3
-                border-2 border-dashed border-gray-500
-                px-5 md:px-6 py-2 md:py-3
+                border-2 border-dashed border-gray-500 py-2 md:py-3
                 text-gray-400 hover:text-red-500 hover:border-red-500
                 text-[10px] md:text-sm tracking-[0.3em] uppercase
                 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"

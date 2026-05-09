@@ -12,7 +12,7 @@ export const experiences: Experience[] = [
   {
     company: "Freelance",
     role: "Full Stack Developer",
-    date: "2025 - Present",
+    date: "2026 - Present",
     description: "Developed web applications for clients using React, Next.js, and Tailwind CSS",
     technologies: ["React", "Vite", "Shadcn UI", "Tailwind CSS", "MongoDB", "Node.js", "RESTful APIs", "Cloudflare"],
     logo: "",
