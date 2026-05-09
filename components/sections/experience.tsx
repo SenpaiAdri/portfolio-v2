@@ -42,7 +42,7 @@ export default function Experience() {
             />
             {/* Radial Gradient */}
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] bg-black/20" />
-            
+
             <div className="w-full max-w-6xl mx-auto">
               {experiences.length === 0 ? (
                 <p className="text-center text-gray-500 tracking-widest">No experience added yet.</p>
@@ -72,22 +72,23 @@ export default function Experience() {
           </div>
 
           {/* Bottom tagline */}
-          <div className="col-span-1 md:col-start-3 md:col-end-3 row-start-2 md:row-start-2 md:row-end-4 flex items-center justify-center px-6 py-4 border-b-4 border-red-500 border-t-4 border-t-red-500 border-dashed md:border-t-0 flex-[0.2] md:flex-col">
+          <div className="col-span-1 md:col-start-3 md:col-end-3 row-start-2 md:row-start-2 md:row-end-4 flex items-center justify-center px-6 py-4 border-b-4 border-red-500 border-t-4 border-t-red-500 border-dashed md:border-t-0 flex-[0.2] md:flex-col md:min-h-0 md:overflow-y-hidden">
             <h2 className="md:hidden text-xs lg:text-2xl lg:font-black tracking-[0.2em] text-gray-500 uppercase flex items-center gap-3">
               <History className="w-4 h-4 sm:w-8 sm:h-8 text-red-500" aria-hidden="true" />
               Work History
             </h2>
-            <div className="hidden md:block w-full mx-auto md:mx-10">
+            {/* skills section */}
+            <div className="hidden md:block w-full mx-auto md:px-6">
               {skillCategories.length === 0 ? (
                 <p className="text-center text-gray-500 tracking-widest">No skills added yet.</p>
               ) : (
-                <div className="flex flex-wrap gap-5 md:gap-10">
+                <div className="grid grid-cols-1 gap-5 md:gap-6">
                   {skillCategories.map((cat, i) => (
-                    <div key={i} className="border-l-2 border-b-2 md:border-l-4 md:border-b-4 border-gray-600 border-dashed p-2 md:p-8 rounded">
-                      <h3 className="text-red-500 text-sm md:text-md font-bold tracking-[0.3em] uppercase mb-2 ml-2 md:mb-4">{cat.category}</h3>
+                    <div key={i} className="w-full border-l-2 border-b-2 md:border-l-4 md:border-b-4 border-gray-600 border-dashed p-2 md:p-6 rounded">
+                      <h3 className="text-red-500 text-xs font-bold tracking-[0.3em] uppercase mb-2 ml-2 md:mb-4">{cat.category}</h3>
                       <div className="flex flex-wrap gap-2">
                         {cat.skills.map((skill, j) => (
-                          <span key={j} className="text-gray-300 text-xs px-2 md:px-3 py-1 md:py-2 border md:border-2 border-dashed border-gray-600 rounded">
+                          <span key={j} className="text-gray-300 text-[10px] px-2 md:px-2 py-[0.2rem] md:py-[0.3rem] border md:border-2 border-dashed border-gray-600 rounded wrap-break-word">
                             {skill.name}
                           </span>
                         ))}
