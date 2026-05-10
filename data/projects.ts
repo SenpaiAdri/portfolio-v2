@@ -1,7 +1,7 @@
 export interface Project {
   name: string;
   description: string;
-  image: string;
+  logo: string;
   images: string[];
   date: string;
   role: string;
@@ -14,7 +14,7 @@ export const projects: Project[] = [
   {
     name: "Pasada [Driver Side]",
     description: "Ride hailing and fleet management platform for modernized jeepney services",
-    image: "/pasada_driver_logo.svg",
+    logo: "/pasada_driver/pasada_driver_logo.svg",
     images: [
       "/pasada_driver/pasada_driver_home_view.webp",
       "/pasada_driver/pasada_driver_main_screen.webp",
@@ -40,7 +40,7 @@ export const projects: Project[] = [
   {
     name: "AI Blog Post",
     description: "An AI-Powered Blogging Channel for Latest Tech News and Updates",
-    image: "/ai-blogpost-logo.svg",
+    logo: "/ai_blogpost/ai-blogpost-logo.svg",
     images: [
       "/ai_blogpost/ai_blogpost_home_page.webp",
       "/ai_blogpost/ai_blogpost_full_blog.webp",
@@ -60,7 +60,7 @@ export const projects: Project[] = [
   {
     name: "Lootbx",
     description: "A Live Streaming Platform",
-    image: "/lootbx-logo.svg",
+    logo: "lootbx/lootbx-logo.svg",
     images: [
       "/lootbx/lootbx_landing_1.webp",
       "/lootbx/lootbx_landing_2.webp",

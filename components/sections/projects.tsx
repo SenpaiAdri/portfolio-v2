@@ -51,7 +51,7 @@ export default function Projects() {
         <div className="relative w-fit h-16 max-w-full overflow-hidden flex items-center justify-center">
           <div className="invisible">
             <Image
-              src={projects[currentProject].image}
+              src={projects[currentProject].logo}
               alt={projects[currentProject].name}
               width={250}
               height={100}
@@ -67,7 +67,7 @@ export default function Projects() {
               }}
             >
               <Image
-                src={project.image}
+                src={project.logo}
                 alt={project.name}
                 width={250}
                 height={100}
@@ -311,7 +311,7 @@ export default function Projects() {
           <div className="relative w-fit h-16 md:h-20 lg:h-24 max-w-full overflow-hidden flex items-center justify-center">
             <div className="invisible">
               <Image
-                src={projects[currentProject].image}
+                src={projects[currentProject].logo}
                 alt={projects[currentProject].name}
                 width={250}
                 height={100}
@@ -327,7 +327,7 @@ export default function Projects() {
                 }}
               >
                 <Image
-                  src={project.image}
+                  src={project.logo}
                   alt={project.name}
                   width={250}
                   height={100}
