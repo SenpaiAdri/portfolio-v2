@@ -189,17 +189,14 @@ export default function ProjectCarousel({
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 cursor-pointer"
           onClick={() => setSelectedImage(null)}
         >
-          <div
-            className="relative max-w-[90vw] max-h-[90vh] w-auto h-auto"
-            onClick={() => setSelectedImage(null)}
-          >
+          <div className="relative w-[95vw] h-[95vh] sm:w-[90vw] sm:h-[90vh]">
             <Image
               src={selectedImage}
               alt={projectName}
-              width={1200}
-              height={800}
-              className="max-w-full max-h-[90vh] w-auto h-auto object-contain"
+              fill
+              className="object-contain"
               priority
+              sizes="100vw"
             />
           </div>
         </div>
