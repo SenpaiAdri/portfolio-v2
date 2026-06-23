@@ -216,7 +216,7 @@ export default function Contact() {
         <div className="hidden md:flex px-6 md:px-10 py-6 md:py-8 border-b-3 sm:border-b-4 border-b-gray-600 border-dashed items-center justify-center md:row-start-3 md:col-start-2">
           <div className="w-full max-w-xs flex flex-col items-center gap-4">
             <a
-              href="/DEGUZMAN_ADRIAN_RESUME.pdf"
+              href="/RESUME.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="group w-full inline-flex items-center justify-center border-2 border-dashed border-gray-500 py-3 text-gray-400 hover:text-red-500 hover:border-red-500 text-xs font-bold tracking-[0.3em] uppercase transition-colors"
