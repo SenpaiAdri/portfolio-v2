@@ -368,6 +368,7 @@ export default function RevealScroll({
         </div>
 
         {sections.map((section, i) => {
+          const isTransitioning = leavingIndex !== null || enteringIndex !== null;
           let translateY = "0%";
 
           if (i === enteringIndex && direction === "up") {
@@ -375,6 +376,14 @@ export default function RevealScroll({
           } else if (i === leavingIndex && direction === "down") {
             translateY = "-100%";
           } else if (i < currentIndex) {
+            translateY = "-100%";
+          } else if (
+            isTransitioning &&
+            direction === "up" &&
+            i > currentIndex &&
+            leavingIndex !== null &&
+            i < leavingIndex
+          ) {
             translateY = "-100%";
           }
 
