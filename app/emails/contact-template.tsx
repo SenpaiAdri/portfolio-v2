@@ -95,12 +95,6 @@ const fromValue = {
   margin: "0 0 24px",
 };
 
-const divider = {
-  color: "#dc2626",
-  fontSize: "12px",
-  margin: "0 0 24px",
-};
-
 const dashedBorder = {
   borderBottom: "2px dashed #dc2626",
   margin: "0 0 24px",

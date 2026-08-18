@@ -139,8 +139,7 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  tabIndex={-1}
-                  className="group relative inline-flex items-center justify-center h-15 w-15 md:h-22  md:w-22 border-4 border-dashed border-gray-600 text-red-500 hover:border-red-500 transition-colors z-10 hover:z-50 focus:outline-none"
+                  className="group relative inline-flex items-center justify-center h-15 w-15 md:h-22  md:w-22 border-4 border-dashed border-gray-600 text-red-500 hover:border-red-500 transition-colors z-10 hover:z-50 focus-visible:border-red-500 focus-visible:z-50 focus:outline-none"
                 >
                   <Icon
                     className="h-7 w-7 md:h-10 md:w-10 transition-transform group-hover:scale-110"
@@ -236,8 +235,7 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  tabIndex={-1}
-                  className="group relative inline-flex items-center justify-center h-12 w-12 border-3 border-dashed border-gray-600 text-red-500 hover:border-red-500 transition-colors z-10 hover:z-50 focus:outline-none"
+                  className="group relative inline-flex items-center justify-center h-12 w-12 border-3 border-dashed border-gray-600 text-red-500 hover:border-red-500 transition-colors z-10 hover:z-50 focus-visible:border-red-500 focus-visible:z-50 focus:outline-none"
                 >
                   <Icon
                     className="h-7 w-7 transition-transform group-hover:scale-110"

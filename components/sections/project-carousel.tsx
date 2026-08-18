@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface ProjectCarouselProps {
-  images: string[];
   projectName: string;
   accentColor: string;
   allImages: string[][];
@@ -30,17 +29,22 @@ function ProjectCarouselInner({
   onImageClick: (src: string) => void;
 }) {
   const isActive = projectIndex === currentProject;
+  const autoplayPlugin = useMemo(
+    () =>
+      isActive
+        ? [
+            Autoplay({
+              delay: 3000,
+              stopOnInteraction: false,
+              stopOnMouseEnter: false,
+            }),
+          ]
+        : [],
+    [isActive]
+  );
   const [emblaRef, emblaApi] = useEmbaCarousel(
     { loop: true, duration: 40 },
-    isActive
-      ? [
-          Autoplay({
-            delay: 3000,
-            stopOnInteraction: false,
-            stopOnMouseEnter: false,
-          }),
-        ]
-      : []
+    autoplayPlugin
   );
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -140,13 +144,13 @@ function useEmbaCarousel(
 }
 
 export default function ProjectCarousel({
-  images,
   projectName,
   accentColor,
   allImages,
   currentProject,
 }: ProjectCarouselProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   const handleImageClick = (src: string) => {
     setSelectedImage(src);
@@ -160,6 +164,22 @@ export default function ProjectCarousel({
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedImage]);
+
+  // Keep wheel/touch events on the open modal from reaching the
+  // RevealScroll container listeners (which would navigate sections).
+  useEffect(() => {
+    const modal = modalRef.current;
+    if (!modal || !selectedImage) return;
+    const stop = (e: Event) => e.stopPropagation();
+    modal.addEventListener("wheel", stop, { passive: false });
+    modal.addEventListener("touchstart", stop, { passive: true });
+    modal.addEventListener("touchend", stop, { passive: true });
+    return () => {
+      modal.removeEventListener("wheel", stop);
+      modal.removeEventListener("touchstart", stop);
+      modal.removeEventListener("touchend", stop);
+    };
   }, [selectedImage]);
 
   return (
@@ -186,8 +206,14 @@ export default function ProjectCarousel({
 
       {selectedImage && (
         <div
+          ref={modalRef}
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 cursor-pointer"
           onClick={() => setSelectedImage(null)}
+          onKeyDown={(e) => {
+            if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+              e.stopPropagation();
+            }
+          }}
         >
           <div className="relative w-[95vw] h-[95vh] sm:w-[90vw] sm:h-[90vh]">
             <Image

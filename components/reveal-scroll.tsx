@@ -63,6 +63,7 @@ export default function RevealScroll({
   const [enteringIndex, setEnteringIndex] = useState<number | null>(null);
   const [direction, setDirection] = useState<"down" | "up">("down");
   const [phase, setPhase] = useState<"idle" | "enter">("idle");
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const isAnimatingRef = useRef(false);
   const lastWheelRef = useRef(0);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -76,6 +77,7 @@ export default function RevealScroll({
       if (nextIndex < 0 || nextIndex >= sectionCount) return;
       if (isAnimatingRef.current) return;
       isAnimatingRef.current = true;
+      setMobileNavOpen(false);
 
       const dir = nextIndex > currentIndex ? "down" : "up";
       setDirection(dir);
@@ -197,16 +199,22 @@ export default function RevealScroll({
     return () => container.removeEventListener("wheel", handleWheel);
   }, [handleIntent]);
 
-  // Keyboard: ArrowDown / ArrowUp
+  // Keyboard: ArrowDown / ArrowUp (skip when focus is in a form field)
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowDown") {
-        e.preventDefault();
-        handleIntent("next");
-      } else if (e.key === "ArrowUp") {
-        e.preventDefault();
-        handleIntent("prev");
+      if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+      const target = e.target as HTMLElement | null;
+      const tag = target?.tagName;
+      if (
+        tag === "INPUT" ||
+        tag === "TEXTAREA" ||
+        tag === "SELECT" ||
+        target?.isContentEditable
+      ) {
+        return;
       }
+      e.preventDefault();
+      handleIntent(e.key === "ArrowDown" ? "next" : "prev");
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
@@ -289,11 +297,6 @@ export default function RevealScroll({
   const progressPercent =
     totalPositions > 1 ? (currentVirtualPosition / (totalPositions - 1)) * 100 : 0;
   const showTopNav = currentIndex > 0 && navItems.length > 0;
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
-
-  useEffect(() => {
-    setMobileNavOpen(false);
-  }, [currentIndex]);
 
   return (
     <ScrollContext.Provider value={contextValue}>

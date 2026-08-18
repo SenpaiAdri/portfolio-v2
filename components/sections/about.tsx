@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { Layers } from "lucide-react";
 import { LogoAnimated } from "../LogoAnimated";
 

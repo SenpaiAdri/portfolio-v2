@@ -1,10 +1,35 @@
 "use client";
 
-import { History, Briefcase } from "lucide-react";
+import { History } from "lucide-react";
+import { useCallback, useRef } from "react";
 import { experiences } from "@/data/experience";
 import { skillCategories } from "@/data/skills";
+import { useSectionScroll, type ScrollDirection } from "../reveal-scroll";
 
 export default function Experience() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleSectionScroll = useCallback((direction: ScrollDirection) => {
+    const el = scrollRef.current;
+    if (!el) return false;
+
+    if (direction === "next") {
+      if (el.scrollTop + el.clientHeight < el.scrollHeight - 1) {
+        el.scrollBy({ top: 90, behavior: "smooth" });
+        return true;
+      }
+      return false;
+    }
+
+    if (el.scrollTop > 1) {
+      el.scrollBy({ top: -90, behavior: "smooth" });
+      return true;
+    }
+    return false;
+  }, []);
+
+  useSectionScroll(2, handleSectionScroll);
+
   return (
     <div
       id="EXPERIENCE"
@@ -27,7 +52,7 @@ export default function Experience() {
           </div>
 
           {/* Main content - Experience entries */}
-          <div className="relative md:col-start-1 md:col-end-3 md:row-start-2 md:row-end-4 md:border-b-4 md:border-r-4 md:border-dashed md:border-b-red-500 md:border-r-gray-500 flex items-center justify-center px-6 py-6 md:px-10 md:py-8 flex-1 md:flex-auto overflow-y-auto">
+          <div ref={scrollRef} className="relative md:col-start-1 md:col-end-3 md:row-start-2 md:row-end-4 md:border-b-4 md:border-r-4 md:border-dashed md:border-b-red-500 md:border-r-gray-500 flex items-center justify-center px-6 py-6 md:px-10 md:py-8 flex-1 md:flex-auto overflow-y-auto">
             {/* Grid lines background */}
             <div
               aria-hidden="true"
@@ -88,7 +113,7 @@ export default function Experience() {
                       <h3 className="text-red-500 text-xs font-bold tracking-[0.3em] uppercase mb-2 ml-2 md:mb-4">{cat.category}</h3>
                       <div className="flex flex-wrap gap-2">
                         {cat.skills.map((skill, j) => (
-                          <span key={j} className="text-gray-300 text-[10px] px-2 md:px-2 py-[0.2rem] md:py-[0.3rem] border md:border-2 border-dashed border-gray-600 rounded wrap-break-word">
+                          <span key={j} className="text-gray-300 text-[10px] px-2 md:px-2 py-[0.2rem] md:py-[0.3rem] border md:border-2 border-dashed border-gray-600 rounded break-words">
                             {skill.name}
                           </span>
                         ))}

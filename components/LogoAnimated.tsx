@@ -133,10 +133,9 @@ export function LogoAnimated({ width, height, className }: LogoAnimatedProps) {
     tl.add(() => {
       // Switch from pure stroke-drawing to filled logo while KEEPING the stroke visible.
       for (const p of paths) {
-        const of = p.dataset.origFill ?? "";
+const of = p.dataset.origFill ?? "";
         const os = p.dataset.origStroke ?? "";
         const osw = p.dataset.origStrokeWidth ?? "";
-        const oo = p.dataset.origOpacity ?? "";
         const ofo = p.dataset.origFillOpacity ?? "";
 
         // Restore fills so they can fade in.

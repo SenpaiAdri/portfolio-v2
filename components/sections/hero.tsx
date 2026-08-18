@@ -82,7 +82,7 @@ export default function Hero() {
                 typingSpeed={200}
                 className="text-red-500 text-xl md:text-2xl mb-2" />
               <span className="text-gray-500 text-base md:text-2xl">
-                Compute Science Student
+                Computer Science Student
               </span>
               <span className="text-gray-500 text-base md:text-2xl">
                 Specialized in Mobile Programming
@@ -172,7 +172,8 @@ export default function Hero() {
             minWidth: "100%",
           }}
         >
-          ADRIAN ADRIAN ADRIAN ADRIAN ADRIAN ADRIAN ADRIAN
+          <span>ADRIAN ADRIAN ADRIAN ADRIAN ADRIAN ADRIAN ADRIAN</span>
+          <span aria-hidden="true">ADRIAN ADRIAN ADRIAN ADRIAN ADRIAN ADRIAN ADRIAN</span>
         </div>
         <style>
           {`
@@ -181,7 +182,7 @@ export default function Hero() {
               100% { transform: translateX(-50%); }
             }
             .animate-marquee {
-              animation: marquee 15s linear infinite;
+              animation: marquee 30s linear infinite;
             }
           `}
         </style>
