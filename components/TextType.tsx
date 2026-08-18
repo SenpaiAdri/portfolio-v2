@@ -2,6 +2,7 @@
 
 import { ElementType, useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { gsap } from 'gsap';
+import { usePrefersReducedMotion } from '@/hooks/use-prefers-reduced-motion';
 
 interface TextTypeProps {
   className?: string;
@@ -50,10 +51,17 @@ const TextType = ({
   const [isDeleting, setIsDeleting] = useState(false);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(!startOnVisible);
+  const prefersReducedMotion = usePrefersReducedMotion();
   const cursorRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLElement>(null);
 
   const textArray = useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
+
+  const reducedText = useMemo(() => {
+    if (!prefersReducedMotion) return null;
+    const currentText = textArray[currentTextIndex];
+    return reverseMode ? currentText.split("").reverse().join("") : currentText;
+  }, [prefersReducedMotion, textArray, currentTextIndex, reverseMode]);
 
   const getRandomSpeed = useCallback(() => {
     if (!variableSpeed) return typingSpeed;
@@ -85,7 +93,7 @@ const TextType = ({
   }, [startOnVisible]);
 
   useEffect(() => {
-    if (showCursor && cursorRef.current) {
+    if (showCursor && !prefersReducedMotion && cursorRef.current) {
       gsap.set(cursorRef.current, { opacity: 1 });
       gsap.to(cursorRef.current, {
         opacity: 0,
@@ -95,10 +103,13 @@ const TextType = ({
         ease: 'power2.inOut'
       });
     }
-  }, [showCursor, cursorBlinkDuration]);
+  }, [showCursor, cursorBlinkDuration, prefersReducedMotion]);
 
   useEffect(() => {
     if (!isVisible) return;
+
+    // Reduced motion: render full text statically (no typing/deleting).
+    if (prefersReducedMotion) return;
 
     let timeout: ReturnType<typeof setTimeout>;
 
@@ -165,6 +176,7 @@ const TextType = ({
     reverseMode,
     variableSpeed,
     getRandomSpeed,
+    prefersReducedMotion,
     onSentenceComplete
   ]);
 
@@ -174,11 +186,11 @@ const TextType = ({
   return (
     <Component
       ref={containerRef}
-      className={`inline-block whitespace-pre-wrap tracking-tight ${className}`}
+      className={`inline-block whitespace-pre-wrap ${className}`}
       {...props}
     >
       <span className="inline" style={{ color: getCurrentTextColor() || 'inherit' }}>
-        {displayedText}
+        {reducedText ?? displayedText}
       </span>
       {showCursor && (
         <span

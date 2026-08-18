@@ -93,9 +93,12 @@ export default function Contact() {
             [<span className="text-gray-500">Contact</span>]
           </h2>
           <div className="flex flex-col justify-between">
-            <FieldLabel>Name:</FieldLabel>
+            <FieldLabel htmlFor="contact-name">Name:</FieldLabel>
             <input
+              id="contact-name"
               type="text"
+              name="name"
+              autoComplete="name"
               required
               maxLength={MAX_CHARS.name}
               value={name}
@@ -116,9 +119,13 @@ export default function Contact() {
 
         {/* Row 2: Sender email (left) | Socials (right on desktop) */}
         <div className="flex flex-col justify-center px-6 md:px-18 py-6 md:py-20 border-b-3 sm:border-b-4 border-b-gray-600 border-dashed md:border-r-4 md:border-r-red-500 md:row-start-2 md:col-start-1">
-          <FieldLabel>Sender Email:</FieldLabel>
+          <FieldLabel htmlFor="contact-email">Sender Email:</FieldLabel>
           <input
+            id="contact-email"
             type="email"
+            name="email"
+            autoComplete="email"
+            spellCheck={false}
             required
             maxLength={MAX_CHARS.email}
             value={email}
@@ -153,13 +160,15 @@ export default function Contact() {
 
         {/* Row 3: Payload content (left) | empty right with vertical divider */}
         <div className="flex flex-col justify-between px-6 md:px-18 py-6 md:py-15 border-b-3 sm:border-b-4 border-b-gray-600 border-dashed md:border-r-4 md:border-r-red-500 md:row-start-3 md:col-start-1">
-          <FieldLabel>Payload Content:</FieldLabel>
+          <FieldLabel htmlFor="contact-message">Payload Content:</FieldLabel>
           <textarea
+            id="contact-message"
+            name="message"
             required
             maxLength={MAX_CHARS.message}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Your portfolio looks great! I'd like to share business with you"
+            placeholder="Your portfolio looks great! I’d like to share business with you"
             className="flex-1 min-h-[90px] w-full resize-none bg-transparent
               text-gray-400 text-[10px] md:text-base tracking-[0.15em] uppercase leading-relaxed
               border-2 border-dashed border-red-500
@@ -185,7 +194,7 @@ export default function Contact() {
             >
               {status === "loading" ? (
                 <>
-                  Sending...
+                  Sending…
                   <Loader2 className="h-4 w-4 md:h-5 md:w-5 animate-spin" />
                 </>
               ) : status === "success" ? (
@@ -204,11 +213,18 @@ export default function Contact() {
               )}
             </button>
           </div>
-          {status === "error" && (
-            <p className="mt-2 text-center text-red-500 text-xs tracking-[0.2em] uppercase">
-              {errorMessage}
-            </p>
-          )}
+          <div aria-live="polite">
+            {status === "error" && (
+              <p className="mt-2 text-center text-red-500 text-xs tracking-[0.2em] uppercase">
+                {errorMessage}
+              </p>
+            )}
+            {status === "success" && (
+              <p className="mt-2 text-center text-gray-400 text-xs tracking-[0.2em] uppercase">
+                Message sent successfully — I’ll get back to you soon.
+              </p>
+            )}
+          </div>
         </div>
 
         {/* Desktop-only resume row: placed below socials (row 3, col 2) */}
@@ -251,9 +267,18 @@ export default function Contact() {
   );
 }
 
-function FieldLabel({ children }: { children: ReactNode }) {
+function FieldLabel({
+  children,
+  htmlFor,
+}: {
+  children: ReactNode;
+  htmlFor?: string;
+}) {
   return (
-    <label className="block mb-3 md:mb-4 text-red-500 text-xs md:text-sm tracking-[0.35em] uppercase">
+    <label
+      htmlFor={htmlFor}
+      className="block mb-3 md:mb-4 text-red-500 text-xs md:text-sm tracking-[0.35em] uppercase"
+    >
       {children}
     </label>
   );

@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 
 const SECTION_TRANSITION_MS = 1000;
 const WHEEL_THROTTLE_MS = 800;
@@ -64,6 +65,8 @@ export default function RevealScroll({
   const [direction, setDirection] = useState<"down" | "up">("down");
   const [phase, setPhase] = useState<"idle" | "enter">("idle");
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const sectionTransitionMs = prefersReducedMotion ? 0 : SECTION_TRANSITION_MS;
   const isAnimatingRef = useRef(false);
   const lastWheelRef = useRef(0);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -91,9 +94,9 @@ export default function RevealScroll({
         setLeavingIndex(null);
         setEnteringIndex(null);
         isAnimatingRef.current = false;
-      }, SECTION_TRANSITION_MS);
+      }, sectionTransitionMs);
     },
-    [sectionCount, currentIndex]
+    [sectionCount, currentIndex, sectionTransitionMs]
   );
 
   useEffect(() => {
@@ -320,7 +323,7 @@ export default function RevealScroll({
         {/* Hamburger menu */}
         <div
           className={cn(
-            "absolute right-4 top-4 z-50 transition-all duration-500 md:right-10 md:top-10",
+            "absolute right-4 top-4 z-50 transition-[opacity] duration-500 md:right-10 md:top-10",
             showTopNav ? "opacity-100" : "opacity-0 pointer-events-none"
           )}
         >
@@ -332,7 +335,7 @@ export default function RevealScroll({
             onClick={() => setMobileNavOpen((v) => !v)}
             className="inline-flex h-10 w-10 items-center justify-center border-b-2 border-r-2 border-dashed border-b-gray-600 border-r-gray-600 text-gray-300 backdrop-blur-md transition-colors hover:border-red-500 hover:text-red-500 rounded-lg"
           >
-            {mobileNavOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {mobileNavOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
           </button>
         </div>
 
@@ -340,7 +343,7 @@ export default function RevealScroll({
         <div
           id="reveal-scroll-nav-menu"
           className={cn(
-            "absolute inset-x-4 top-16 z-50 transition-all duration-300 md:inset-x-auto md:right-10 md:top-24 md:w-48",
+            "absolute inset-x-4 top-16 z-50 transition-[opacity,transform] duration-300 md:inset-x-auto md:right-10 md:top-24 md:w-48",
             showTopNav && mobileNavOpen
               ? "translate-y-0 opacity-100 pointer-events-auto"
               : "-translate-y-2 opacity-0 pointer-events-none"
@@ -405,7 +408,7 @@ export default function RevealScroll({
               style={{
                 transform: `translateY(${translateY})`,
                 transitionDuration: isAnimating
-                  ? `${SECTION_TRANSITION_MS}ms`
+                  ? `${sectionTransitionMs}ms`
                   : "0ms",
                 zIndex: sectionCount - i,
               }}

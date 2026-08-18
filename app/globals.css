@@ -20,6 +20,10 @@ body {
   height: 100%;
 }
 
+html {
+  color-scheme: dark;
+}
+
 body {
   color: var(--background);
 }

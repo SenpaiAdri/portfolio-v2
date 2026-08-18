@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 
 gsap.registerPlugin(DrawSVGPlugin);
 
@@ -52,6 +53,7 @@ export function LogoAnimated({ width, height, className }: LogoAnimatedProps) {
   const currentHeight = useResponsiveSize(height, defaultHeight);
   const containerRef = useRef<HTMLDivElement>(null);
   const [logoSvg, setLogoSvg] = useState<string>("");
+  const prefersReducedMotion = usePrefersReducedMotion();
   const strokeColor = "#FF0000";
   const strokeWidth = 3;
   const svgUrl = useMemo(() => "/logo.svg", []);
@@ -90,6 +92,34 @@ export function LogoAnimated({ width, height, className }: LogoAnimatedProps) {
     const strokePaths: SVGPathElement[] = [];
     const fillPaths: SVGPathElement[] = [];
 
+    const restoreOriginalPaths = (paths: SVGPathElement[]) => {
+      for (const p of paths) {
+        const of = p.dataset.origFill ?? "";
+        const os = p.dataset.origStroke ?? "";
+        const osw = p.dataset.origStrokeWidth ?? "";
+        const oo = p.dataset.origOpacity ?? "";
+        const ofo = p.dataset.origFillOpacity ?? "";
+
+        if (of) p.setAttribute("fill", of);
+        else p.removeAttribute("fill");
+
+        if (os) p.setAttribute("stroke", os);
+        else p.removeAttribute("stroke");
+
+        if (osw) p.setAttribute("stroke-width", osw);
+        else p.removeAttribute("stroke-width");
+
+        if (oo) p.setAttribute("opacity", oo);
+        else p.removeAttribute("opacity");
+
+        if (ofo) p.setAttribute("fill-opacity", ofo);
+        else p.removeAttribute("fill-opacity");
+
+        p.style.opacity = "";
+        p.style.fillOpacity = "";
+      }
+    };
+
     for (const p of paths) {
       const origFill = p.getAttribute("fill") ?? "";
       const origStroke = p.getAttribute("stroke") ?? "";
@@ -118,6 +148,11 @@ export function LogoAnimated({ width, height, className }: LogoAnimatedProps) {
       // If the SVG had fill-opacity, keep it but we'll animate overall opacity on reveal
       p.style.opacity = "1";
       strokePaths.push(p);
+    }
+
+    if (prefersReducedMotion) {
+      restoreOriginalPaths(paths);
+      return;
     }
 
     const tl = gsap.timeline();
@@ -176,38 +211,20 @@ const of = p.dataset.origFill ?? "";
 
     tl.add(() => {
       // Final cleanup: restore original stroke attributes and opacity.
-      for (const p of paths) {
-        const os = p.dataset.origStroke ?? "";
-        const osw = p.dataset.origStrokeWidth ?? "";
-        const oo = p.dataset.origOpacity ?? "";
-        const ofo = p.dataset.origFillOpacity ?? "";
-
-        if (os) p.setAttribute("stroke", os);
-        else p.removeAttribute("stroke");
-
-        if (osw) p.setAttribute("stroke-width", osw);
-        else p.removeAttribute("stroke-width");
-
-        if (oo) p.setAttribute("opacity", oo);
-        else p.removeAttribute("opacity");
-
-        if (ofo) {
-          p.setAttribute("fill-opacity", ofo);
-          p.style.fillOpacity = "";
-        }
-      }
+      restoreOriginalPaths(paths);
     });
 
     return () => {
       tl.kill();
     };
-  }, [logoSvg, strokeColor, strokeWidth]);
+  }, [logoSvg, strokeColor, strokeWidth, prefersReducedMotion]);
 
   return (
     <div
       ref={containerRef}
       className={`flex items-center justify-center ${className ?? ""}`}
       style={{ width: currentWidth, height: currentHeight }}
+      role="img"
       aria-label="profile logo"
       // SVG is loaded from /public/logo.svg so updates auto-apply
       dangerouslySetInnerHTML={logoSvg ? { __html: logoSvg } : undefined}

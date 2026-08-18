@@ -11,6 +11,11 @@ import {
 } from "../reveal-scroll";
 import ProjectCarousel from "./project-carousel";
 
+const TRANSITION_THEME =
+  "border-color 0.7s ease-in-out, color 0.7s ease-in-out, transform 0.7s ease-in-out";
+const TRANSITION_THEME_LONG =
+  "border-color 1s ease-in-out, color 1s ease-in-out, transform 1s ease-in-out";
+
 export default function Projects() {
   const [currentProject, setCurrentProject] = useState(0);
   const lastIndex = projects.length - 1;
@@ -92,7 +97,7 @@ export default function Projects() {
       <div className="flex-[0.5] md:hidden flex flex-row border-b-2 border-dashed"
         style={{
           borderColor: projects[currentProject].color,
-          transition: "all 0.7s ease-in-out"
+          transition: TRANSITION_THEME
         }}>
         <div className="flex-1 flex flex-col items-center justify-center py-4 gap-5 border-r-2 border-gray-600 border-dashed">
           <div className="flex items-center gap-2">
@@ -100,7 +105,7 @@ export default function Projects() {
               size={16}
               style={{
                 color: projects[currentProject].color,
-                transition: "all 0.7s ease-in-out"
+                transition: TRANSITION_THEME
               }}
             />
             <div className="relative min-h-6 min-w-20 overflow-hidden">
@@ -110,7 +115,7 @@ export default function Projects() {
                   className="absolute inset-0 flex items-center justify-center transition-transform"
                   style={{
                     transform: `translateY(${(index - currentProject) * 100}%)`,
-                    transition: "all 0.7s ease-in-out",
+                    transition: TRANSITION_THEME,
                   }}
                 >
                   {project.website ? (
@@ -134,7 +139,7 @@ export default function Projects() {
               size={16}
               style={{
                 color: projects[currentProject].color,
-                transition: "all 0.7s ease-in-out"
+                transition: TRANSITION_THEME
               }}
             />
             <div className="relative min-h-6 min-w-20 overflow-hidden">
@@ -144,7 +149,7 @@ export default function Projects() {
                   className="absolute inset-0 flex items-center justify-center transition-transform"
                   style={{
                     transform: `translateY(${(index - currentProject) * 100}%)`,
-                    transition: "all 0.7s ease-in-out",
+                    transition: TRANSITION_THEME,
                   }}
                 >
                   {project.github ? (
@@ -171,7 +176,7 @@ export default function Projects() {
             style={{
               WebkitTextStroke: `1px ${projects[currentProject].color}`,
               color: "transparent",
-              transition: "all 0.7s ease-in-out",
+              transition: TRANSITION_THEME,
             }}
           >
             PROJECT
@@ -181,7 +186,7 @@ export default function Projects() {
               className="text-xl font-black"
               style={{
                 color: projects[currentProject].color,
-                transition: "all 0.7s ease-in-out",
+                transition: TRANSITION_THEME,
               }}
             >
               #
@@ -195,7 +200,7 @@ export default function Projects() {
                   style={{
                     transform: `translateY(${(index - currentProject) * 100}%)`,
                     color: project.color,
-                    transition: "all 0.7s ease-in-out",
+                    transition: TRANSITION_THEME,
                   }}
                 >
                   {index + 1}
@@ -291,10 +296,11 @@ export default function Projects() {
       </div>
 
       {/* Web Layout: Row 1 (md+) */}
+      {/* <div className="h-15 border-b-4 border-dashed border-gray-600"></div> */}
       <div className="hidden md:flex flex-1 flex-row border-b-2 md:border-b-4 border-dashed"
         style={{
           borderColor: projects[currentProject].color,
-          transition: "all 1s ease-in-out"
+          transition: TRANSITION_THEME_LONG
         }}>
         <div className="w-[calc(13/21*100%)] h-full border-r-gray-600 border-r-2 md:border-r-4 border-dashed flex items-center justify-center">
           <ProjectCarousel
@@ -423,14 +429,14 @@ export default function Projects() {
           <div className="w-full h-full flex flex-row border-b-2 md:border-b-4 border-dashed"
             style={{
               borderColor: projects[currentProject].color,
-              transition: "all 0.7s ease-in-out"
+              transition: TRANSITION_THEME
             }}>
 
             <div className="w-full h-full flex flex-5 flex-col border-r-gray-600 border-r-2 md:border-r-4 border-dashed">
               <div className="w-full h-full flex flex-col items-center justify-center overflow-hidden py-3 md:py-5 gap-3 md:gap-5 border-b-2 md:border-b-4 border-dashed"
                 style={{
                   borderColor: projects[currentProject].color,
-                  transition: "all 0.7s ease-in-out",
+                  transition: TRANSITION_THEME,
                 }}>
                 <div className="flex items-center justify-center gap-2">
                   <Link
@@ -438,7 +444,7 @@ export default function Projects() {
                     className="shrink-0"
                     style={{
                       color: projects[currentProject].color,
-                      transition: "all 0.7s ease-in-out"
+                      transition: TRANSITION_THEME
                     }}
                   />
                   <div className="relative min-h-6 md:min-h-8 min-w-20 flex-1 overflow-hidden">
@@ -448,7 +454,7 @@ export default function Projects() {
                         className="absolute inset-0 flex items-center justify-center transition-transform"
                         style={{
                           transform: `translateY(${(index - currentProject) * 100}%)`,
-                          transition: "all 0.7s ease-in-out",
+                          transition: TRANSITION_THEME,
                         }}
                       >
                         {project.website ? (
@@ -477,7 +483,7 @@ export default function Projects() {
                     className="shrink-0"
                     style={{
                       color: projects[currentProject].color,
-                      transition: "all 0.7s ease-in-out"
+                      transition: TRANSITION_THEME
                     }}
                   />
                   <div className="relative min-h-6 md:min-h-8 min-w-20 flex-1 overflow-hidden">
@@ -487,7 +493,7 @@ export default function Projects() {
                         className="absolute inset-0 flex items-center justify-center transition-transform"
                         style={{
                           transform: `translateY(${(index - currentProject) * 100}%)`,
-                          transition: "all 0.7s ease-in-out",
+                          transition: TRANSITION_THEME,
                         }}
                       >
                         {project.github ? (
@@ -517,7 +523,7 @@ export default function Projects() {
                 style={{
                   WebkitTextStroke: `2px ${projects[currentProject].color}`,
                   color: "transparent",
-                  transition: "all 0.7s ease-in-out",
+                  transition: TRANSITION_THEME,
                 }}
               >
                 PROJECT
@@ -526,7 +532,7 @@ export default function Projects() {
                 <div className={`text-2xl md:text-3xl lg:text-4xl font-black`}
                   style={{
                     color: projects[currentProject].color,
-                    transition: "all 0.7s ease-in-out",
+                    transition: TRANSITION_THEME,
                     borderColor: projects[currentProject].color
                   }}>
                   #
@@ -540,7 +546,7 @@ export default function Projects() {
                       style={{
                         transform: `translateY(${(index - currentProject) * 100}%)`,
                         color: project.color,
-                        transition: "all 0.7s ease-in-out",
+                        transition: TRANSITION_THEME,
                       }}
                     >
                       {index + 1}
