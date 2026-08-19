@@ -18,7 +18,8 @@ export const metadata: Metadata = {
     default: "Eydriannn",
     template: "%s | Eydriannn",
   },
-  description: "Personal website of Adrian",
+  description:
+    "Portfolio of Adrian M. De Guzman — full-stack developer and Computer Science student crafting detail-oriented web and mobile experiences.",
   keywords: [
     "Software Engineer",
     "Web Developer",
@@ -36,7 +37,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Eydriannn",
-    description: "Personal website of Adrian",
+    description:
+      "Portfolio of Adrian M. De Guzman — full-stack developer and Computer Science student crafting detail-oriented web and mobile experiences.",
     url: "https://eydriannn.vercel.app",
     siteName: "Eydriannn",
     images: [
@@ -53,7 +55,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Eydriannn",
-    description: "Personal website of Adrian",
+    description:
+      "Portfolio of Adrian M. De Guzman — full-stack developer and Computer Science student crafting detail-oriented web and mobile experiences.",
     images: ["/my_logo.png"],
   },
   robots: {

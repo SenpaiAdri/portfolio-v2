@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { Github, Link } from "lucide-react";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import gsap from "gsap";
 import { projects } from "@/data/projects";
 import {
   type ScrollDirection,
@@ -10,15 +11,40 @@ import {
   useSectionScroll,
 } from "../reveal-scroll";
 import ProjectCarousel from "./project-carousel";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 
 const TRANSITION_THEME =
   "border-color 0.7s ease-in-out, color 0.7s ease-in-out, transform 0.7s ease-in-out";
 const TRANSITION_THEME_LONG =
   "border-color 1s ease-in-out, color 1s ease-in-out, transform 1s ease-in-out";
+// OUTLINED "PROJECT" text: visible color is -webkit-text-stroke-color,
+// not `color` (fill is transparent) — so the stroke longhand must be
+// explicitly transitioned, or the color snaps instantly
+const TRANSITION_STROKE =
+  "color 0.7s ease-in-out, -webkit-text-stroke-color 0.7s ease-in-out";
 
 export default function Projects() {
   const [currentProject, setCurrentProject] = useState(0);
   const lastIndex = projects.length - 1;
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const prevColorRef = useRef<string | null>(null);
+
+  // Morph the entering slide's title/number color from the previous
+  // project's color to its own (slides are separate colored elements,
+  // so plain CSS transitions can't ease the swap)
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    const from = prevColorRef.current ?? projects[currentProject].color;
+    const to = projects[currentProject].color;
+    prevColorRef.current = to;
+    if (from === to) return;
+
+    gsap.fromTo(
+      document.querySelectorAll(`[data-project-color="${currentProject}"]`),
+      { color: from },
+      { color: to, duration: 0.7, ease: "power2.inOut", overwrite: "auto" }
+    );
+  }, [currentProject, prefersReducedMotion]);
 
   const handleSectionScroll = useCallback(
     (direction: ScrollDirection) => {
@@ -176,7 +202,7 @@ export default function Projects() {
             style={{
               WebkitTextStroke: `1px ${projects[currentProject].color}`,
               color: "transparent",
-              transition: TRANSITION_THEME,
+              transition: TRANSITION_STROKE,
             }}
           >
             PROJECT
@@ -196,11 +222,12 @@ export default function Projects() {
               {projects.map((project, index) => (
                 <div
                   key={project.name}
+                  data-project-color={index}
                   className="absolute inset-0 flex items-center justify-center transition-transform text-xl font-black"
                   style={{
                     transform: `translateY(${(index - currentProject) * 100}%)`,
                     color: project.color,
-                    transition: TRANSITION_THEME,
+                    transition: "transform 0.7s ease-in-out",
                   }}
                 >
                   {index + 1}
@@ -216,6 +243,7 @@ export default function Projects() {
         {/* Grid Background */}
         <div
           aria-hidden="true"
+          data-parallax
           className="absolute inset-0 z-0 pointer-events-none select-none"
           style={{
             '--grid-color': `${projects[currentProject].color}26`,
@@ -235,6 +263,7 @@ export default function Projects() {
           {projects.map((project, index) => (
             <div
               key={project.name}
+              data-project-color={index}
               className="absolute inset-0 flex flex-col transition-transform ease-in-out duration-1000"
               style={{
                 transform: `translateY(${(index - currentProject) * 100}%)`,
@@ -348,6 +377,7 @@ export default function Projects() {
         <div className="relative w-[calc(13/21*100%)] h-full flex flex-col  border-r-gray-600 border-r-2 md:border-r-4 border-dashed py-5 md:py-10 px-8 md:px-12 lg:px-15">
           <div
             aria-hidden="true"
+            data-parallax
             className="absolute inset-0 z-0 pointer-events-none select-none"
             style={{
               '--grid-color': `${projects[currentProject].color}26`,
@@ -364,6 +394,7 @@ export default function Projects() {
             {projects.map((project, index) => (
               <div
                 key={project.name}
+                data-project-color={index}
                 className="absolute inset-0 flex flex-col transition-transform ease-in-out duration-1000"
                 style={{
                   transform: `translateY(${(index - currentProject) * 100}%)`,
@@ -523,7 +554,7 @@ export default function Projects() {
                 style={{
                   WebkitTextStroke: `2px ${projects[currentProject].color}`,
                   color: "transparent",
-                  transition: TRANSITION_THEME,
+                  transition: TRANSITION_STROKE,
                 }}
               >
                 PROJECT
@@ -542,11 +573,12 @@ export default function Projects() {
                   {projects.map((project, index) => (
                     <div
                       key={project.name}
+                      data-project-color={index}
                       className={`absolute inset-0 flex items-center justify-center transition-transform text-2xl md:text-3xl lg:text-4xl font-black`}
                       style={{
                         transform: `translateY(${(index - currentProject) * 100}%)`,
                         color: project.color,
-                        transition: TRANSITION_THEME,
+                        transition: "transform 0.7s ease-in-out",
                       }}
                     >
                       {index + 1}

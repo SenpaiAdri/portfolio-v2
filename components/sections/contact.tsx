@@ -1,10 +1,17 @@
 "use client";
 
 import { useState, useRef, type FormEvent, type ReactNode } from "react";
-import { Facebook, Github, Instagram, Linkedin, Send, Loader2 } from "lucide-react";
+import {
+  Facebook,
+  Github,
+  Instagram,
+  Linkedin,
+  Send,
+  Loader2,
+} from "lucide-react";
 import { sendEmail } from "@/app/actions/send-email";
 
-const SOCIALS = [
+export const SOCIALS = [
   {
     href: "https://github.com/SenpaiAdri",
     label: "GitHub",
@@ -35,7 +42,9 @@ export default function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -48,13 +57,23 @@ export default function Contact() {
     const honeypot = form.elements.namedItem("website_url") as HTMLInputElement;
     const timestamp = Date.now();
 
-    if (!ASCII_REGEX.test(name) || !ASCII_REGEX.test(email) || !ASCII_REGEX.test(message)) {
+    if (
+      !ASCII_REGEX.test(name) ||
+      !ASCII_REGEX.test(email) ||
+      !ASCII_REGEX.test(message)
+    ) {
       setStatus("error");
       setErrorMessage("Invalid characters detected");
       return;
     }
 
-    const result = await sendEmail({ name, email, message, honeypot: honeypot?.value, timestamp });
+    const result = await sendEmail({
+      name,
+      email,
+      message,
+      honeypot: honeypot?.value,
+      timestamp,
+    });
 
     if (result.success) {
       setStatus("success");
@@ -77,18 +96,18 @@ export default function Contact() {
       <form
         ref={formRef}
         onSubmit={handleSubmit}
-        className="relative h-dvh w-full grid grid-cols-1 md:grid-cols-[5fr_2.5fr]
+        className="relative h-dvh w-full grid grid-cols-1 md:grid-cols-[13fr_8fr]
           md:grid-rows-[5fr_3fr_5fr]"
       >
         {/* Mobile top title strip */}
-        <div className="px-6 py-10 border-b-3 sm:border-b-4 border-b-gray-600 border-dashed md:hidden">
+        <div className="px-6 py-10 border-b-2 sm:border-b-4 border-b-gray-600 border-dashed md:hidden">
           <h2 className="text-lg tracking-[0.35em] text-center text-red-500 uppercase">
             [<span className="text-gray-500">Contact</span>]
           </h2>
         </div>
 
         {/* Row 1: Name (left) | empty right with vertical divider */}
-        <div className="flex flex-col justify-center sm:justify-between px-6 py-6 border-b-3 sm:border-b-4 border-b-gray-600 border-dashed md:border-r-4 md:border-r-red-500 md:py-20 md:px-18 md:row-start-1 md:col-start-1">
+        <div className="flex flex-col justify-center sm:justify-between px-6 py-6 border-b-2 sm:border-b-4 border-b-gray-600 border-dashed md:border-r-4 md:border-r-red-500 md:py-20 md:px-18 md:row-start-1 md:col-start-1">
           <h2 className="hidden md:block text-2xl tracking-[0.35em] text-red-500 uppercase sm:text-3xl md:text-5xl text-center md:text-left">
             [<span className="text-gray-500">Contact</span>]
           </h2>
@@ -110,15 +129,14 @@ export default function Contact() {
               placeholder:text-gray-800 py-2 px-0"
             />
           </div>
-
         </div>
         <div
           aria-hidden="true"
-          className="hidden md:block border-b-3 sm:border-b-4 border-b-gray-600 border-dashed md:row-start-1 md:col-start-2"
+          className="hidden md:block border-b-2 sm:border-b-4 border-b-gray-600 border-dashed md:row-start-1 md:col-start-2"
         />
 
         {/* Row 2: Sender email (left) | Socials (right on desktop) */}
-        <div className="flex flex-col justify-center px-6 md:px-18 py-6 md:py-20 border-b-3 sm:border-b-4 border-b-gray-600 border-dashed md:border-r-4 md:border-r-red-500 md:row-start-2 md:col-start-1">
+        <div className="flex flex-col justify-center px-6 md:px-18 py-6 md:py-20 border-b-2 sm:border-b-4 border-b-gray-600 border-dashed md:border-r-4 md:border-r-red-500 md:row-start-2 md:col-start-1">
           <FieldLabel htmlFor="contact-email">Sender Email:</FieldLabel>
           <input
             id="contact-email"
@@ -137,7 +155,35 @@ export default function Contact() {
               placeholder:text-gray-800 py-2 px-0"
           />
         </div>
-        <div className="hidden md:flex px-6 md:px-10 py-6 md:py-8 border-b-3 sm:border-b-4 border-b-gray-600 border-dashed items-center justify-center md:row-start-2 md:col-start-2">
+        <div className="relative hidden md:flex md:row-start-1 md:col-start-2">
+          {/* Grid lines background */}
+          <div
+            aria-hidden="true"
+            data-parallax
+            className="absolute inset-0 z-0 pointer-events-none select-none"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, rgba(255,25,25,0.1) 2px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,25,25,0.1) 2px, transparent 1px)
+              `,
+              backgroundSize: "60px 60px",
+            }}
+          />
+        </div>
+        <div className="relative hidden md:flex px-6 md:px-10 py-6 md:py-8 border-b-2 sm:border-b-4 border-b-gray-600 border-dashed items-center justify-center md:row-start-2 md:col-start-2">
+          {/* Grid lines background */}
+          <div
+            aria-hidden="true"
+            data-parallax
+            className="absolute inset-0 z-0 pointer-events-none select-none"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, rgba(255,25,25,0.1) 2px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,25,25,0.1) 2px, transparent 1px)
+              `,
+              backgroundSize: "60px 60px",
+            }}
+          />
           <ul className="flex items-center ">
             {SOCIALS.map(({ href, label, Icon }) => (
               <li key={label} className="-mx-[2px]">
@@ -159,7 +205,7 @@ export default function Contact() {
         </div>
 
         {/* Row 3: Payload content (left) | empty right with vertical divider */}
-        <div className="flex flex-col justify-between px-6 md:px-18 py-6 md:py-15 border-b-3 sm:border-b-4 border-b-gray-600 border-dashed md:border-r-4 md:border-r-red-500 md:row-start-3 md:col-start-1">
+        <div className="flex flex-col justify-between px-6 md:px-18 py-6 md:py-15 border-b-2 sm:border-b-4 border-b-gray-600 border-dashed md:border-r-4 md:border-r-red-500 md:row-start-3 md:col-start-1">
           <FieldLabel htmlFor="contact-message">Payload Content:</FieldLabel>
           <textarea
             id="contact-message"
@@ -187,7 +233,7 @@ export default function Contact() {
               type="submit"
               disabled={status === "loading" || status === "success"}
               className="group w-full sm:w-1/3 justify-center inline-flex items-center gap-3
-                border-2 border-dashed border-gray-500 py-2 md:py-3
+                border-2 border-dashed border-gray-600 py-2 md:py-3
                 text-gray-400 hover:text-red-500 hover:border-red-500
                 text-[10px] md:text-sm tracking-[0.3em] uppercase
                 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -228,13 +274,26 @@ export default function Contact() {
         </div>
 
         {/* Desktop-only resume row: placed below socials (row 3, col 2) */}
-        <div className="hidden md:flex px-6 md:px-10 py-6 md:py-8 border-b-3 sm:border-b-4 border-b-gray-600 border-dashed items-center justify-center md:row-start-3 md:col-start-2">
+        <div className="relative hidden md:flex px-6 md:px-10 py-6 md:py-8 border-b-2 sm:border-b-4 border-b-gray-600 border-dashed items-center justify-center md:row-start-3 md:col-start-2">
+          {/* Grid lines background */}
+          <div
+            aria-hidden="true"
+            data-parallax
+            className="absolute inset-0 z-0 pointer-events-none select-none"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, rgba(255,25,25,0.1) 2px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,25,25,0.1) 2px, transparent 1px)
+              `,
+              backgroundSize: "60px 60px",
+            }}
+          />
           <div className="w-full max-w-xs flex flex-col items-center gap-4">
             <a
               href="/RESUME.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="group w-full inline-flex items-center justify-center border-2 border-dashed border-gray-500 py-3 text-gray-400 hover:text-red-500 hover:border-red-500 text-xs font-bold tracking-[0.3em] uppercase transition-colors"
+              className="group w-full inline-flex items-center justify-center border-2 border-dashed border-gray-600 py-3 text-gray-400 hover:text-red-500 hover:border-red-500 text-xs font-bold tracking-[0.3em] uppercase transition-colors"
             >
               [ View Resume ]
             </a>
@@ -242,7 +301,20 @@ export default function Contact() {
         </div>
 
         {/* Mobile-only socials row */}
-        <div className="px-6 py-7 border-b-3 sm:border-b-4 border-b-gray-600 border-dashed flex items-center justify-center md:hidden">
+        <div className="relative px-6 py-7 border-b-2 sm:border-b-4 border-b-gray-600 border-dashed flex items-center justify-center md:hidden">
+          {/* Grid lines background */}
+          <div
+            aria-hidden="true"
+            data-parallax
+            className="absolute inset-0 z-0 pointer-events-none select-none"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, rgba(255,25,25,0.1) 2px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,25,25,0.1) 2px, transparent 1px)
+              `,
+              backgroundSize: "60px 60px",
+            }}
+          />
           <ul className="flex items-center">
             {SOCIALS.map(({ href, label, Icon }) => (
               <li key={label} className="-mx-px">
@@ -251,7 +323,7 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="group relative inline-flex items-center justify-center h-12 w-12 border-3 border-dashed border-gray-600 text-red-500 hover:border-red-500 transition-colors z-10 hover:z-50 focus-visible:border-red-500 focus-visible:z-50 focus:outline-none"
+                  className="group relative inline-flex items-center justify-center h-12 w-12 border-2 border-dashed border-gray-600 text-red-500 hover:border-red-500 transition-colors z-10 hover:z-50 focus-visible:border-red-500 focus-visible:z-50 focus:outline-none"
                 >
                   <Icon
                     className="h-7 w-7 transition-transform group-hover:scale-110"

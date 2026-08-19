@@ -4,6 +4,7 @@ import Projects from "@/components/sections/projects";
 import Experience from "@/components/sections/experience";
 import About from "@/components/sections/about";
 import Contact from "@/components/sections/contact";
+import FooterStrip from "@/components/sections/footer";
 
 const NAV_ITEMS = [
   { label: "Home", index: 0 },
@@ -15,7 +16,7 @@ const NAV_ITEMS = [
 
 export default function Home() {
   return (
-    <RevealScroll navItems={NAV_ITEMS}>
+    <RevealScroll navItems={NAV_ITEMS} footer={<FooterStrip />}>
       <Hero />
       <Projects />
       {/*<Skills />*/}

@@ -2,12 +2,42 @@
 
 import { RevealScrollTo } from "../reveal-scroll";
 import { Activity, Github, Linkedin, Maximize } from "lucide-react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 import TextType from "../TextType";
 import { LogoAnimated } from "../LogoAnimated";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 
 export default function Hero() {
   const logoRef = useRef<HTMLDivElement>(null);
+  const firstTextRef = useRef<HTMLSpanElement>(null);
+  const secondTextRef = useRef<HTMLSpanElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  // Infinite marquee: two identical copies tiling seamlessly via rAF + gsap.set
+  useEffect(() => {
+    const first = firstTextRef.current;
+    const second = secondTextRef.current;
+    if (!first || !second || prefersReducedMotion) return;
+
+    gsap.set(second, {
+      left: second.getBoundingClientRect().width,
+    });
+
+    let xPercent = 0;
+    let raf = 0;
+
+    const animate = () => {
+      if (xPercent > 0) xPercent = -100;
+      gsap.set(first, { xPercent });
+      gsap.set(second, { xPercent });
+      raf = requestAnimationFrame(animate);
+      xPercent += 0.1;
+    };
+
+    raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
+  }, [prefersReducedMotion]);
 
   return (
     <section
@@ -62,6 +92,7 @@ export default function Hero() {
           {/* Grid lines background */}
           <div
             aria-hidden="true"
+            data-parallax
             className="absolute inset-0 z-0 pointer-events-none select-none"
             style={{
               backgroundImage: `
@@ -168,7 +199,7 @@ export default function Hero() {
       {/* Marquee */}
       <div aria-hidden="true" className="flex-[0.15] md:flex-[0.3] flex flex-col border-b-gray-600 border-b-4 border-dashed overflow-hidden relative">
         <div
-          className="absolute whitespace-nowrap animate-marquee text-[3rem] md:text-[6rem] text-[#18181c] select-none"
+          className="absolute whitespace-nowrap text-[3rem] md:text-[6rem] text-[#18181c] select-none will-change-transform"
           style={{
             WebkitTextStroke: "2px #333",
             color: "transparent",
@@ -176,25 +207,13 @@ export default function Hero() {
             minWidth: "100%",
           }}
         >
-          <span>ADRIAN ADRIAN ADRIAN ADRIAN ADRIAN ADRIAN ADRIAN</span>
-          <span aria-hidden="true">ADRIAN ADRIAN ADRIAN ADRIAN ADRIAN ADRIAN ADRIAN</span>
+          <span ref={firstTextRef} className="inline-block">
+            {"ADRIAN ".repeat(4)}
+          </span>
+          <span ref={secondTextRef} className="absolute top-0 left-0 inline-block">
+            {"ADRIAN ".repeat(4)}
+          </span>
         </div>
-        <style>
-          {`
-            @keyframes marquee {
-              0% { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
-            .animate-marquee {
-              animation: marquee 30s linear infinite;
-            }
-            @media (prefers-reduced-motion: reduce) {
-              .animate-marquee {
-                animation: none;
-              }
-            }
-          `}
-        </style>
       </div>
     </section>
   );

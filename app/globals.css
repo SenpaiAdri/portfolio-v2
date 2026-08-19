@@ -139,6 +139,24 @@ body {
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+::selection {
+  background: rgba(255, 25, 25, 0.9);
+  color: #0a0a0a;
+}
+
+/* Honor reduced motion globally for CSS animations/transitions
+   (GSAP tweens are gated separately in reveal-scroll.tsx) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

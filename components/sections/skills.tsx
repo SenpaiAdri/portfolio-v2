@@ -26,7 +26,7 @@ export default function Skills() {
           </div>
 
           {/* Main content - Skill categories */}
-          <div className="relative md:col-start-1 md:col-end-3 md:row-start-2 md:row-end-4 md:border-b-4 md:border-dashed md:border-r-4 border-r-gray-500 md:border-b-red-500 flex items-center justify-center px-6 py-6 md:px-10 md:py-8 flex-1 md:flex-auto overflow-y-auto">
+          <div className="relative md:col-start-1 md:col-end-3 md:row-start-2 md:row-end-4 md:border-b-4 md:border-dashed md:border-r-4 md:border-b-red-500 flex items-center justify-center px-6 py-6 md:px-10 md:py-8 flex-1 md:flex-auto overflow-y-auto">
             {/* Grid lines background */}
             <div
               aria-hidden="true"
