@@ -1,4 +1,5 @@
 import RevealScroll from "../components/reveal-scroll";
+import IntroOverlay from "@/components/intro-overlay";
 import Hero from "@/components/sections/hero";
 import Projects from "@/components/sections/projects";
 import Experience from "@/components/sections/experience";
@@ -16,13 +17,16 @@ const NAV_ITEMS = [
 
 export default function Home() {
   return (
-    <RevealScroll navItems={NAV_ITEMS} footer={<FooterStrip />}>
-      <Hero />
-      <Projects />
-      {/*<Skills />*/}
-      <Experience />
-      <About />
-      <Contact />
-    </RevealScroll>
+    <>
+      <RevealScroll navItems={NAV_ITEMS} footer={<FooterStrip />}>
+        <Hero />
+        <Projects />
+        {/*<Skills />*/}
+        <Experience />
+        <About />
+        <Contact />
+      </RevealScroll>
+      <IntroOverlay />
+    </>
   );
 }
