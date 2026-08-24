@@ -11,6 +11,7 @@ type LogoAnimatedProps = {
   width?: ResponsiveSize;
   height?: ResponsiveSize;
   className?: string;
+  delay?: number;
 };
 
 function getSizeValue(size: ResponsiveSize | undefined, defaultValue: number): number {
@@ -46,7 +47,7 @@ function useResponsiveSize(size: ResponsiveSize | undefined, defaultValue: numbe
   return responsiveWidth;
 }
 
-export function LogoAnimated({ width, height, className }: LogoAnimatedProps) {
+export function LogoAnimated({ width, height, className, delay = 0.2 }: LogoAnimatedProps) {
   const defaultWidth = 350;
   const defaultHeight = 100;
   const currentWidth = useResponsiveSize(width, defaultWidth);
@@ -158,7 +159,7 @@ export function LogoAnimated({ width, height, className }: LogoAnimatedProps) {
     const tl = gsap.timeline();
 
     tl.from(strokePaths, {
-      delay: 0.2,
+      delay,
       duration: 2,
       stagger: 0.06,
       drawSVG: 0,
@@ -217,7 +218,7 @@ const of = p.dataset.origFill ?? "";
     return () => {
       tl.kill();
     };
-  }, [logoSvg, strokeColor, strokeWidth, prefersReducedMotion]);
+  }, [logoSvg, strokeColor, strokeWidth, delay, prefersReducedMotion]);
 
   return (
     <div

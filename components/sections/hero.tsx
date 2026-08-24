@@ -6,6 +6,10 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import TextType from "../TextType";
 import { LogoAnimated } from "../LogoAnimated";
+import {
+  INTRO_DURATION_S,
+  INTRO_REDUCED_DURATION_S,
+} from "@/components/intro-overlay";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 
 export default function Hero() {
@@ -13,6 +17,12 @@ export default function Hero() {
   const firstTextRef = useRef<HTMLSpanElement>(null);
   const secondTextRef = useRef<HTMLSpanElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
+
+  // Start hero entrance animations only after the intro overlay has faded out
+  const introDelayS = prefersReducedMotion
+    ? INTRO_REDUCED_DURATION_S
+    : INTRO_DURATION_S - 0.4;
+  const introDelayMs = introDelayS * 1000;
 
   // Infinite marquee: two identical copies tiling seamlessly via rAF + gsap.set
   useEffect(() => {
@@ -62,6 +72,7 @@ export default function Hero() {
             <TextType
               text={["WELCOME TO MY PORTFOLIO!", "I'M ADRIAN", "A COMPUTER SCIENCE STUDENT", "Full-Stack Developer"]}
               typingSpeed={200}
+              initialDelay={introDelayMs}
               pauseDuration={2100}
               showCursor
               cursorCharacter="▎"
@@ -77,7 +88,7 @@ export default function Hero() {
         <div className="flex items-center justify-center 
         md:w-[calc(8/21*100%)]"
           ref={logoRef}>
-          <LogoAnimated width={{ base: 150, md: 200, lg: 250 }} />
+          <LogoAnimated width={{ base: 150, md: 200, lg: 250 }} delay={introDelayS} />
         </div>
       </div>
 
@@ -115,6 +126,7 @@ export default function Hero() {
               <TextType text="[PATH]"
                 loop={false}
                 typingSpeed={200}
+                initialDelay={introDelayMs}
                 className="text-red-500 text-xl md:text-2xl mb-2" />
               <span className="text-gray-500 text-base md:text-2xl">
                 Computer Science Student
@@ -151,6 +163,7 @@ export default function Hero() {
                   text="[ HOME ]"
                   loop={false}
                   typingSpeed={200}
+                  initialDelay={introDelayMs}
                   className="text-red-500 text-base md:text-lg xl:text-2xl" />
                 <RevealScrollTo
                   to={1}

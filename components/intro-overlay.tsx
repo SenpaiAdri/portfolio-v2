@@ -4,7 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 
-const HOLD_SECONDS = 1.4;
+export const INTRO_HOLD_S = 1.4;
+export const INTRO_FADE_S = 0.45;
+export const INTRO_DURATION_S = INTRO_HOLD_S + INTRO_FADE_S;
+export const INTRO_REDUCED_DURATION_S = 0.35;
+
+const HOLD_SECONDS = INTRO_HOLD_S;
 
 export default function IntroOverlay() {
   const [done, setDone] = useState(false);
@@ -23,7 +28,7 @@ export default function IntroOverlay() {
       } else {
         tl.to(root, {
           opacity: 0,
-          duration: 0.45,
+          duration: INTRO_FADE_S,
           ease: "none",
           delay: HOLD_SECONDS,
         });
