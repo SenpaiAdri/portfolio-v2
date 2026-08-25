@@ -10,6 +10,7 @@ import {
   Loader2,
 } from "lucide-react";
 import { sendEmail } from "@/app/actions/send-email";
+import { BackdropGrid } from "@/components/backdrop-grid";
 
 export const SOCIALS = [
   {
@@ -35,6 +36,11 @@ export const SOCIALS = [
 ] as const;
 
 const MAX_CHARS = { name: 50, email: 50, message: 250 };
+
+const INPUT_CLASS = `w-full bg-transparent text-gray-400 text-[10px] md:text-base tracking-[0.2em] uppercase
+              border-0 border-b-2 border-dashed border-red-500
+              focus:outline-none focus:border-red-500 focus:text-red-400
+              placeholder:text-gray-800 py-2 px-0`;
 
 const ASCII_REGEX = /^[\x20-\x7E\r\n]+$/;
 
@@ -91,12 +97,12 @@ export default function Contact() {
       id="CONTACT"
       role="region"
       aria-label="Contact"
-      className="bg-[#0a0a0a] h-dvh w-screen overflow-hidden text-gray-400"
+      className="bg-[#0a0a0a] pt-15 h-dvh w-screen overflow-hidden text-gray-400"
     >
       <form
         ref={formRef}
         onSubmit={handleSubmit}
-        className="relative h-dvh w-full grid grid-cols-1 md:grid-cols-[13fr_8fr]
+        className="relative h-full w-full grid grid-cols-1 md:grid-cols-[13fr_8fr]
           md:grid-rows-[5fr_3fr_5fr]"
       >
         {/* Mobile top title strip */}
@@ -123,10 +129,7 @@ export default function Contact() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="John Doe"
-              className="w-full bg-transparent text-gray-400 text-[10px] md:text-base tracking-[0.2em] uppercase
-              border-0 border-b-2 border-dashed border-red-500
-              focus:outline-none focus:border-red-500 focus:text-red-400
-              placeholder:text-gray-800 py-2 px-0"
+              className={INPUT_CLASS}
             />
           </div>
         </div>
@@ -146,62 +149,18 @@ export default function Contact() {
             spellCheck={false}
             required
             maxLength={MAX_CHARS.email}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="johndoe@gmail.com"
-            className="w-full bg-transparent text-gray-400 text-[10px] md:text-base tracking-[0.2em] uppercase
-              border-0 border-b-2 border-dashed border-red-500
-              focus:outline-none focus:border-red-500 focus:text-red-400
-              placeholder:text-gray-800 py-2 px-0"
-          />
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="johndoe@gmail.com"
+              className={INPUT_CLASS}
+            />
         </div>
         <div className="relative hidden md:flex md:row-start-1 md:col-start-2">
-          {/* Grid lines background */}
-          <div
-            aria-hidden="true"
-            data-parallax
-            className="absolute inset-0 z-0 pointer-events-none select-none"
-            style={{
-              backgroundImage: `
-                linear-gradient(to right, rgba(255,25,25,0.1) 2px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,25,25,0.1) 2px, transparent 1px)
-              `,
-              backgroundSize: "60px 60px",
-            }}
-          />
+          <BackdropGrid parallax />
         </div>
         <div className="relative hidden md:flex px-6 md:px-10 py-6 md:py-8 border-b-2 sm:border-b-4 border-b-gray-600 border-dashed items-center justify-center md:row-start-2 md:col-start-2">
-          {/* Grid lines background */}
-          <div
-            aria-hidden="true"
-            data-parallax
-            className="absolute inset-0 z-0 pointer-events-none select-none"
-            style={{
-              backgroundImage: `
-                linear-gradient(to right, rgba(255,25,25,0.1) 2px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,25,25,0.1) 2px, transparent 1px)
-              `,
-              backgroundSize: "60px 60px",
-            }}
-          />
-          <ul className="flex items-center ">
-            {SOCIALS.map(({ href, label, Icon }) => (
-              <li key={label} className="-mx-[2px]">
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="group relative inline-flex items-center justify-center h-15 w-15 md:h-22  md:w-22 border-4 border-dashed border-gray-600 text-red-500 hover:border-red-500 transition-colors z-10 hover:z-50 focus-visible:border-red-500 focus-visible:z-50 focus:outline-none"
-                >
-                  <Icon
-                    className="h-7 w-7 md:h-10 md:w-10 transition-transform group-hover:scale-110"
-                    aria-hidden="true"
-                  />
-                </a>
-              </li>
-            ))}
-          </ul>
+          <BackdropGrid parallax />
+          <SocialIconList variant="desktop" />
         </div>
 
         {/* Row 3: Payload content (left) | empty right with vertical divider */}
@@ -275,19 +234,7 @@ export default function Contact() {
 
         {/* Desktop-only resume row: placed below socials (row 3, col 2) */}
         <div className="relative hidden md:flex px-6 md:px-10 py-6 md:py-8 border-b-2 sm:border-b-4 border-b-gray-600 border-dashed items-center justify-center md:row-start-3 md:col-start-2">
-          {/* Grid lines background */}
-          <div
-            aria-hidden="true"
-            data-parallax
-            className="absolute inset-0 z-0 pointer-events-none select-none"
-            style={{
-              backgroundImage: `
-                linear-gradient(to right, rgba(255,25,25,0.1) 2px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,25,25,0.1) 2px, transparent 1px)
-              `,
-              backgroundSize: "60px 60px",
-            }}
-          />
+          <BackdropGrid parallax />
           <div className="w-full max-w-xs flex flex-col items-center gap-4">
             <a
               href="/RESUME.pdf"
@@ -302,37 +249,8 @@ export default function Contact() {
 
         {/* Mobile-only socials row */}
         <div className="relative px-6 py-7 border-b-2 sm:border-b-4 border-b-gray-600 border-dashed flex items-center justify-center md:hidden">
-          {/* Grid lines background */}
-          <div
-            aria-hidden="true"
-            data-parallax
-            className="absolute inset-0 z-0 pointer-events-none select-none"
-            style={{
-              backgroundImage: `
-                linear-gradient(to right, rgba(255,25,25,0.1) 2px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,25,25,0.1) 2px, transparent 1px)
-              `,
-              backgroundSize: "60px 60px",
-            }}
-          />
-          <ul className="flex items-center">
-            {SOCIALS.map(({ href, label, Icon }) => (
-              <li key={label} className="-mx-px">
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="group relative inline-flex items-center justify-center h-12 w-12 border-2 border-dashed border-gray-600 text-red-500 hover:border-red-500 transition-colors z-10 hover:z-50 focus-visible:border-red-500 focus-visible:z-50 focus:outline-none"
-                >
-                  <Icon
-                    className="h-7 w-7 transition-transform group-hover:scale-110"
-                    aria-hidden="true"
-                  />
-                </a>
-              </li>
-            ))}
-          </ul>
+          <BackdropGrid parallax />
+          <SocialIconList variant="mobile" />
         </div>
       </form>
     </section>
@@ -353,5 +271,39 @@ function FieldLabel({
     >
       {children}
     </label>
+  );
+}
+
+function SocialIconList({
+  variant,
+}: {
+  variant: "desktop" | "mobile";
+}) {
+  const box =
+    variant === "desktop"
+      ? "h-15 w-15 md:h-22 md:w-22 border-4 border-gray-600"
+      : "h-12 w-12 border-2 border-gray-600";
+
+  return (
+    <ul className="flex items-center">
+      {SOCIALS.map(({ href, label, Icon }) => (
+        <li key={label} className={variant === "desktop" ? "-mx-[2px]" : "-mx-px"}>
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={label}
+            className={`group relative inline-flex items-center justify-center border-dashed text-red-500 hover:border-red-500 transition-colors z-10 hover:z-50 focus-visible:border-red-500 focus-visible:z-50 focus:outline-none ${box}`}
+          >
+            <Icon
+              className={`transition-transform group-hover:scale-110 ${
+                variant === "desktop" ? "h-7 w-7 md:h-10 md:w-10" : "h-7 w-7"
+              }`}
+              aria-hidden="true"
+            />
+          </a>
+        </li>
+      ))}
+    </ul>
   );
 }

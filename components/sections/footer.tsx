@@ -1,10 +1,9 @@
 "use client";
 
 import { ArrowUp } from "lucide-react";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
+import { useRef } from "react";
 import { SOCIALS } from "./contact";
-import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
+import { useMarqueeLoop } from "@/components/marquee-strip";
 
 type TitleBlockRow = {
   label: string;
@@ -22,32 +21,9 @@ const TITLE_BLOCK_ROWS: TitleBlockRow[] = [
 export default function FooterStrip() {
   const firstTextRef = useRef<HTMLSpanElement>(null);
   const secondTextRef = useRef<HTMLSpanElement>(null);
-  const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Infinite marquee: two identical copies tiling seamlessly via rAF + gsap.set
-  useEffect(() => {
-    const first = firstTextRef.current;
-    const second = secondTextRef.current;
-    if (!first || !second || prefersReducedMotion) return;
-
-    gsap.set(second, {
-      left: second.getBoundingClientRect().width,
-    });
-
-    let xPercent = 0;
-    let raf = 0;
-
-    const animate = () => {
-      if (xPercent > 0) xPercent = -100;
-      gsap.set(first, { xPercent });
-      gsap.set(second, { xPercent });
-      raf = requestAnimationFrame(animate);
-      xPercent += 0.1;
-    };
-
-    raf = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(raf);
-  }, [prefersReducedMotion]);
+  // Infinite name marquee: two identical copies tiling seamlessly
+  useMarqueeLoop(firstTextRef, secondTextRef);
 
   return (
     <footer className="relative flex h-full w-screen flex-col overflow-hidden ">

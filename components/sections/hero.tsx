@@ -2,10 +2,11 @@
 
 import { RevealScrollTo } from "../reveal-scroll";
 import { Activity, Github, Linkedin, Maximize } from "lucide-react";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
+import { useRef } from "react";
 import TextType from "../TextType";
 import { LogoAnimated } from "../LogoAnimated";
+import { MarqueeStrip } from "@/components/marquee-strip";
+import { BackdropGrid } from "@/components/backdrop-grid";
 import {
   INTRO_DURATION_S,
   INTRO_REDUCED_DURATION_S,
@@ -14,8 +15,6 @@ import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 
 export default function Hero() {
   const logoRef = useRef<HTMLDivElement>(null);
-  const firstTextRef = useRef<HTMLSpanElement>(null);
-  const secondTextRef = useRef<HTMLSpanElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   // Start hero entrance animations only after the intro overlay has faded out
@@ -23,31 +22,6 @@ export default function Hero() {
     ? INTRO_REDUCED_DURATION_S
     : INTRO_DURATION_S - 0.4;
   const introDelayMs = introDelayS * 1000;
-
-  // Infinite marquee: two identical copies tiling seamlessly via rAF + gsap.set
-  useEffect(() => {
-    const first = firstTextRef.current;
-    const second = secondTextRef.current;
-    if (!first || !second || prefersReducedMotion) return;
-
-    gsap.set(second, {
-      left: second.getBoundingClientRect().width,
-    });
-
-    let xPercent = 0;
-    let raf = 0;
-
-    const animate = () => {
-      if (xPercent > 0) xPercent = -100;
-      gsap.set(first, { xPercent });
-      gsap.set(second, { xPercent });
-      raf = requestAnimationFrame(animate);
-      xPercent += 0.1;
-    };
-
-    raf = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(raf);
-  }, [prefersReducedMotion]);
 
   return (
     <section
@@ -115,21 +89,8 @@ export default function Hero() {
           justify-end gap-10 p-10 border-dashed relative overflow-hidden
         md:border-r-gray-600 md:border-r-4"
         >
-          {/* Grid lines background */}
-          <div
-            aria-hidden="true"
-            data-parallax
-            className="absolute inset-0 z-0 pointer-events-none select-none"
-            style={{
-              backgroundImage: `
-                linear-gradient(to right, rgba(255,25,25,0.1) 2px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,25,25,0.1) 2px, transparent 1px)
-              `,
-              backgroundSize: "60px 60px",
-            }}
-          />
-          {/* Radial Gradient */}
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-center mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] bg-black/20" />
+          {/* Grid lines background + radial vignette */}
+          <BackdropGrid parallax masked />
 
           {/* Path/Education Background */}
           <div className="flex flex-row items-start justify-end gap-3 md:gap-10 z-10">
@@ -244,30 +205,7 @@ export default function Hero() {
       </div>
 
       {/* Marquee */}
-      <div
-        aria-hidden="true"
-        className="flex-[0.12] md:flex-[0.3] md:leading-snug flex flex-col border-b-gray-600 border-b-4 border-dashed overflow-hidden relative"
-      >
-        <div
-          className="absolute whitespace-nowrap text-[3rem] md:text-[6rem] text-[#18181c] select-none will-change-transform"
-          style={{
-            WebkitTextStroke: "2px #333",
-            color: "transparent",
-            left: 0,
-            minWidth: "100%",
-          }}
-        >
-          <span ref={firstTextRef} className="inline-block">
-            {"ADRIAN ".repeat(4)}
-          </span>
-          <span
-            ref={secondTextRef}
-            className="absolute top-0 left-0 inline-block"
-          >
-            {"ADRIAN ".repeat(4)}
-          </span>
-        </div>
-      </div>
+      <MarqueeStrip className="flex-[0.12] md:flex-[0.3] md:leading-snug" />
     </section>
   );
 }

@@ -8,11 +8,11 @@ export default function About() {
       id="ABOUT"
       role="region"
       aria-label="About"
-      className="bg-[#0a0a0a] h-dvh w-screen overflow-x-hidden"
+      className="bg-[#0a0a0a] pt-15 h-dvh w-screen overflow-x-hidden"
     >
       <div className="relative h-full w-full">
         {/* Mobile: flex column fill | Desktop: 3x3 grid */}
-        <div className="flex flex-col md:grid h-dvh w-full md:grid-cols-[1fr_1fr_.618fr] md:grid-rows-[0.618fr_1fr_.618fr] text-gray-400">
+        <div className="flex flex-col md:grid h-full w-full md:grid-cols-[1fr_1fr_.618fr] md:grid-rows-[0.618fr_1fr_.618fr] text-gray-400">
           {/* MOBILE: Header section */}
           {/* DESKTOP: Row 1 - Logo + name (spans first two columns) */}
           <div className="md:col-span-2 md:row-start-1 md:row-end-2 md:border-b-4 md:border-b-red-500 md:border-r-4 md:border-r-gray-600 md:border-dashed flex flex-col md:flex-row items-center justify-center md:justify-center gap-4 md:gap-20 py-6 px-4 border-b-2 border-b-red-500 border-dashed flex-1 md:flex-auto">

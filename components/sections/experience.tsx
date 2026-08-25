@@ -5,6 +5,7 @@ import { useCallback, useRef } from "react";
 import { experiences } from "@/data/experience";
 import { skillCategories } from "@/data/skills";
 import { useSectionScroll, type ScrollDirection } from "../reveal-scroll";
+import { BackdropGrid } from "@/components/backdrop-grid";
 
 export default function Experience() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -35,10 +36,10 @@ export default function Experience() {
       id="EXPERIENCE"
       role="region"
       aria-label="Experience"
-      className="bg-[#0a0a0a] h-dvh w-screen overflow-x-hidden"
+      className="bg-[#0a0a0a] pt-15 h-dvh w-screen overflow-x-hidden"
     >
       <div className="relative h-full w-full">
-        <div className="flex flex-col md:grid h-dvh w-full md:grid-cols-[1fr_1fr_.618fr] md:grid-rows-[1fr_4fr_.618fr] text-gray-400">
+        <div className="flex flex-col md:grid h-full w-full md:grid-cols-[1fr_1fr_.618fr] md:grid-rows-[1fr_4fr_.618fr] text-gray-400">
           {/* Header */}
           <div className="md:col-span-2 md:row-start-1 md:row-end-2 md:border-r-4 md:border-r-gray-600 md:border-dashed flex flex-[0.2] items-center justify-center gap-4 py-6 px-4 border-b-2 md:border-b-4 border-b-red-500 border-dashed">
             <h2 className="text-sm lg:text-2xl lg:font-black tracking-[0.5em] text-gray-500 uppercase text-center">
@@ -53,18 +54,7 @@ export default function Experience() {
 
           {/* Main content - Experience entries */}
           <div ref={scrollRef} className="relative md:col-start-1 md:col-end-3 md:row-start-2 md:row-end-4 md:border-b-4 md:border-r-4 md:border-dashed md:border-b-red-500 md:border-r-gray-600 flex items-center justify-center px-6 py-6 md:px-10 md:py-8 flex-1 md:flex-auto overflow-y-auto">
-            {/* Grid lines background */}
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 z-0 pointer-events-none select-none"
-              style={{
-                backgroundImage: `
-                  linear-gradient(to right, rgba(255,25,25,0.1) 2px, transparent 1px),
-                  linear-gradient(to bottom, rgba(255,25,25,0.1) 2px, transparent 1px)
-                `,
-                backgroundSize: '60px 60px',
-              }}
-            />
+            <BackdropGrid />
             {/* Radial Gradient */}
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] bg-black/20" />
 
