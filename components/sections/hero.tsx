@@ -56,21 +56,30 @@ export default function Hero() {
       aria-label="Home"
       className="bg-[#0a0a0a] h-dvh w-screen flex flex-col overflow-x-hidden"
     >
-      <h1 className="sr-only">
-        Adrian M. De Guzman — Full Stack Developer
-      </h1>
+      <h1 className="sr-only">Adrian M. De Guzman — Full Stack Developer</h1>
 
       {/* row 1 */}
-      <div className="flex-[0.1] border-b-red-600 border-b-4 border-dashed
-      md:flex-1 flex flex-col-reverse md:flex-row mt-3 md:mt-0">
-
+      <div
+        className="flex-[0.4] border-b-red-600 border-b-4 border-dashed
+      md:flex-1 flex flex-col-reverse justify-center gap-5 md:gap-0 md:flex-row md:mt-0"
+      >
         {/* Welcome message */}
-        <div className="w-full h-10 sm:h-full px-5 pb-2 md:border-r-gray-600 md:border-r-4 border-dashed flex justify-start items-center 
-          md:pr-20 md:w-[calc(13/21*100%)] md:items-end md:pb-20 md:px-0">
+        <div
+          className="w-full h-10 sm:h-full px-5 pb-2 md:border-r-gray-600 md:border-r-4 border-dashed flex justify-start items-center 
+          md:pr-20 md:w-[calc(13/21*100%)] md:items-end md:pb-20 md:px-0"
+        >
           <span className="relative flex items-center text-gray-500 text-base md:text-2xl lg:text-4xl font-medium tracking-widest whitespace-nowrap md:ml-auto text-left my-5 gap-2 md:gap-4">
-            <Activity className="text-red-500 w-5 md:w-7 lg:w-9 h-full" strokeWidth={2} />
+            <Activity
+              className="text-red-500 w-5 md:w-7 lg:w-9 h-full"
+              strokeWidth={2}
+            />
             <TextType
-              text={["WELCOME TO MY PORTFOLIO!", "I'M ADRIAN", "A COMPUTER SCIENCE STUDENT", "Full-Stack Developer"]}
+              text={[
+                "WELCOME TO MY PORTFOLIO!",
+                "I'M ADRIAN",
+                "A COMPUTER SCIENCE STUDENT",
+                "Full-Stack Developer",
+              ]}
               typingSpeed={200}
               initialDelay={introDelayMs}
               pauseDuration={2100}
@@ -85,10 +94,16 @@ export default function Hero() {
         </div>
 
         {/* Profile image / Logo with DrawSVG animation */}
-        <div className="flex items-center justify-center 
-        md:w-[calc(8/21*100%)]"
-          ref={logoRef}>
-          <LogoAnimated width={{ base: 150, md: 200, lg: 250 }} delay={introDelayS} />
+        <div
+          className="flex items-center justify-center md:w-[calc(8/21*100%)] md:justify-center md:items-center"
+          ref={logoRef}
+        >
+          <div className="flex items-center justify-center w-full h-full">
+            <LogoAnimated
+              width={{ base: 150, md: 200, lg: 250 }}
+              delay={introDelayS}
+            />
+          </div>
         </div>
       </div>
 
@@ -110,7 +125,7 @@ export default function Hero() {
                 linear-gradient(to right, rgba(255,25,25,0.1) 2px, transparent 1px),
                 linear-gradient(to bottom, rgba(255,25,25,0.1) 2px, transparent 1px)
               `,
-              backgroundSize: '60px 60px',
+              backgroundSize: "60px 60px",
             }}
           />
           {/* Radial Gradient */}
@@ -118,16 +133,17 @@ export default function Hero() {
 
           {/* Path/Education Background */}
           <div className="flex flex-row items-start justify-end gap-3 md:gap-10 z-10">
-
             <span className="text-red-500 text-xl text-nowrap md:text-2xl">
               ---
             </span>
             <div className="flex flex-col ">
-              <TextType text="[PATH]"
+              <TextType
+                text="[PATH]"
                 loop={false}
                 typingSpeed={200}
                 initialDelay={introDelayMs}
-                className="text-red-500 text-xl md:text-2xl mb-2" />
+                className="text-red-500 text-xl md:text-2xl mb-2"
+              />
               <span className="text-gray-500 text-base md:text-2xl">
                 Computer Science Student
               </span>
@@ -139,19 +155,36 @@ export default function Hero() {
         </div>
 
         {/* Navigation and Socials */}
-        <div className="md:w-[calc(8/21*100%)] h-3/4 sm:h-full flex flex-col">
+        <div className="md:w-[calc(8/21*100%)] h-2/4 sm:h-full flex flex-col">
           <div className="w-full h-full flex flex-row border-b-red-600 border-b-4 border-dashed">
-
             {/* Socials */}
             <div className="w-full h-full flex flex-col items-center justify-center overflow-hidden border-r-gray-600 border-r-4 border-dashed">
               <div className="w-full h-full flex items-center justify-center border-b-red-600 border-b-4 border-dashed ">
-                <a href="https://github.com/SenpaiAdri" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
-                  <Github className="text-red-500 hover:text-red-400 hover:scale-110 transition-[transform,color] cursor-pointer" size={35} aria-hidden="true" />
+                <a
+                  href="https://github.com/SenpaiAdri"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub profile"
+                >
+                  <Github
+                    className="text-red-500 hover:text-red-400 hover:scale-110 transition-[transform,color] cursor-pointer"
+                    size={35}
+                    aria-hidden="true"
+                  />
                 </a>
               </div>
               <div className="w-full h-full flex items-center justify-center">
-                <a href="https://www.linkedin.com/in/eydriannn/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
-                  <Linkedin className="text-red-500 hover:text-red-400 hover:scale-110 transition-[transform,color] cursor-pointer" size={35} aria-hidden="true" />
+                <a
+                  href="https://www.linkedin.com/in/eydriannn/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn profile"
+                >
+                  <Linkedin
+                    className="text-red-500 hover:text-red-400 hover:scale-110 transition-[transform,color] cursor-pointer"
+                    size={35}
+                    aria-hidden="true"
+                  />
                 </a>
               </div>
             </div>
@@ -164,7 +197,8 @@ export default function Hero() {
                   loop={false}
                   typingSpeed={200}
                   initialDelay={introDelayMs}
-                  className="text-red-500 text-base md:text-lg xl:text-2xl" />
+                  className="text-red-500 text-base md:text-lg xl:text-2xl"
+                />
                 <RevealScrollTo
                   to={1}
                   className="text-gray-500 text-base md:text-lg xl:text-2xl
@@ -210,7 +244,10 @@ export default function Hero() {
       </div>
 
       {/* Marquee */}
-      <div aria-hidden="true" className="flex-[0.15] md:flex-[0.3] flex flex-col border-b-gray-600 border-b-4 border-dashed overflow-hidden relative">
+      <div
+        aria-hidden="true"
+        className="flex-[0.12] md:flex-[0.3] md:leading-snug flex flex-col border-b-gray-600 border-b-4 border-dashed overflow-hidden relative"
+      >
         <div
           className="absolute whitespace-nowrap text-[3rem] md:text-[6rem] text-[#18181c] select-none will-change-transform"
           style={{
@@ -223,7 +260,10 @@ export default function Hero() {
           <span ref={firstTextRef} className="inline-block">
             {"ADRIAN ".repeat(4)}
           </span>
-          <span ref={secondTextRef} className="absolute top-0 left-0 inline-block">
+          <span
+            ref={secondTextRef}
+            className="absolute top-0 left-0 inline-block"
+          >
             {"ADRIAN ".repeat(4)}
           </span>
         </div>
