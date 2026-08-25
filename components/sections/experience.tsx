@@ -36,7 +36,7 @@ export default function Experience() {
       id="EXPERIENCE"
       role="region"
       aria-label="Experience"
-      className="bg-[#0a0a0a] pt-15 h-dvh w-screen overflow-x-hidden"
+      className="bg-surface pt-15 h-dvh w-screen overflow-hidden"
     >
       <div className="relative h-full w-full">
         <div className="flex flex-col md:grid h-full w-full md:grid-cols-[1fr_1fr_.618fr] md:grid-rows-[1fr_4fr_.618fr] text-gray-400">

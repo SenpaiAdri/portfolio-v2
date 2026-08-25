@@ -28,7 +28,7 @@ export default function Hero() {
       id="HOME"
       role="region"
       aria-label="Home"
-      className="bg-[#0a0a0a] h-dvh w-screen flex flex-col overflow-x-hidden"
+      className="bg-surface h-dvh w-screen flex flex-col overflow-hidden"
     >
       <h1 className="sr-only">Adrian M. De Guzman — Full Stack Developer</h1>
 
@@ -90,7 +90,7 @@ export default function Hero() {
         md:border-r-gray-600 md:border-r-4"
         >
           {/* Grid lines background + radial vignette */}
-          <BackdropGrid parallax masked />
+          <BackdropGrid masked />
 
           {/* Path/Education Background */}
           <div className="flex flex-row items-start justify-end gap-3 md:gap-10 z-10">

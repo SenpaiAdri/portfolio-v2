@@ -97,7 +97,7 @@ export default function Contact() {
       id="CONTACT"
       role="region"
       aria-label="Contact"
-      className="bg-[#0a0a0a] pt-15 h-dvh w-screen overflow-hidden text-gray-400"
+      className="bg-surface pt-15 h-dvh w-screen overflow-hidden text-gray-400"
     >
       <form
         ref={formRef}
@@ -156,10 +156,10 @@ export default function Contact() {
             />
         </div>
         <div className="relative hidden md:flex md:row-start-1 md:col-start-2">
-          <BackdropGrid parallax />
+          <BackdropGrid />
         </div>
         <div className="relative hidden md:flex px-6 md:px-10 py-6 md:py-8 border-b-2 sm:border-b-4 border-b-gray-600 border-dashed items-center justify-center md:row-start-2 md:col-start-2">
-          <BackdropGrid parallax />
+          <BackdropGrid />
           <SocialIconList variant="desktop" />
         </div>
 
@@ -234,7 +234,7 @@ export default function Contact() {
 
         {/* Desktop-only resume row: placed below socials (row 3, col 2) */}
         <div className="relative hidden md:flex px-6 md:px-10 py-6 md:py-8 border-b-2 sm:border-b-4 border-b-gray-600 border-dashed items-center justify-center md:row-start-3 md:col-start-2">
-          <BackdropGrid parallax />
+          <BackdropGrid />
           <div className="w-full max-w-xs flex flex-col items-center gap-4">
             <a
               href="/RESUME.pdf"
@@ -249,7 +249,7 @@ export default function Contact() {
 
         {/* Mobile-only socials row */}
         <div className="relative px-6 py-7 border-b-2 sm:border-b-4 border-b-gray-600 border-dashed flex items-center justify-center md:hidden">
-          <BackdropGrid parallax />
+          <BackdropGrid />
           <SocialIconList variant="mobile" />
         </div>
       </form>

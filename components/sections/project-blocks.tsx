@@ -310,7 +310,7 @@ export function ProjectInfoPanel({
 }) {
   return (
     <div className={panelClassName}>
-      <BackdropGrid color={projects[current].color} masked parallax />
+      <BackdropGrid color={projects[current].color} masked />
 
       <ProjectTitleSlides
         current={current}

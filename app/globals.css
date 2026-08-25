@@ -12,6 +12,8 @@
 
 @theme {
   --font-sans: var(--font-bruno-ace-sc), ui-sans-serif, system-ui, sans-serif;
+  /* App surface color — sections, overlays and the reveal-scroll shell */
+  --color-surface: #0a0a0a;
 }
 
 html,

@@ -6,8 +6,6 @@ type BackdropGridProps = {
   color?: string;
   /** Include the paired radial vignette overlay (hero / projects panels) */
   masked?: boolean;
-  /** Attach data-parallax so RevealScroll drifts the backdrop on exit */
-  parallax?: boolean;
   className?: string;
 };
 
@@ -26,7 +24,6 @@ const STATIC_GRID_STYLE: CSSProperties = {
 export function BackdropGrid({
   color,
   masked = false,
-  parallax = false,
   className,
 }: BackdropGridProps) {
   const style: CSSProperties = color
@@ -45,7 +42,6 @@ export function BackdropGrid({
     <>
       <div
         aria-hidden="true"
-        {...(parallax ? { "data-parallax": true } : {})}
         className={cn(
           "absolute inset-0 z-0 pointer-events-none select-none",
           className

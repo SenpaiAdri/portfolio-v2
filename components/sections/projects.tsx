@@ -72,7 +72,7 @@ export default function Projects() {
   return (
     <div
       id="PROJECTS"
-      className="bg-[#0a0a0a] pt-15 h-dvh md:min-h-screen w-screen flex flex-col overflow-x-hidden"
+      className="bg-surface pt-15 h-dvh md:min-h-screen w-screen flex flex-col overflow-hidden"
     >
       {/* Mobile Row 1: Project Logo */}
       <div className="flex-[0.5] h-24 md:hidden flex items-center justify-center border-b-2 border-gray-600 border-dashed">

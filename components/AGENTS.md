@@ -4,12 +4,21 @@
 
 - **Native scroll disabled**: `reveal-scroll.tsx` sets `overflow: hidden` on `html, body` and locks scroll to section-by-section navigation
 - **Transitions**: GSAP pair tweens (1000ms, `power4.inOut`) — only the leaving/entering sections animate; every other section sits at a rest transform (`gsap.set`), tracked in `currentIndexRef`. GSAP owns all transforms; React only renders z-index
-- **Parallax layers**: Any `[data-parallax]` element inside a section drifts at half speed in the opposite direction and fades to 0.2 during exit (Richard Mille-style). Sections rest: below viewport → `y: 50% / opacity 0.2`, elsewhere → `0% / 1`
+- **No parallax**: removed intentionally — transformed layers overflowing section bounds caused scrollbar flicker during transitions. All section roots use `overflow-hidden` to fully contain their children
 - **Footer strip**: `<RevealScroll footer={...}>` renders a `h-[50vh]` strip; scrolling "next" at the last section slides the whole stack up past it (and back down on "prev"). Must match `FOOTER_HEIGHT` in `reveal-scroll.tsx`
 - **Input methods**: Wheel (800ms throttle, 20px delta), ArrowUp/ArrowDown, touch swipes (50px threshold, swipe up = next)
 - **Section registration**: Use `useSectionScroll(index, handler)` hook — sections can return `true` from handler to consume scroll intents (e.g., internal scrollable content)
 - **Programmatic navigation**: Use `<RevealScrollTo to={index}>` component or dispatch `reveal-scroll-to` custom event with `{ detail: { index: number } }`
 - **z-index stacking**: Sections use `zIndex: sectionCount - i` — higher index sections stack on top
+- **Overlay nav bar**: RevealScroll renders an `h-15` nav bar (GSAP-tweened via `navBarRef`) that slides in synced with the hero→section transition and stays pinned afterwards; hidden (with `inert`) on the hero. Non-hero section roots must reserve its height with `pt-15`, and their inner fixed-height elements use `h-full` (not `h-dvh`)
+- **Input wiring**: wheel/keyboard/touch listeners live in `hooks/use-section-inputs.ts` (`useSectionInputs(handleIntent)`)
+
+## Shared Primitives
+
+- `components/slide-stack.tsx` — `SlideStack<T>`: vertical slide-reveal (`translateY((index - current) * 100%)`) used for all project slides
+- `components/backdrop-grid.tsx` — `BackdropGrid`: dashed grid-lines backdrop; optional accent `color` (CSS-var themed), `masked` vignette pair, `parallax` flag
+- `components/marquee-strip.tsx` — `MarqueeStrip` (hero band) + `useMarqueeLoop(firstRef, secondRef)` hook (footer's custom marquee)
+- `components/sections/project-blocks.tsx` — shared Projects building blocks (`ProjectLogoBox`, `ProjectLinkField`, `ProjectCounter`, `ProjectInfoPanel`, slide groups) reused by mobile and desktop layouts
 
 ## Animation Tools
 

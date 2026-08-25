@@ -8,7 +8,7 @@ export default function About() {
       id="ABOUT"
       role="region"
       aria-label="About"
-      className="bg-[#0a0a0a] pt-15 h-dvh w-screen overflow-x-hidden"
+      className="bg-surface pt-15 h-dvh w-screen overflow-hidden"
     >
       <div className="relative h-full w-full">
         {/* Mobile: flex column fill | Desktop: 3x3 grid */}

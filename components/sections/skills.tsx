@@ -9,7 +9,7 @@ export default function Skills() {
       id="SKILLS"
       role="region"
       aria-label="Skills"
-      className="bg-[#0a0a0a] h-dvh w-screen overflow-x-hidden"
+      className="bg-surface h-dvh w-screen overflow-hidden"
     >
       <div className="relative h-full w-full">
         <div className="flex flex-col md:grid h-dvh w-full md:grid-cols-[1fr_1fr_.618fr] md:grid-rows-[0.618fr_1fr_.618fr] text-gray-400">

@@ -44,7 +44,7 @@ export default function IntroOverlay() {
     <div
       ref={rootRef}
       aria-hidden="true"
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#0a0a0a]"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-surface"
     >
       <p className="px-6 text-center text-base uppercase tracking-[0.32em] text-gray-100 sm:text-2xl">
         ADRIAN M. DE GUZMAN

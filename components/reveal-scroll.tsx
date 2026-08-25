@@ -100,14 +100,6 @@ export default function RevealScroll({
       if (!el) return;
       const rel = i < ci ? -1 : i > ci ? 1 : 0;
       gsap.set(el, { y: `${rel * 100}%`, overwrite: "auto" });
-      const media = el.querySelector<HTMLElement>("[data-parallax]");
-      if (media) {
-        gsap.set(media, {
-          y: `${rel === 1 ? 50 : 0}%`,
-          opacity: rel === 1 ? 0.2 : 1,
-          overwrite: "auto",
-        });
-      }
     });
     // Section nav bar rests off-screen on the hero, pinned everywhere else
     if (navBarRef.current) {
@@ -163,14 +155,8 @@ export default function RevealScroll({
         return;
       }
 
-      const mediaShift = dir === "down" ? 50 : -50;
       const outY = dir === "down" ? "-100%" : "100%";
       const inY = dir === "down" ? "100%" : "-100%";
-
-      const leavingMedia =
-        leaving.querySelector<HTMLElement>("[data-parallax]");
-      const enteringMedia =
-        entering.querySelector<HTMLElement>("[data-parallax]");
 
       const tl = gsap.timeline({
         defaults: { duration: SECTION_TRANSITION_MS / 1000, ease: SECTION_EASE },
@@ -182,22 +168,6 @@ export default function RevealScroll({
 
       tl.fromTo(leaving, { y: "0%" }, { y: outY }, 0);
       tl.fromTo(entering, { y: inY }, { y: "0%" }, 0);
-      if (leavingMedia) {
-        tl.fromTo(
-          leavingMedia,
-          { y: "0%", opacity: 1 },
-          { y: `${mediaShift}%`, opacity: 0.2 },
-          0
-        );
-      }
-      if (enteringMedia) {
-        tl.fromTo(
-          enteringMedia,
-          { y: `${mediaShift}%`, opacity: 0.2 },
-          { y: "0%", opacity: 1 },
-          0
-        );
-      }
       // Slide the section nav bar in/out only when entering/leaving the hero,
       // so it stays pinned during transitions between the other sections
       if (navBarRef.current && (from === 0) !== (nextIndex === 0)) {
@@ -402,7 +372,7 @@ export default function RevealScroll({
     <ScrollContext.Provider value={contextValue}>
       <div
         id="reveal-scroll-container"
-        className="bg-[#0a0a0a] fixed inset-0 overflow-hidden touch-none"
+        className="bg-surface fixed inset-0 overflow-hidden touch-none"
         style={{ touchAction: "none" }}
       >
         <div
@@ -420,10 +390,11 @@ export default function RevealScroll({
         {/* Section navigation bar — slides in with the hero transition, pinned afterwards */}
         <nav
           ref={navBarRef}
+          aria-label="Section navigation"
           className="absolute inset-x-0 top-0 z-50"
           inert={!showTopNav}
         >
-          <div className="h-15 bg-[#0a0a0a] border-b-2 md:border-b-4 border-dashed border-gray-600 flex items-center justify-center gap-2 sm:gap-4 md:gap-8 pr-4 sm:pr-5 md:pr-10">
+          <div className="h-15 bg-surface border-b-2 md:border-b-4 border-dashed border-gray-600 flex items-center justify-center gap-2 sm:gap-4 md:gap-8 pr-4 sm:pr-5 md:pr-10">
             {navItems
               .filter((item) => item.index > 0)
               .map((item) => {
@@ -434,6 +405,7 @@ export default function RevealScroll({
                     key={item.label}
                     to={item.index}
                     as="button"
+                    {...(isActive ? { "aria-current": "true" as const } : {})}
                     className={cn(
                       "whitespace-nowrap text-[0.625rem] tracking-wide sm:text-sm md:text-lg md:tracking-widest transition-colors cursor-pointer",
                       isActive
@@ -483,13 +455,14 @@ export function RevealScrollTo({
   children,
   onNavigate,
   as: Tag = "span",
+  ...rest
 }: {
   to: number;
   className?: string;
   children: React.ReactNode;
   onNavigate?: () => void;
   as?: "span" | "a" | "button";
-}) {
+} & Omit<React.HTMLAttributes<HTMLElement>, "onClick" | "onKeyDown">) {
   const go = useCallback(() => {
     window.dispatchEvent(
       new CustomEvent("reveal-scroll-to", { detail: { index: to } })
@@ -497,6 +470,7 @@ export function RevealScrollTo({
   }, [to]);
   return (
     <Tag
+      {...rest}
       {...(Tag === "button" ? { type: "button" as const } : {})}
       {...(Tag !== "button" ? { role: "link" } : {})}
       tabIndex={0}
