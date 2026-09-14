@@ -2,7 +2,7 @@
 
 import { ArrowUp } from "lucide-react";
 import { useRef } from "react";
-import { SOCIALS } from "./contact";
+import { SOCIALS } from "@/components/site-primitives";
 import { useMarqueeLoop } from "@/components/marquee-strip";
 
 type TitleBlockRow = {
@@ -35,28 +35,16 @@ export default function FooterStrip() {
         className="pointer-events-none absolute inset-0 select-none"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(255,25,25,0.08) 2px, transparent 2px),
-            linear-gradient(to bottom, rgba(255,25,25,0.08) 2px, transparent 2px)
+            linear-gradient(to right, rgba(220,38,38,0.08) 2px, transparent 2px),
+            linear-gradient(to bottom, rgba(220,38,38,0.08) 2px, transparent 2px)
           `,
           backgroundSize: "60px 60px",
         }}
       />
 
-      {/* EOF watermark */}
-      {/* <span
-        aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-1/2 z-0 -translate-y-1/2 translate-x-[12%] select-none whitespace-nowrap text-[4.5rem] font-bold md:text-[9rem]"
-        style={{
-          WebkitTextStroke: "2px rgba(255,25,25,0.16)",
-          color: "transparent",
-        }}
-      >
-        [ EOF ]
-      </span> */}
-
       {/* Top strip — name marquee */}
       <div className="relative z-10 flex items-center overflow-hidden border-b-2 md:border-b-4 border-dashed border-gray-600 py-2.5 md:py-4">
-        <div className="relative whitespace-nowrap text-[10px] md:text-xs tracking-[0.35em] uppercase text-red-500 select-none will-change-transform w-full">
+        <div className="relative whitespace-nowrap text-[10px] md:text-xs tracking-[0.35em] uppercase text-red-600 select-none will-change-transform w-full">
           <span ref={firstTextRef} className="inline-block">
             {"ADRIAN ADRIAN ".repeat(10)}
           </span>
@@ -68,7 +56,7 @@ export default function FooterStrip() {
 
       {/* Middle: info rows | channels */}
       <div className="relative z-10 grid flex-1 min-h-0 grid-cols-1 md:grid-cols-[13fr_8fr]">
-        <dl className="flex flex-col justify-center px-6 py-2 md:px-12 md:py-6 md:border-r-4 md:border-dashed md:border-r-red-500 lg:px-15">
+        <dl className="flex flex-col justify-center px-6 py-2 md:px-12 md:py-6 md:border-r-4 md:border-dashed md:border-r-red-600 lg:px-15">
           {TITLE_BLOCK_ROWS.map((row) => (
             <div
               key={row.label}
@@ -80,7 +68,7 @@ export default function FooterStrip() {
               <dd
                 className={
                   row.accent
-                    ? "text-red-500 text-[10px] md:text-xs tracking-[0.25em] uppercase font-bold"
+                    ? "text-red-600 text-[10px] md:text-xs tracking-[0.25em] uppercase font-bold"
                     : "text-gray-200 text-[10px] md:text-xs tracking-[0.25em] uppercase"
                 }
               >
@@ -91,7 +79,7 @@ export default function FooterStrip() {
         </dl>
 
         <div className="flex flex-col items-center justify-center gap-2 border-t-2 border-dashed border-gray-600 px-6 py-3 md:border-t-0 md:py-0">
-          <span className="text-red-500 text-[10px] md:text-xs tracking-[0.35em] uppercase">
+          <span className="text-red-600 text-[10px] md:text-xs tracking-[0.35em] uppercase">
             [ Channels ]
           </span>
           <ul className="flex items-center gap-2 md:gap-3">
@@ -102,7 +90,7 @@ export default function FooterStrip() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="group inline-flex h-9 w-9 items-center justify-center border-2 border-dashed border-gray-600 text-red-500 transition-colors hover:border-red-500 hover:text-red-400 focus-visible:border-red-500 focus:outline-none md:h-11 md:w-11"
+                  className="group inline-flex h-9 w-9 items-center justify-center border-2 border-dashed border-gray-600 text-red-600 transition-colors hover:border-red-600 hover:text-red-500 focus-visible:border-red-600 focus:outline-none md:h-11 md:w-11"
                 >
                   <Icon
                     className="h-4 w-4 md:h-5 md:w-5 transition-transform group-hover:scale-110"
@@ -121,7 +109,7 @@ export default function FooterStrip() {
           © 2026 Adrian M. De Guzman — All Rights Reserved
         </p>
         <p className="inline-flex items-center gap-2 text-gray-400 text-[9px] md:text-xs tracking-[0.3em] uppercase">
-          <ArrowUp className="h-3.5 w-3.5 text-red-500" aria-hidden="true" />
+          <ArrowUp className="h-3.5 w-3.5 text-red-600" aria-hidden="true" />
           Scroll up to close
         </p>
       </div>

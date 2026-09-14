@@ -11,8 +11,8 @@ type BackdropGridProps = {
 
 const STATIC_GRID_STYLE: CSSProperties = {
   backgroundImage: `
-                linear-gradient(to right, rgba(255,25,25,0.1) 2px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,25,25,0.1) 2px, transparent 1px)
+                linear-gradient(to right, rgba(220,38,38,0.1) 2px, transparent 1px),
+                linear-gradient(to bottom, rgba(220,38,38,0.1) 2px, transparent 1px)
               `,
   backgroundSize: "60px 60px",
 };

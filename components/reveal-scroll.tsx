@@ -381,7 +381,7 @@ export default function RevealScroll({
         >
           <div className="h-1 w-full">
             <div
-              className="h-full bg-red-500 transition-[width] duration-1000 ease-in-out"
+              className="h-full bg-red-600 transition-[width] duration-1000 ease-in-out"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -409,8 +409,8 @@ export default function RevealScroll({
                     className={cn(
                       "whitespace-nowrap text-[0.625rem] tracking-wide sm:text-sm md:text-lg md:tracking-widest transition-colors cursor-pointer",
                       isActive
-                        ? "text-red-500"
-                        : "text-gray-500 hover:text-red-500",
+                        ? "text-red-600"
+                        : "text-gray-500 hover:text-red-600",
                     )}
                   >
                     [ {item.label.toUpperCase()} ]

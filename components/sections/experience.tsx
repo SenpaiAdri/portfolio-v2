@@ -6,6 +6,11 @@ import { experiences } from "@/data/experience";
 import { skillCategories } from "@/data/skills";
 import { useSectionScroll, type ScrollDirection } from "../reveal-scroll";
 import { BackdropGrid } from "@/components/backdrop-grid";
+import { cn } from "@/lib/utils";
+import {
+  SECTION_HEADING,
+  SECTION_TAGLINE,
+} from "@/components/site-primitives";
 
 export default function Experience() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -41,19 +46,17 @@ export default function Experience() {
       <div className="relative h-full w-full">
         <div className="flex flex-col md:grid h-full w-full md:grid-cols-[1fr_1fr_.618fr] md:grid-rows-[1fr_4fr_.618fr] text-gray-400">
           {/* Header */}
-          <div className="md:col-span-2 md:row-start-1 md:row-end-2 md:border-r-4 md:border-r-gray-600 md:border-dashed flex flex-[0.2] items-center justify-center gap-4 py-6 px-4 border-b-2 md:border-b-4 border-b-red-500 border-dashed">
-            <h2 className="text-sm lg:text-2xl lg:font-black tracking-[0.5em] text-gray-500 uppercase text-center">
+          <div className="md:col-span-2 md:row-start-1 md:row-end-2 md:border-r-4 md:border-r-gray-600 md:border-dashed flex flex-[0.2] items-center justify-center gap-4 py-6 px-4 border-b-2 md:border-b-4 border-b-red-600 border-dashed">
+            <h2 className={SECTION_HEADING}>
               Experience
             </h2>
           </div>
 
           {/* Right panel header */}
-          <div className="hidden md:flex col-start-3 row-start-1 row-end-2 border-b-4 border-b-red-500 border-dashed items-center justify-center" aria-hidden="true">
-            {/* <Briefcase className="w-6 h-6 lg:w-10 lg:h-10 text-red-500" /> */}
-          </div>
+          <div className="hidden md:flex col-start-3 row-start-1 row-end-2 border-b-4 border-b-red-600 border-dashed items-center justify-center" aria-hidden="true" />
 
           {/* Main content - Experience entries */}
-          <div ref={scrollRef} className="relative md:col-start-1 md:col-end-3 md:row-start-2 md:row-end-4 md:border-b-4 md:border-r-4 md:border-dashed md:border-b-red-500 md:border-r-gray-600 flex items-center justify-center px-6 py-6 md:px-10 md:py-8 flex-1 md:flex-auto overflow-y-auto">
+          <div ref={scrollRef} className="relative md:col-start-1 md:col-end-3 md:row-start-2 md:row-end-4 md:border-b-4 md:border-r-4 md:border-dashed md:border-b-red-600 md:border-r-gray-600 flex items-center justify-center px-6 py-6 md:px-10 md:py-8 flex-1 md:flex-auto overflow-y-auto">
             <BackdropGrid />
             {/* Radial Gradient */}
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] bg-black/20" />
@@ -71,14 +74,6 @@ export default function Experience() {
                       </div>
                       <p className="text-gray-400 text-sm md:text-base mb-2 uppercase">{exp.role}</p>
                       <span className="md:hidden text-gray-400 text-xs md:text-sm tracking-wider uppercase">{exp.date}</span>
-                      {/* <p className="hidden md:block text-gray-400 text-xs leading-relaxed mb-3">{exp.description}</p> */}
-                      {/* <div className="flex flex-wrap gap-2">
-                        {exp.technologies.map((tech, j) => (
-                          <span key={j} className="text-gray-300 text-xs px-2 md:px-4 py-1 md:py-2 border md:border-2 border-dashed border-gray-600 ">
-                            {tech}
-                          </span>
-                        ))}
-                      </div> */}
                     </div>
                   ))}
                 </div>
@@ -87,9 +82,9 @@ export default function Experience() {
           </div>
 
           {/* Bottom tagline */}
-          <div className="col-span-1 md:col-start-3 md:col-end-3 row-start-2 md:row-start-2 md:row-end-4 flex items-center justify-center px-6 py-4 border-b-2 md:border-b-4 border-red-500 border-t-2 border-t-red-500 border-dashed md:border-t-0 flex-[0.2] md:flex-col md:min-h-0 md:overflow-y-hidden">
-            <h2 className="md:hidden text-xs lg:text-2xl lg:font-black tracking-[0.2em] text-gray-500 uppercase flex items-center gap-3">
-              <History className="w-4 h-4 sm:w-8 sm:h-8 text-red-500" aria-hidden="true" />
+          <div className="col-span-1 md:col-start-3 md:col-end-3 row-start-2 md:row-start-2 md:row-end-4 flex items-center justify-center px-6 py-4 border-b-2 md:border-b-4 border-red-600 border-t-2 border-t-red-600 border-dashed md:border-t-0 flex-[0.2] md:flex-col md:min-h-0 md:overflow-y-hidden">
+            <h2 className={cn(SECTION_TAGLINE, "md:hidden")}>
+              <History className="w-4 h-4 sm:w-8 sm:h-8 text-red-600" aria-hidden="true" />
               Work History
             </h2>
             {/* skills section */}
@@ -100,7 +95,7 @@ export default function Experience() {
                 <div className="grid grid-cols-1 gap-5 md:gap-6">
                   {skillCategories.map((cat, i) => (
                     <div key={i} className="w-full border-l-2 border-b-2 md:border-l-4 md:border-b-4 border-gray-600 border-dashed p-2 md:pl-6 md:pb-6 rounded">
-                      <h3 className="text-red-500 text-xs font-bold tracking-[0.3em] uppercase mb-2 ml-2 md:mb-4">{cat.category}</h3>
+                      <h3 className="text-red-600 text-xs font-bold tracking-[0.3em] uppercase mb-2 ml-2 md:mb-4">{cat.category}</h3>
                       <div className="flex flex-wrap gap-2">
                         {cat.skills.map((skill, j) => (
                           <span key={j} className="text-gray-300 text-[10px] px-2 md:px-2 py-[0.2rem] md:py-[0.3rem] border md:border-2 border-dashed border-gray-600 rounded break-words">

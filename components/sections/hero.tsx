@@ -1,11 +1,22 @@
 "use client";
 
-import { RevealScrollTo } from "../reveal-scroll";
-import { Activity, Github, Linkedin } from "lucide-react";
+import { Activity } from "lucide-react";
 import { useRef } from "react";
 import TextType from "../TextType";
 import { LogoAnimated } from "../LogoAnimated";
 import { GithubContributionGraph } from "../github-contribution-graph";
+import {
+  HERO_ACCENT_TEXT,
+  HERO_DIVIDER_BOTTOM_GRAY,
+  HERO_DIVIDER_BOTTOM_RED,
+  HERO_DIVIDER_RIGHT_GRAY,
+  HERO_DIVIDER_RIGHT_GRAY_MD,
+  HERO_MUTED_TEXT,
+  HERO_SOCIALS,
+  HeroNavLink,
+  SocialIconLink,
+} from "../site-primitives";
+import { cn } from "@/lib/utils";
 import { MarqueeStrip } from "@/components/marquee-strip";
 import { BackdropGrid } from "@/components/backdrop-grid";
 import {
@@ -36,12 +47,22 @@ export default function Hero() {
       {/* Fibonacci field (21) + spiral overlay */}
       <div className="relative flex-21 min-h-0 flex flex-col">
         {/* row 1 — 8 */}
-        <div className="flex-5 md:flex-8 min-h-0 flex flex-col-reverse md:grid md:grid-cols-[13fr_8fr] border-b-red-600 border-b-4 border-dashed">
+        <div
+          className={cn(
+            "flex-5 md:flex-8 min-h-0 flex flex-col-reverse md:grid md:grid-cols-[13fr_8fr]",
+            HERO_DIVIDER_BOTTOM_RED,
+          )}
+        >
           {/* Welcome message */}
-          <div className="shrink-0 h-12 sm:h-14 md:h-auto flex justify-center items-center md:items-end md:pb-10 lg:pb-15 md:pr-0 lg:pr-15 md:border-r-gray-600 md:border-r-4 border-dashed">
+          <div
+            className={cn(
+              "shrink-0 h-12 sm:h-14 md:h-auto flex justify-center items-center md:items-end md:pb-10 lg:pb-15 md:pr-0 lg:pr-15",
+              HERO_DIVIDER_RIGHT_GRAY_MD,
+            )}
+          >
             <span className="relative flex items-center text-gray-500 font-medium tracking-widest whitespace-nowrap md:ml-auto text-left my-5 gap-2 md:gap-4">
               <Activity
-                className="text-red-500 w-5 md:w-7 lg:w-9 h-full"
+                className="text-red-600 w-5 md:w-7 lg:w-9 h-full"
                 strokeWidth={2}
               />
               <TextType
@@ -79,29 +100,37 @@ export default function Hero() {
         </div>
 
         {/* row 2 — 13 */}
-        <div className="flex-13 min-h-0 flex flex-col-reverse md:grid md:grid-cols-[13fr_8fr] border-b-gray-600 border-b-4 border-dashed">
+        <div
+          className={cn(
+            "flex-13 min-h-0 flex flex-col-reverse md:grid md:grid-cols-[13fr_8fr]",
+            HERO_DIVIDER_BOTTOM_GRAY,
+          )}
+        >
           {/* Introduction */}
-          <div className="flex-8 min-h-0 flex flex-row items-end justify-end gap-10 p-10 border-dashed relative overflow-hidden md:border-r-gray-600 md:border-r-4">
+          <div
+            className={cn(
+              "flex-8 min-h-0 flex flex-row items-end justify-end gap-10 p-10 relative overflow-hidden",
+              HERO_DIVIDER_RIGHT_GRAY_MD,
+            )}
+          >
             {/* Grid lines background + radial vignette */}
             <BackdropGrid masked />
 
             {/* Path/Education Background */}
             <div className="flex flex-row items-start justify-end gap-3 md:gap-10 z-10">
-              <span className="text-red-500 text-xl text-nowrap md:text-2xl">
-                ---
-              </span>
+              <span className={cn(HERO_ACCENT_TEXT, "text-nowrap")}>---</span>
               <div className="flex flex-col ">
                 <TextType
                   text="[PATH]"
                   loop={false}
                   typingSpeed={200}
                   initialDelay={introDelayMs}
-                  className="text-red-500 text-xl md:text-2xl mb-2"
+                  className={cn(HERO_ACCENT_TEXT, "mb-2")}
                 />
-                <span className="text-gray-500 text-base md:text-xl lg:text-2xl">
+                <span className={HERO_MUTED_TEXT}>
                   Computer Science Student
                 </span>
-                <span className="text-gray-500 text-base md:text-xl lg:text-2xl">
+                <span className={HERO_MUTED_TEXT}>
                   Specialized in Mobile Programming
                 </span>
               </div>
@@ -110,73 +139,46 @@ export default function Hero() {
 
           {/* Navigation and Socials */}
           <div className="flex-5 min-h-0 flex flex-col">
-            <div className="flex-8 min-h-0 grid grid-cols-[3fr_5fr] border-b-red-600 border-b-4 border-dashed">
+            <div
+              className={cn(
+                "flex-8 min-h-0 grid grid-cols-[3fr_5fr]",
+                HERO_DIVIDER_BOTTOM_RED,
+              )}
+            >
               {/* Socials */}
-              <div className="grid grid-rows-2 overflow-hidden border-r-gray-600 border-r-4 border-dashed">
-                <div className="min-h-0 flex items-center justify-center border-b-red-600 border-b-4 border-dashed">
-                  <a
-                    href="https://github.com/SenpaiAdri"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub profile"
+              <div
+                className={cn(
+                  "grid grid-rows-2 overflow-hidden",
+                  HERO_DIVIDER_RIGHT_GRAY,
+                )}
+              >
+                {HERO_SOCIALS.map(({ href, label, Icon }, index) => (
+                  <div
+                    key={label}
+                    className={cn(
+                      "min-h-0 flex items-center justify-center",
+                      index === 0 && HERO_DIVIDER_BOTTOM_RED,
+                    )}
                   >
-                    <Github
-                      className="text-red-500 hover:text-red-400 hover:scale-110 transition-[transform,color] cursor-pointer"
-                      size={35}
-                      aria-hidden="true"
-                    />
-                  </a>
-                </div>
-                <div className="min-h-0 flex items-center justify-center">
-                  <a
-                    href="https://www.linkedin.com/in/eydriannn/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn profile"
-                  >
-                    <Linkedin
-                      className="text-red-500 hover:text-red-400 hover:scale-110 transition-[transform,color] cursor-pointer"
-                      size={35}
-                      aria-hidden="true"
-                    />
-                  </a>
-                </div>
+                    <SocialIconLink href={href} label={label} Icon={Icon} />
+                  </div>
+                ))}
               </div>
 
               {/* Navigation */}
               <section className="min-h-0 flex flex-col items-end justify-center overflow-hidden gap-5">
-                <div className="w-full h-full flex flex-col items-end justify-center overflow-hidden gap-2 pr-5 lg:pr-10 text-base md:lg xl:text-xl">
+                <div className="w-full h-full flex flex-col items-end justify-center overflow-hidden gap-2 pr-5 lg:pr-10 text-base xl:text-xl">
                   <TextType
                     text="[ HOME ]"
                     loop={false}
                     typingSpeed={200}
                     initialDelay={introDelayMs}
-                    className="text-red-500"
+                    className="text-red-600"
                   />
-                  <RevealScrollTo
-                    to={1}
-                    className="text-gray-500 hover:text-red-500 hover:-translate-x-4 transition-[transform,color] cursor-pointer"
-                  >
-                    [ PROJECTS ]
-                  </RevealScrollTo>
-                  <RevealScrollTo
-                    to={2}
-                    className="text-gray-500 hover:text-red-500 hover:-translate-x-4 transition-[transform,color]"
-                  >
-                    [ EXPERIENCE ]
-                  </RevealScrollTo>
-                  <RevealScrollTo
-                    to={3}
-                    className="text-gray-500 hover:text-red-500 hover:-translate-x-4 transition-[transform,color]"
-                  >
-                    [ ABOUT ]
-                  </RevealScrollTo>
-                  <RevealScrollTo
-                    to={4}
-                    className="text-gray-500 hover:text-red-500 hover:-translate-x-4 transition-[transform,color]"
-                  >
-                    [ CONTACT ]
-                  </RevealScrollTo>
+                  <HeroNavLink to={1}>[ PROJECTS ]</HeroNavLink>
+                  <HeroNavLink to={2}>[ EXPERIENCE ]</HeroNavLink>
+                  <HeroNavLink to={3}>[ ABOUT ]</HeroNavLink>
+                  <HeroNavLink to={4}>[ CONTACT ]</HeroNavLink>
                 </div>
               </section>
             </div>
@@ -187,7 +189,7 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 aria-label="SenpaiAdri's GitHub contribution graph — opens GitHub profile"
                 title="Open SenpaiAdri's GitHub profile"
-                className="block rounded-sm outline-none transition-opacity  focus-visible:ring-2 focus-visible:ring-red-500"
+                className="block rounded-sm outline-none transition-opacity focus-visible:ring-2 focus-visible:ring-red-600"
               >
                 <GithubContributionGraph />
               </a>

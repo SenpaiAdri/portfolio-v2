@@ -306,7 +306,7 @@ export default function ProjectCarousel({
             type="button"
             onClick={closeModal}
             aria-label="Close image"
-            className="absolute right-6 top-6 z-10 p-2 rounded-full border-2 border-dashed border-gray-600 text-gray-400 hover:border-red-500 hover:text-red-500 focus-visible:border-red-500 focus-visible:text-red-500 transition-colors"
+            className="absolute right-6 top-6 z-10 p-2 rounded-full border-2 border-dashed border-gray-600 text-gray-400 hover:border-red-600 hover:text-red-600 focus-visible:border-red-600 focus-visible:text-red-600 transition-colors"
           >
             <X className="h-5 w-5" aria-hidden="true" />
           </button>
