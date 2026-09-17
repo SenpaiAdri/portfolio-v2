@@ -143,7 +143,7 @@ export default function Projects() {
         <div className="w-[calc(8/21*100%)] h-full flex items-center justify-center p-2 md:p-4">
           <ProjectLogoBox
             current={currentProject}
-            className="w-fit h-16 md:h-20 lg:h-24"
+            className="w-full h-16 md:h-20 lg:h-24"
           />
         </div>
       </div>

@@ -34,7 +34,7 @@ export function ProjectLogoBox({
       )}
     >
       <div className="invisible">
-        <Image src={active.logo} alt={active.name} width={250} height={100} />
+        <Image src={active.logo} alt={active.name} width={250} height={200} />
       </div>
       <SlideStack
         items={projects}
@@ -45,8 +45,8 @@ export function ProjectLogoBox({
           <Image
             src={p.logo}
             alt={p.name}
-            width={250}
-            height={100}
+            width={350}
+            height={200}
             className="object-contain max-h-full max-w-full"
           />
         )}
