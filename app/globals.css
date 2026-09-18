@@ -42,7 +42,7 @@ body {
   --shade: rgba(122, 106, 83, 0.1); /* warm vignette wash */
   --track: rgba(0, 0, 0, 0.1); /* contribution graph level-0 swatch */
   --brand: #9b7c39; /* site accent */
-  --brand-hover: #ef4444; /* accent hover */
+  --brand-hover: #9b7c39; /* accent hover */
   --brand-grid: rgba(220, 38, 38, 0.1); /* red grid backdrops */
   --brand-grid-soft: rgba(220, 38, 38, 0.08); /* faint red grid (footer) */
   --background: oklch(0.97 0.02 95);
