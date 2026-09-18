@@ -55,7 +55,7 @@ export function LogoAnimated({ width, height, className, delay = 0.2 }: LogoAnim
   const containerRef = useRef<HTMLDivElement>(null);
   const [logoSvg, setLogoSvg] = useState<string>("");
   const prefersReducedMotion = usePrefersReducedMotion();
-  const strokeColor = "#FF0000";
+  const strokeColor = "var(--brand)";
   const strokeWidth = 3;
   const svgUrl = useMemo(() => "/logo.svg", []);
 
@@ -118,6 +118,7 @@ export function LogoAnimated({ width, height, className, delay = 0.2 }: LogoAnim
 
         p.style.opacity = "";
         p.style.fillOpacity = "";
+        p.style.stroke = "";
       }
     };
 
@@ -139,9 +140,10 @@ export function LogoAnimated({ width, height, className, delay = 0.2 }: LogoAnim
         fillPaths.push(p);
       }
 
-      // Force stroke appearance for drawing
+      // Force stroke appearance for drawing (style so `var(--brand)` resolves reliably)
       p.setAttribute("fill", "none");
       p.setAttribute("stroke", strokeColor);
+      p.style.stroke = strokeColor;
       p.setAttribute("stroke-width", String(strokeWidth));
       p.setAttribute("stroke-linejoin", "round");
       p.setAttribute("stroke-linecap", "round");
