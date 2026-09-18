@@ -147,30 +147,30 @@ export default function Hero() {
                 HERO_DIVIDER_BOTTOM_RED,
               )}
             >
-              {/* Socials — row 1 is the theme toggle (replaces the old GitHub icon), row 2 is LinkedIn */}
+              {/* Socials — row 1 Theme Toggle, row 2 LinkedIn */}
               <div
                 className={cn(
                   "grid grid-rows-2 overflow-hidden",
                   HERO_DIVIDER_RIGHT_GRAY,
                 )}
               >
-                <Button
-                  as="div"
+                <div
                   className={cn(
                     "min-h-0 flex items-center justify-center",
                     HERO_DIVIDER_BOTTOM_RED,
                   )}
                 >
                   <ThemeToggle />
-                </Button>
+                </div>
                 {HERO_SOCIALS.map(({ href, label, Icon }) => (
-                  <Button
-                    as="div"
+                  <div
                     key={label}
                     className="min-h-0 flex items-center justify-center"
                   >
-                    <SocialIconLink href={href} label={label} Icon={Icon} />
-                  </Button>
+                    <Button>
+                      <SocialIconLink href={href} label={label} Icon={Icon} />
+                    </Button>
+                  </div>
                 ))}
               </div>
 
