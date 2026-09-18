@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Github, Link } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { projects } from "@/data/projects";
+import { projects, type Project } from "@/data/projects";
 import { SlideStack } from "@/components/slide-stack";
 import { BackdropGrid } from "@/components/backdrop-grid";
 import { Button } from "@/components/button";
@@ -17,6 +17,49 @@ export const TRANSITION_THEME_LONG =
 // explicitly transitioned, or the color snaps instantly
 export const TRANSITION_STROKE =
   "color 0.7s ease-in-out, -webkit-text-stroke-color 0.7s ease-in-out";
+
+/** Theme-aware project logo. Renders `logoDark` under `.dark`, else `logo`. */
+function ProjectLogoImage({
+  project,
+  width,
+  height,
+  className,
+}: {
+  project: Project;
+  width: number;
+  height: number;
+  className?: string;
+}) {
+  if (!project.logoDark) {
+    return (
+      <Image
+        src={project.logo}
+        alt={project.name}
+        width={width}
+        height={height}
+        className={className}
+      />
+    );
+  }
+  return (
+    <>
+      <Image
+        src={project.logo}
+        alt={project.name}
+        width={width}
+        height={height}
+        className={cn(className, "hidden dark:block")}
+      />
+      <Image
+        src={project.logoDark}
+        alt={project.name}
+        width={width}
+        height={height}
+        className={cn(className, "dark:hidden")}
+      />
+    </>
+  );
+}
 
 /** Invisible-sizer box holding the sliding project logos. */
 export function ProjectLogoBox({
@@ -34,8 +77,8 @@ export function ProjectLogoBox({
         className,
       )}
     >
-      <div className="invisible">
-        <Image src={active.logo} alt={active.name} width={250} height={200} />
+      <div className="invisible" aria-hidden="true">
+        <ProjectLogoImage project={active} width={250} height={200} />
       </div>
       <SlideStack
         items={projects}
@@ -43,9 +86,8 @@ export function ProjectLogoBox({
         getKey={(p) => p.name}
         itemClassName="absolute inset-0 flex items-center justify-center"
         renderItem={(p) => (
-          <Image
-            src={p.logo}
-            alt={p.name}
+          <ProjectLogoImage
+            project={p}
             width={350}
             height={200}
             className="object-contain max-h-full max-w-full"

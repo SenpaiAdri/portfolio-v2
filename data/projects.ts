@@ -2,6 +2,7 @@ export interface Project {
   name: string;
   description: string;
   logo: string;
+  logoDark?: string;
   images: string[];
   date: string;
   role: string;
@@ -13,7 +14,8 @@ export interface Project {
 export const projects: Project[] = [
   {
     name: "Pasada [Driver Side]",
-    description: "Ride hailing and fleet management platform for modernized jeepney services",
+    description:
+      "Ride hailing and fleet management platform for modernized jeepney services",
     logo: "/pasada_driver/pasada_driver_logo.svg",
     images: [
       "/pasada_driver/pasada_driver_home_view.webp",
@@ -39,8 +41,10 @@ export const projects: Project[] = [
   },
   {
     name: "AI Blog Post",
-    description: "An AI-Powered Blogging Channel for Latest Tech News and Updates",
+    description:
+      "An AI-Powered Blogging Channel for Latest Tech News and Updates",
     logo: "/ai_blogpost/ai-blogpost-logo.svg",
+    logoDark: "/ai_blogpost/ai-blogpost-logo-dark.svg",
     images: [
       "/ai_blogpost/ai_blogpost_home_page.webp",
       "/ai_blogpost/ai_blogpost_full_blog.webp",
@@ -73,5 +77,5 @@ export const projects: Project[] = [
     color: "#FFD149",
     website: "https://lootbx.com/",
     github: "",
-  }
+  },
 ];
