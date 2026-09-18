@@ -26,7 +26,7 @@ export default function FooterStrip() {
   useMarqueeLoop(firstTextRef, secondTextRef);
 
   return (
-    <footer className="relative flex h-full w-screen flex-col overflow-hidden ">
+    <footer className="relative flex h-full w-screen flex-col overflow-hidden bg-surface">
       <h2 className="sr-only">Footer — index sheet</h2>
 
       {/* Grid lines background */}
@@ -35,16 +35,16 @@ export default function FooterStrip() {
         className="pointer-events-none absolute inset-0 select-none"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(220,38,38,0.08) 2px, transparent 2px),
-            linear-gradient(to bottom, rgba(220,38,38,0.08) 2px, transparent 2px)
+            linear-gradient(to right, var(--brand-grid-soft) 2px, transparent 2px),
+            linear-gradient(to bottom, var(--brand-grid-soft) 2px, transparent 2px)
           `,
           backgroundSize: "60px 60px",
         }}
       />
 
       {/* Top strip — name marquee */}
-      <div className="relative z-10 flex items-center overflow-hidden border-b-2 md:border-b-4 border-dashed border-gray-600 py-2.5 md:py-4">
-        <div className="relative whitespace-nowrap text-[10px] md:text-xs tracking-[0.35em] uppercase text-red-600 select-none will-change-transform w-full">
+      <div className="relative z-10 flex items-center overflow-hidden border-b-2 md:border-b-4 border-dashed border-line py-2.5 md:py-4">
+        <div className="relative whitespace-nowrap text-[10px] md:text-xs tracking-[0.35em] uppercase text-brand select-none will-change-transform w-full">
           <span ref={firstTextRef} className="inline-block">
             {"ADRIAN ADRIAN ".repeat(10)}
           </span>
@@ -56,20 +56,20 @@ export default function FooterStrip() {
 
       {/* Middle: info rows | channels */}
       <div className="relative z-10 grid flex-1 min-h-0 grid-cols-1 md:grid-cols-[13fr_8fr]">
-        <dl className="flex flex-col justify-center px-6 py-2 md:px-12 md:py-6 md:border-r-4 md:border-dashed md:border-r-red-600 lg:px-15">
+        <dl className="flex flex-col justify-center px-6 py-2 md:px-12 md:py-6 md:border-r-4 md:border-dashed md:border-r-brand lg:px-15">
           {TITLE_BLOCK_ROWS.map((row) => (
             <div
               key={row.label}
-              className="flex items-baseline justify-between gap-4 border-b-2 border-dashed border-gray-600 py-1.5 last:border-b-0 md:py-2.5"
+              className="flex items-baseline justify-between gap-4 border-b-2 border-dashed border-line py-1.5 last:border-b-0 md:py-2.5"
             >
-              <dt className="text-gray-500 text-[10px] md:text-xs tracking-[0.35em] uppercase">
+              <dt className="text-ink-muted text-[10px] md:text-xs tracking-[0.35em] uppercase">
                 {row.label}
               </dt>
               <dd
                 className={
                   row.accent
-                    ? "text-red-600 text-[10px] md:text-xs tracking-[0.25em] uppercase font-bold"
-                    : "text-gray-200 text-[10px] md:text-xs tracking-[0.25em] uppercase"
+                    ? "text-brand text-[10px] md:text-xs tracking-[0.25em] uppercase font-bold"
+                    : "text-ink-bright text-[10px] md:text-xs tracking-[0.25em] uppercase"
                 }
               >
                 {row.value}
@@ -78,8 +78,8 @@ export default function FooterStrip() {
           ))}
         </dl>
 
-        <div className="flex flex-col items-center justify-center gap-2 border-t-2 border-dashed border-gray-600 px-6 py-3 md:border-t-0 md:py-0">
-          <span className="text-red-600 text-[10px] md:text-xs tracking-[0.35em] uppercase">
+        <div className="flex flex-col items-center justify-center gap-2 border-t-2 border-dashed border-line px-6 py-3 md:border-t-0 md:py-0">
+          <span className="text-brand text-[10px] md:text-xs tracking-[0.35em] uppercase">
             [ Channels ]
           </span>
           <ul className="flex items-center gap-2 md:gap-3">
@@ -90,7 +90,7 @@ export default function FooterStrip() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="group inline-flex h-9 w-9 items-center justify-center border-2 border-dashed border-gray-600 text-red-600 transition-colors hover:border-red-600 hover:text-red-500 focus-visible:border-red-600 focus:outline-none md:h-11 md:w-11"
+                  className="group inline-flex h-9 w-9 items-center justify-center border-2 border-dashed border-line text-brand transition-colors hover:border-brand hover:text-brand-hover focus-visible:border-brand focus:outline-none md:h-11 md:w-11"
                 >
                   <Icon
                     className="h-4 w-4 md:h-5 md:w-5 transition-transform group-hover:scale-110"
@@ -104,12 +104,12 @@ export default function FooterStrip() {
       </div>
 
       {/* Bottom strip */}
-      <div className="relative z-10 flex flex-wrap items-center justify-center gap-2 border-t-2 md:border-t-4 border-dashed border-gray-600 px-6 py-2.5 md:justify-between md:px-12 md:py-4 lg:px-15">
-        <p className="text-gray-500 text-[9px] md:text-xs tracking-[0.3em] uppercase">
+      <div className="relative z-10 flex flex-wrap items-center justify-center gap-2 border-t-2 md:border-t-4 border-dashed border-line px-6 py-2.5 md:justify-between md:px-12 md:py-4 lg:px-15">
+        <p className="text-ink-muted text-[9px] md:text-xs tracking-[0.3em] uppercase">
           © 2026 Adrian M. De Guzman — All Rights Reserved
         </p>
-        <p className="inline-flex items-center gap-2 text-gray-400 text-[9px] md:text-xs tracking-[0.3em] uppercase">
-          <ArrowUp className="h-3.5 w-3.5 text-red-600" aria-hidden="true" />
+        <p className="inline-flex items-center gap-2 text-ink-body text-[9px] md:text-xs tracking-[0.3em] uppercase">
+          <ArrowUp className="h-3.5 w-3.5 text-brand" aria-hidden="true" />
           Scroll up to close
         </p>
       </div>

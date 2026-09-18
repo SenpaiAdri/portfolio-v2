@@ -46,7 +46,7 @@ export default function IntroOverlay() {
       aria-hidden="true"
       className="fixed inset-0 z-[100] flex items-center justify-center bg-surface"
     >
-      <p className="px-6 text-center text-base uppercase tracking-[0.32em] text-gray-100 sm:text-2xl">
+      <p className="px-6 text-center text-base uppercase tracking-[0.32em] text-ink-bright sm:text-2xl">
         ADRIAN M. DE GUZMAN
       </p>
     </div>

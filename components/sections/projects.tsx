@@ -75,12 +75,12 @@ export default function Projects() {
       className="bg-surface pt-15 h-dvh md:min-h-screen w-screen flex flex-col overflow-hidden"
     >
       {/* Mobile Row 1: Project Logo */}
-      <div className="flex-[0.5] h-24 md:hidden flex items-center justify-center border-b-2 border-gray-600 border-dashed">
+      <div className="flex-[0.5] h-24 md:hidden flex items-center justify-center border-b-2 border-line border-dashed">
         <ProjectLogoBox current={currentProject} className="h-16" />
       </div>
 
       {/* Mobile Row 2: Project Images (hidden on md+) */}
-      <div className="flex-[0.9] md:hidden flex items-center justify-center border-b-2 border-gray-600 border-dashed">
+      <div className="flex-[0.9] md:hidden flex items-center justify-center border-b-2 border-line border-dashed">
         <ProjectCarousel
           projectName={projects[currentProject].name}
           accentColor={projects[currentProject].color}
@@ -95,7 +95,7 @@ export default function Projects() {
           borderColor: projects[currentProject].color,
           transition: TRANSITION_THEME
         }}>
-        <div className="flex-1 flex flex-col items-center justify-center py-4 gap-5 border-r-2 border-gray-600 border-dashed">
+        <div className="flex-1 flex flex-col items-center justify-center py-4 gap-5 border-r-2 border-line border-dashed">
           <ProjectLinkField
             current={currentProject}
             kind="website"
@@ -116,13 +116,13 @@ export default function Projects() {
       {/* Mobile Row 4: Title, Description, Timeline with Grid (hidden on md+) */}
       <ProjectInfoPanel
         current={currentProject}
-        panelClassName="md:hidden relative flex-1 flex flex-col py-5 px-6 border-b-2 border-gray-600 border-dashed"
+        panelClassName="md:hidden relative flex-1 flex flex-col py-5 px-6 border-b-2 border-line border-dashed"
         titleBoxClassName="relative flex-[.25] overflow-hidden"
         titleTextClassName="text-xl"
         descBoxClassName="relative flex-[.5] mt-5 overflow-hidden"
         descTextClassName="text-xs sm:text-sm"
         dateBoxClassName="relative h-10"
-        dateTextClassName="text-gray-400 text-xs tracking-widest"
+        dateTextClassName="text-ink-body text-xs tracking-widest"
       />
 
       {/* Web Layout: Row 1 (md+) */}
@@ -131,7 +131,7 @@ export default function Projects() {
           borderColor: projects[currentProject].color,
           transition: TRANSITION_THEME_LONG
         }}>
-        <div className="w-[calc(13/21*100%)] h-full border-r-gray-600 border-r-2 md:border-r-4 border-dashed flex items-center justify-center">
+        <div className="w-[calc(13/21*100%)] h-full border-r-line border-r-2 md:border-r-4 border-dashed flex items-center justify-center">
           <ProjectCarousel
             projectName={projects[currentProject].name}
             accentColor={projects[currentProject].color}
@@ -149,16 +149,16 @@ export default function Projects() {
       </div>
 
       {/* Web Layout: Row 2 (md+) */}
-      <div className="hidden md:flex flex-1 flex-row border-b-2 md:border-b-4 border-gray-600 border-dashed">
+      <div className="hidden md:flex flex-1 flex-row border-b-2 md:border-b-4 border-line border-dashed">
         <ProjectInfoPanel
           current={currentProject}
-          panelClassName="relative w-[calc(13/21*100%)] h-full flex flex-col border-r-gray-600 border-r-2 md:border-r-4 border-dashed py-5 md:py-10 px-8 md:px-12 lg:px-15"
+          panelClassName="relative w-[calc(13/21*100%)] h-full flex flex-col border-r-line border-r-2 md:border-r-4 border-dashed py-5 md:py-10 px-8 md:px-12 lg:px-15"
           titleBoxClassName="relative flex-[.2] overflow-hidden"
           titleTextClassName="text-xl md:text-2xl lg:text-[2.2rem]"
           descBoxClassName="relative flex-[.2] mt-5 overflow-hidden"
           descTextClassName="text-sm md:text-lg lg:text-xl"
           dateBoxClassName="relative h-10 md:h-12 lg:h-14"
-          dateTextClassName="text-gray-400 text-xs md:text-sm lg:text-base tracking-widest"
+          dateTextClassName="text-ink-body text-xs md:text-sm lg:text-base tracking-widest"
         />
 
         <div className="w-[calc(8/21*100%)] h-full flex flex-col">
@@ -168,7 +168,7 @@ export default function Projects() {
               transition: TRANSITION_THEME
             }}>
 
-            <div className="w-full h-full flex flex-5 flex-col border-r-gray-600 border-r-2 md:border-r-4 border-dashed">
+            <div className="w-full h-full flex flex-5 flex-col border-r-line border-r-2 md:border-r-4 border-dashed">
               <div className="w-full h-full flex flex-col items-center justify-center overflow-hidden py-3 md:py-5 gap-3 md:gap-5 border-b-2 md:border-b-4 border-dashed"
                 style={{
                   borderColor: projects[currentProject].color,
@@ -202,7 +202,7 @@ export default function Projects() {
             <ProjectRoleSlides
               current={currentProject}
               boxClassName="h-12 md:h-14 lg:h-16 w-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden"
-              textClassName="text-lg md:text-2xl lg:text-3xl text-gray-400"
+              textClassName="text-lg md:text-2xl lg:text-3xl text-ink-body"
             />
           </div>
         </div>

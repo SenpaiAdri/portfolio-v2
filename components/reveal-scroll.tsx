@@ -9,6 +9,7 @@ import React, {
   useState,
 } from "react";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "./theme-toggle";
 import gsap from "gsap";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 import { useSectionInputs } from "@/hooks/use-section-inputs";
@@ -381,7 +382,7 @@ export default function RevealScroll({
         >
           <div className="h-1 w-full">
             <div
-              className="h-full bg-red-600 transition-[width] duration-1000 ease-in-out"
+              className="h-full bg-brand transition-[width] duration-1000 ease-in-out"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -394,7 +395,7 @@ export default function RevealScroll({
           className="absolute inset-x-0 top-0 z-50"
           inert={!showTopNav}
         >
-          <div className="h-15 bg-surface border-b-2 md:border-b-4 border-dashed border-gray-600 flex items-center justify-center gap-2 sm:gap-4 md:gap-8 pr-4 sm:pr-5 md:pr-10">
+          <div className="h-15 bg-surface border-b-2 md:border-b-4 border-dashed border-line flex items-center justify-center gap-2 sm:gap-4 md:gap-8 pr-4 sm:pr-5 md:pr-10 relative">
             {navItems
               .filter((item) => item.index > 0)
               .map((item) => {
@@ -409,14 +410,17 @@ export default function RevealScroll({
                     className={cn(
                       "whitespace-nowrap text-[0.625rem] tracking-wide sm:text-sm md:text-lg md:tracking-widest transition-colors cursor-pointer",
                       isActive
-                        ? "text-red-600"
-                        : "text-gray-500 hover:text-red-600",
+                        ? "text-brand"
+                        : "text-ink-muted hover:text-brand",
                     )}
                   >
                     [ {item.label.toUpperCase()} ]
                   </RevealScrollTo>
                 );
               })}
+            <div className="absolute right-4 sm:right-5 md:right-10">
+              <ThemeToggle size={22} />
+            </div>
           </div>
         </nav>
 

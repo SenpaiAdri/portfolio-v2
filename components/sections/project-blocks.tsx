@@ -91,12 +91,12 @@ export function ProjectLinkField({
               href={p[kind]}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:underline flex items-center gap-2"
+              className="text-ink-body hover:underline flex items-center gap-2"
             >
               {label}
             </a>
           ) : (
-            <span className="text-gray-600 select-none">{label}</span>
+            <span className="text-ink-faint select-none">{label}</span>
           )
         }
       />
@@ -219,7 +219,7 @@ export function ProjectDescSlides({
         <div className="flex justify-end">
           <span
             className={cn(
-              "text-gray-400 tracking-wide text-right leading-tight max-w-[90%]",
+              "text-ink-body tracking-wide text-right leading-tight max-w-[90%]",
               textClassName
             )}
           >
@@ -310,7 +310,7 @@ export function ProjectInfoPanel({
 }) {
   return (
     <div className={panelClassName}>
-      <BackdropGrid color={projects[current].color} masked />
+      <BackdropGrid color={projects[current].color} />
 
       <ProjectTitleSlides
         current={current}

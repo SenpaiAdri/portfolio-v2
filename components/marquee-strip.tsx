@@ -66,14 +66,14 @@ export function MarqueeStrip({
     <div
       aria-hidden="true"
       className={cn(
-        "flex flex-col border-b-gray-600 border-b-4 border-dashed overflow-hidden relative",
+        "flex flex-col border-b-line border-b-4 border-dashed overflow-hidden relative",
         className
       )}
     >
       <div
-        className="absolute whitespace-nowrap text-[3rem] md:text-[6rem] text-[#18181c] select-none will-change-transform"
+        className="absolute whitespace-nowrap text-[3rem] md:text-[6rem] select-none will-change-transform"
         style={{
-          WebkitTextStroke: "2px #333",
+          WebkitTextStroke: "2px var(--marquee-stroke)",
           color: "transparent",
           left: 0,
           minWidth: "100%",

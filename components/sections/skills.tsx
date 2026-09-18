@@ -13,46 +13,46 @@ export default function Skills() {
       className="bg-surface h-dvh w-screen overflow-hidden"
     >
       <div className="relative h-full w-full">
-        <div className="flex flex-col md:grid h-dvh w-full md:grid-cols-[1fr_1fr_.618fr] md:grid-rows-[0.618fr_1fr_.618fr] text-gray-400">
+        <div className="flex flex-col md:grid h-dvh w-full md:grid-cols-[1fr_1fr_.618fr] md:grid-rows-[0.618fr_1fr_.618fr] text-ink-body">
           {/* Header */}
-          <div className="md:col-span-2 md:row-start-1 md:row-end-2 md:border-b-4 md:border-b-red-600 md:border-r-4 md:border-r-gray-600 md:border-dashed flex flex-[0.1] items-center justify-center gap-4 py-6 px-4 border-b-4 border-b-red-600 border-dashed">
+          <div className="md:col-span-2 md:row-start-1 md:row-end-2 md:border-b-4 md:border-b-brand md:border-r-4 md:border-r-line md:border-dashed flex flex-[0.1] items-center justify-center gap-4 py-6 px-4 border-b-4 border-b-brand border-dashed">
             <h2 className={SECTION_HEADING}>
               Skills
             </h2>
           </div>
 
           {/* Right panel header */}
-          <div className="hidden md:flex col-start-3 row-start-1 row-end-2 border-b-4 border-b-red-600 border-dashed items-center justify-center" aria-hidden="true">
-            <Code2 className="w-6 h-6 md:w-10 md:h-10 text-red-600" />
+          <div className="hidden md:flex col-start-3 row-start-1 row-end-2 border-b-4 border-b-brand border-dashed items-center justify-center" aria-hidden="true">
+            <Code2 className="w-6 h-6 md:w-10 md:h-10 text-brand" />
           </div>
 
           {/* Main content - Skill categories */}
-          <div className="relative md:col-start-1 md:col-end-3 md:row-start-2 md:row-end-4 md:border-b-4 md:border-dashed md:border-r-4 md:border-b-red-600 flex items-center justify-center px-6 py-6 md:px-10 md:py-8 flex-1 md:flex-auto overflow-y-auto">
+          <div className="relative md:col-start-1 md:col-end-3 md:row-start-2 md:row-end-4 md:border-b-4 md:border-dashed md:border-r-4 md:border-b-brand flex items-center justify-center px-6 py-6 md:px-10 md:py-8 flex-1 md:flex-auto overflow-y-auto">
             {/* Grid lines background */}
             <div
               aria-hidden="true"
               className="absolute inset-0 z-0 pointer-events-none select-none"
               style={{
                 backgroundImage: `
-                  linear-gradient(to right, rgba(220,38,38,0.1) 2px, transparent 1px),
-                  linear-gradient(to bottom, rgba(220,38,38,0.1) 2px, transparent 1px)
+                  linear-gradient(to right, var(--brand-grid) 2px, transparent 1px),
+                  linear-gradient(to bottom, var(--brand-grid) 2px, transparent 1px)
                 `,
                 backgroundSize: '60px 60px',
               }}
             />
             {/* Radial Gradient */}
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-center mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] bg-black/20" />
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] bg-shade" />
             <div className="w-full mx-auto md:mx-10">
               {skillCategories.length === 0 ? (
-                <p className="text-center text-gray-500 tracking-widest">No skills added yet.</p>
+                <p className="text-center text-ink-muted tracking-widest">No skills added yet.</p>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-15">
                   {skillCategories.map((cat, i) => (
-                    <div key={i} className="border-l-2 border-b-2 md:border-l-4 md:border-b-4 border-gray-600 border-dashed p-2 md:p-8">
-                      <h3 className="text-red-600 text-sm md:text-base font-bold tracking-[0.3em] uppercase mb-2 ml-2 md:mb-4">{cat.category}</h3>
+                    <div key={i} className="border-l-2 border-b-2 md:border-l-4 md:border-b-4 border-line border-dashed p-2 md:p-8">
+                      <h3 className="text-brand text-sm md:text-base font-bold tracking-[0.3em] uppercase mb-2 ml-2 md:mb-4">{cat.category}</h3>
                       <div className="flex flex-wrap gap-2">
                         {cat.skills.map((skill, j) => (
-                          <span key={j} className="text-gray-300 text-xs px-2 md:px-4 py-1 md:py-2 border md:border-2 border-dashed border-gray-600 ">
+                          <span key={j} className="text-ink-strong text-xs px-2 md:px-4 py-1 md:py-2 border md:border-2 border-dashed border-line ">
                             {skill.name}
                           </span>
                         ))}
@@ -65,9 +65,9 @@ export default function Skills() {
           </div>
 
           {/* Bottom tagline */}
-          <div className="col-span-1 md:col-start-3 md:col-end-3 row-start-3 md:row-start-2 md:row-end-4 flex items-center justify-center px-6 py-4 border-b-4 border-b-red-600 border-t-4 border-t-red-600 border-dashed md:border-t-0 flex-[0.1] md:flex-auto">
-            <h2 className="text-xs lg:text-xl lg:font-black tracking-[0.1em] text-gray-500 uppercase flex items-center justify-center gap-3">
-              <Database className="w-4 h-4 sm:w-8 sm:h-8 text-red-600" aria-hidden="true" />
+          <div className="col-span-1 md:col-start-3 md:col-end-3 row-start-3 md:row-start-2 md:row-end-4 flex items-center justify-center px-6 py-4 border-b-4 border-b-brand border-t-4 border-t-brand border-dashed md:border-t-0 flex-[0.1] md:flex-auto">
+            <h2 className="text-xs lg:text-xl lg:font-black tracking-[0.1em] text-ink-muted uppercase flex items-center justify-center gap-3">
+              <Database className="w-4 h-4 sm:w-8 sm:h-8 text-brand" aria-hidden="true" />
               Knowledge Database
             </h2>
           </div>

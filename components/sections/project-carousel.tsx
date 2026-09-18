@@ -95,7 +95,7 @@ function ProjectCarouselInner({
       <div className="relative w-full h-full flex items-center">
         <button
           onClick={prevButton}
-          className="absolute left-1 z-10 p-1 ml-5 sm:ml-10 rounded-full border-2 border-dashed hover:border-white/70 transition-colors duration-300 ease-in-out delay-300"
+          className="absolute left-1 z-10 p-1 ml-5 sm:ml-10 rounded-full border-2 border-dashed hover:opacity-80 dark:hover:border-white/70 transition-[opacity,border-color] duration-300 ease-in-out delay-300"
           style={{ color: accentColor, borderColor: accentColor }}
           aria-label="Previous slide"
         >
@@ -131,7 +131,7 @@ function ProjectCarouselInner({
 
         <button
           onClick={nextButton}
-          className="absolute right-1 z-10 p-1 mr-5 sm:mr-10 rounded-full border-2 border-dashed hover:border-white/70 transition-colors duration-300 ease-in-out delay-300"
+          className="absolute right-1 z-10 p-1 mr-5 sm:mr-10 rounded-full border-2 border-dashed hover:opacity-80 dark:hover:border-white/70 transition-[opacity,border-color] duration-300 ease-in-out delay-300"
           style={{ color: accentColor, borderColor: accentColor }}
           aria-label="Next slide"
         >
@@ -147,7 +147,7 @@ function ProjectCarouselInner({
             className="w-2 h-2 rounded-full transition-[background-color,transform] duration-300"
             style={{
               backgroundColor:
-                index === selectedIndex ? accentColor : "#4a4a4a",
+                index === selectedIndex ? accentColor : "var(--carousel-dot)",
               transform: index === selectedIndex ? "scale(1.2)" : "scale(1)",
             }}
             aria-label={`Go to slide ${index + 1}`}
@@ -306,7 +306,7 @@ export default function ProjectCarousel({
             type="button"
             onClick={closeModal}
             aria-label="Close image"
-            className="absolute right-6 top-6 z-10 p-2 rounded-full border-2 border-dashed border-gray-600 text-gray-400 hover:border-red-600 hover:text-red-600 focus-visible:border-red-600 focus-visible:text-red-600 transition-colors"
+            className="absolute right-6 top-6 z-10 p-2 rounded-full border-2 border-dashed border-gray-600 text-gray-400 hover:border-brand hover:text-brand focus-visible:border-brand focus-visible:text-brand transition-colors"
           >
             <X className="h-5 w-5" aria-hidden="true" />
           </button>

@@ -21,11 +21,11 @@ type ApiPayload = {
 const VISIBLE_WEEKS = 26;
 
 const LEVEL_STYLES: Record<Level, string> = {
-  0: "bg-white/[0.07]",
-  1: "bg-red-600/15",
-  2: "bg-red-600/40",
-  3: "bg-red-600/70",
-  4: "bg-red-600",
+  0: "bg-track",
+  1: "bg-brand/15",
+  2: "bg-brand/40",
+  3: "bg-brand/70",
+  4: "bg-brand",
 };
 
 /** Deterministic sparse pattern used for loading / offline fallback. */
@@ -102,7 +102,7 @@ function ContributionGrid({
                   "h-2 w-2 rounded-xs lg:h-3 lg:w-3",
                   LEVEL_STYLES[day.level],
                   interactive &&
-                    "transition-transform duration-150 motion-safe:hover:scale-125 motion-safe:hover:ring-1 motion-safe:hover:ring-red-400",
+                    "transition-transform duration-150 motion-safe:hover:scale-125 motion-safe:hover:ring-1 motion-safe:hover:ring-brand-hover",
                 )}
               />
             ),
@@ -164,7 +164,7 @@ export function GithubContributionGraph({ className }: { className?: string }) {
       </div>
       {/* Label row — mirrors the hero "[ PATH ]" treatment */}
       <div className="flex items-baseline gap-3 text-[10px] tracking-widest whitespace-nowrap lg:text-xs">
-        <span className="text-gray-500">
+        <span className="text-ink-muted">
           {data
             ? `${data.total} CONTRIBUTION${data.total === 1 ? "" : "S"} IN THE LAST YEAR`
             : failed

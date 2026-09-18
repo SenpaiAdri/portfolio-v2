@@ -6,15 +6,15 @@ import { sendEmail } from "@/app/actions/send-email";
 import { BackdropGrid } from "@/components/backdrop-grid";
 import { SOCIALS } from "@/components/site-primitives";
 
-const DIVIDER_ROW = "border-b-2 sm:border-b-4 border-b-gray-600 border-dashed";
-const DIVIDER_RIGHT_RED = "md:border-r-4 md:border-r-red-600";
+const DIVIDER_ROW = "border-b-2 sm:border-b-4 border-b-line border-dashed";
+const DIVIDER_RIGHT_RED = "md:border-r-4 md:border-r-brand";
 
 const MAX_CHARS = { name: 50, email: 50, message: 250 };
 
-const INPUT_CLASS = `w-full bg-transparent text-gray-400 text-[10px] md:text-base tracking-[0.2em] uppercase
-              border-0 border-b-2 border-dashed border-red-600
-              focus:outline-none focus:border-red-600 focus:text-red-500
-              placeholder:text-gray-800 py-2 px-0`;
+const INPUT_CLASS = `w-full bg-transparent text-ink-body text-[10px] md:text-base tracking-[0.2em] uppercase
+              border-0 border-b-2 border-dashed border-brand
+              focus:outline-none focus:border-brand focus:text-brand-hover
+              placeholder:text-ink-faint py-2 px-0`;
 
 const ASCII_REGEX = /^[\x20-\x7E\r\n]+$/;
 
@@ -71,7 +71,7 @@ export default function Contact() {
       id="CONTACT"
       role="region"
       aria-label="Contact"
-      className="bg-surface pt-15 h-dvh w-screen overflow-hidden text-gray-400"
+      className="bg-surface pt-15 h-dvh w-screen overflow-hidden text-ink-body"
     >
       <form
         ref={formRef}
@@ -81,15 +81,15 @@ export default function Contact() {
       >
         {/* Mobile top title strip */}
         <div className={`px-6 py-10 ${DIVIDER_ROW} md:hidden`}>
-          <h2 className="text-lg tracking-[0.35em] text-center text-red-600 uppercase">
-            [<span className="text-gray-500">Contact</span>]
+          <h2 className="text-lg tracking-[0.35em] text-center text-brand uppercase">
+            [<span className="text-ink-muted">Contact</span>]
           </h2>
         </div>
 
         {/* Row 1: Name (left) | empty right with vertical divider */}
         <div className={`flex flex-col justify-center sm:justify-between px-6 py-6 ${DIVIDER_ROW} ${DIVIDER_RIGHT_RED} md:py-20 md:px-18 md:row-start-1 md:col-start-1`}>
-          <h2 className="hidden md:block text-2xl tracking-[0.35em] text-red-600 uppercase sm:text-3xl md:text-5xl text-center md:text-left">
-            [<span className="text-gray-500">Contact</span>]
+          <h2 className="hidden md:block text-2xl tracking-[0.35em] text-brand uppercase sm:text-3xl md:text-5xl text-center md:text-left">
+            [<span className="text-ink-muted">Contact</span>]
           </h2>
           <div className="flex flex-col justify-between">
             <FieldLabel htmlFor="contact-name">Name:</FieldLabel>
@@ -149,10 +149,10 @@ export default function Contact() {
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Your portfolio looks great! I’d like to share business with you"
             className="flex-1 min-h-[90px] w-full resize-none bg-transparent
-              text-gray-400 text-[10px] md:text-base tracking-[0.15em] uppercase leading-relaxed
-              border-2 border-dashed border-red-600
-              focus:outline-none focus:border-red-600 focus:text-red-500
-              placeholder:text-gray-800 p-4"
+              text-ink-body text-[10px] md:text-base tracking-[0.15em] uppercase leading-relaxed
+              border-2 border-dashed border-brand
+              focus:outline-none focus:border-brand focus:text-brand-hover
+              placeholder:text-ink-faint p-4"
           />
           <input
             type="text"
@@ -166,8 +166,8 @@ export default function Contact() {
               type="submit"
               disabled={status === "loading" || status === "success"}
               className="group w-full sm:w-1/3 justify-center inline-flex items-center gap-3
-                border-2 border-dashed border-gray-600 py-2 md:py-3
-                text-gray-400 hover:text-red-600 hover:border-red-600
+                border-2 border-dashed border-line py-2 md:py-3
+                text-ink-body hover:text-brand hover:border-brand
                 text-[10px] md:text-sm tracking-[0.3em] uppercase
                 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
@@ -194,12 +194,12 @@ export default function Contact() {
           </div>
           <div aria-live="polite">
             {status === "error" && (
-              <p className="mt-2 text-center text-red-600 text-xs tracking-[0.2em] uppercase">
+              <p className="mt-2 text-center text-brand text-xs tracking-[0.2em] uppercase">
                 {errorMessage}
               </p>
             )}
             {status === "success" && (
-              <p className="mt-2 text-center text-gray-400 text-xs tracking-[0.2em] uppercase">
+              <p className="mt-2 text-center text-ink-body text-xs tracking-[0.2em] uppercase">
                 Message sent successfully — I’ll get back to you soon.
               </p>
             )}
@@ -214,7 +214,7 @@ export default function Contact() {
               href="/RESUME.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="group w-full inline-flex items-center justify-center border-2 border-dashed border-gray-600 py-3 text-gray-400 hover:text-red-600 hover:border-red-600 text-xs font-bold tracking-[0.3em] uppercase transition-colors"
+              className="group w-full inline-flex items-center justify-center border-2 border-dashed border-line py-3 text-ink-body hover:text-brand hover:border-brand text-xs font-bold tracking-[0.3em] uppercase transition-colors"
             >
               [ View Resume ]
             </a>
@@ -241,7 +241,7 @@ function FieldLabel({
   return (
     <label
       htmlFor={htmlFor}
-      className="block mb-3 md:mb-4 text-red-600 text-xs md:text-sm tracking-[0.35em] uppercase"
+      className="block mb-3 md:mb-4 text-brand text-xs md:text-sm tracking-[0.35em] uppercase"
     >
       {children}
     </label>
@@ -255,8 +255,8 @@ function SocialIconList({
 }) {
   const box =
     variant === "desktop"
-      ? "h-15 w-15 md:h-22 md:w-22 border-4 border-gray-600"
-      : "h-12 w-12 border-2 border-gray-600";
+      ? "h-15 w-15 md:h-22 md:w-22 border-4 border-line"
+      : "h-12 w-12 border-2 border-line";
 
   return (
     <ul className="flex items-center">
@@ -267,7 +267,7 @@ function SocialIconList({
             target="_blank"
             rel="noopener noreferrer"
             aria-label={label}
-            className={`group relative inline-flex items-center justify-center border-dashed text-red-600 hover:border-red-600 transition-colors z-10 hover:z-50 focus-visible:border-red-600 focus-visible:z-50 focus:outline-none ${box}`}
+            className={`group relative inline-flex items-center justify-center border-dashed text-brand hover:border-brand transition-colors z-10 hover:z-50 focus-visible:border-brand focus-visible:z-50 focus:outline-none ${box}`}
           >
             <Icon
               className={`transition-transform group-hover:scale-110 ${

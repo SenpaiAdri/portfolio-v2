@@ -4,15 +4,13 @@ import { cn } from "@/lib/utils";
 type BackdropGridProps = {
   /** Accent hex — enables the themed CSS-variable grid with color transition */
   color?: string;
-  /** Include the paired radial vignette overlay (hero / projects panels) */
-  masked?: boolean;
   className?: string;
 };
 
 const STATIC_GRID_STYLE: CSSProperties = {
   backgroundImage: `
-                linear-gradient(to right, rgba(220,38,38,0.1) 2px, transparent 1px),
-                linear-gradient(to bottom, rgba(220,38,38,0.1) 2px, transparent 1px)
+                linear-gradient(to right, var(--brand-grid) 2px, transparent 1px),
+                linear-gradient(to bottom, var(--brand-grid) 2px, transparent 1px)
               `,
   backgroundSize: "60px 60px",
 };
@@ -23,7 +21,6 @@ const STATIC_GRID_STYLE: CSSProperties = {
  */
 export function BackdropGrid({
   color,
-  masked = false,
   className,
 }: BackdropGridProps) {
   const style: CSSProperties = color
@@ -48,9 +45,6 @@ export function BackdropGrid({
         )}
         style={style}
       />
-      {masked && (
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] bg-black/20" />
-      )}
     </>
   );
 }
