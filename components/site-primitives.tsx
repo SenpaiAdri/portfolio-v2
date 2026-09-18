@@ -9,6 +9,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { RevealScrollTo } from "./reveal-scroll";
+import { Button } from "./button";
 
 /**
  * Shared site primitives — single source for the repeated Tailwind
@@ -30,8 +31,7 @@ export const HERO_DIVIDER_BOTTOM_RED =
 export const HERO_DIVIDER_BOTTOM_GRAY =
   "border-b-line border-b-4 border-dashed";
 
-export const HERO_DIVIDER_RIGHT_GRAY =
-  "border-r-line border-r-4 border-dashed";
+export const HERO_DIVIDER_RIGHT_GRAY = "border-r-line border-r-4 border-dashed";
 
 export const HERO_DIVIDER_RIGHT_GRAY_MD =
   "md:border-r-line md:border-r-4 border-dashed";
@@ -117,12 +117,14 @@ export function HeroNavLink({
 }) {
   return (
     <RevealScrollTo to={to} className={HERO_NAV_LINK_CLASS}>
-      {children}
+      <Button underline>
+        {children}
+      </Button>
     </RevealScrollTo>
   );
 }
 
-/** Bare red social icon link with grow-on-hover. */
+/** Bare red social icon link with GSAP draw hover. */
 export function SocialIconLink({
   href,
   label,
@@ -137,7 +139,7 @@ export function SocialIconLink({
   return (
     <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
       <Icon
-        className="text-brand hover:text-brand-hover hover:scale-110 transition-[transform,color] cursor-pointer"
+        className="text-brand hover:text-brand-hover transition-colors cursor-pointer"
         size={size}
         aria-hidden="true"
       />

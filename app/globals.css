@@ -210,6 +210,33 @@ body {
   z-index: 2147483646;
 }
 
+/* Button hover system (Button) — SVG draw is driven by GSAP in
+   components/button.tsx; the text underline draw is pure CSS so it
+   survives reduced-motion. */
+.button-underline {
+  position: relative;
+}
+
+.button-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 100%;
+  background: var(--brand);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.button-hover:hover.button-underline::after,
+.button-hover.is-button-hover.button-underline::after,
+.button-hover.is-button-hover .button-underline::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 /* Honor reduced motion globally for CSS animations/transitions
    (GSAP tweens are gated separately in reveal-scroll.tsx) */
 @media (prefers-reduced-motion: reduce) {

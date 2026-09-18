@@ -3,6 +3,7 @@
 import { ArrowUp } from "lucide-react";
 import { useRef } from "react";
 import { SOCIALS } from "@/components/site-primitives";
+import { Button } from "@/components/button";
 import { useMarqueeLoop } from "@/components/marquee-strip";
 import { BackdropGrid } from "@/components/backdrop-grid";
 
@@ -78,18 +79,20 @@ export default function FooterStrip() {
           <ul className="flex items-center gap-2 md:gap-3">
             {SOCIALS.map(({ href, label, Icon }) => (
               <li key={label}>
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="group inline-flex h-9 w-9 items-center justify-center border-2 border-dashed border-line text-brand transition-colors hover:border-brand hover:text-brand-hover focus-visible:border-brand focus:outline-none md:h-11 md:w-11"
-                >
-                  <Icon
-                    className="h-4 w-4 md:h-5 md:w-5 transition-transform group-hover:scale-110"
-                    aria-hidden="true"
-                  />
-                </a>
+                <Button>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="group inline-flex h-9 w-9 items-center justify-center border-2 border-dashed border-line text-brand transition-colors hover:border-brand hover:text-brand-hover focus-visible:border-brand focus:outline-none md:h-11 md:w-11"
+                  >
+                    <Icon
+                      className="h-4 w-4 md:h-5 md:w-5"
+                      aria-hidden="true"
+                    />
+                  </a>
+                </Button>
               </li>
             ))}
           </ul>

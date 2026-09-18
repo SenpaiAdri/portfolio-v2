@@ -5,6 +5,7 @@ import { useTheme } from "next-themes";
 import { useCallback, useSyncExternalStore } from "react";
 import { flushSync } from "react-dom";
 import { cn } from "@/lib/utils";
+import { Button } from "./button";
 
 type ThemeToggleProps = {
   size?: number;
@@ -56,10 +57,8 @@ export function ThemeToggle({ size = 35, className }: ThemeToggleProps) {
 
       // Keyboard activation reports 0,0 — fall back to the button center.
       const rect = e.currentTarget.getBoundingClientRect();
-      const x =
-        e.clientX || e.clientY ? e.clientX : rect.left + rect.width / 2;
-      const y =
-        e.clientX || e.clientY ? e.clientY : rect.top + rect.height / 2;
+      const x = e.clientX || e.clientY ? e.clientX : rect.left + rect.width / 2;
+      const y = e.clientX || e.clientY ? e.clientY : rect.top + rect.height / 2;
 
       const transition = doc.startViewTransition(() => {
         flushSync(() => setTheme(next));
@@ -102,21 +101,23 @@ export function ThemeToggle({ size = 35, className }: ThemeToggleProps) {
   }
 
   return (
-    <button
-      type="button"
-      onClick={handleToggle}
-      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      title={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      className={cn(
-        "text-brand hover:text-brand-hover hover:scale-110 transition-[transform,color] cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-sm",
-        className,
-      )}
-    >
-      {isDark ? (
-        <Moon size={size} aria-hidden="true" />
-      ) : (
-        <Sun size={size} aria-hidden="true" />
-      )}
-    </button>
+    <Button>
+      <button
+        type="button"
+        onClick={handleToggle}
+        aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+        title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+        className={cn(
+          "text-brand hover:text-brand-hover transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-sm",
+          className,
+        )}
+      >
+        {isDark ? (
+          <Moon size={size} aria-hidden="true" />
+        ) : (
+          <Sun size={size} aria-hidden="true" />
+        )}
+      </button>
+    </Button>
   );
 }

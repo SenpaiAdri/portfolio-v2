@@ -82,8 +82,6 @@ export default function Projects() {
       {/* Mobile Row 2: Project Images (hidden on md+) */}
       <div className="flex-[0.9] md:hidden flex items-center justify-center border-b-2 border-line border-dashed">
         <ProjectCarousel
-          projectName={projects[currentProject].name}
-          accentColor={projects[currentProject].color}
           allImages={projects.map((p) => p.images)}
           currentProject={currentProject}
         />
@@ -133,8 +131,6 @@ export default function Projects() {
         }}>
         <div className="w-[calc(13/21*100%)] h-full border-r-line border-r-2 md:border-r-4 border-dashed flex items-center justify-center">
           <ProjectCarousel
-            projectName={projects[currentProject].name}
-            accentColor={projects[currentProject].color}
             allImages={projects.map((p) => p.images)}
             currentProject={currentProject}
           />

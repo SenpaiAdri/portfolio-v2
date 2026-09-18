@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { projects } from "@/data/projects";
 import { SlideStack } from "@/components/slide-stack";
 import { BackdropGrid } from "@/components/backdrop-grid";
+import { Button } from "@/components/button";
 
 export const TRANSITION_THEME =
   "border-color 0.7s ease-in-out, color 0.7s ease-in-out, transform 0.7s ease-in-out";
@@ -30,7 +31,7 @@ export function ProjectLogoBox({
     <div
       className={cn(
         "relative w-fit max-w-full overflow-hidden flex items-center justify-center",
-        className
+        className,
       )}
     >
       <div className="invisible">
@@ -69,7 +70,7 @@ export function ProjectLinkField({
   const label = kind === "website" ? "Website" : "GitHub";
 
   return (
-    <div className="flex items-center gap-2">
+    <Button as="div" className="flex items-center gap-2">
       <Icon
         size={16}
         className="shrink-0"
@@ -91,16 +92,18 @@ export function ProjectLinkField({
               href={p[kind]}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-ink-body hover:underline flex items-center gap-2"
+              className="text-ink-body flex items-center gap-2"
             >
-              {label}
+              <Button draw={false} underline>
+                {label}
+              </Button>
             </a>
           ) : (
             <span className="text-ink-faint select-none">{label}</span>
           )
         }
       />
-    </div>
+    </Button>
   );
 }
 
@@ -148,7 +151,7 @@ export function ProjectCounter({
             className="absolute inset-0"
             itemClassName={cn(
               "absolute inset-0 flex items-center justify-center font-black",
-              sizeClassName
+              sizeClassName,
             )}
             transition="transform 0.7s ease-in-out"
             getItemProps={(_, index) => ({
@@ -187,7 +190,10 @@ export function ProjectTitleSlides({
       renderItem={(p) => (
         <div className="flex justify-end">
           <span
-            className={cn("tracking-wider text-right font-black", textClassName)}
+            className={cn(
+              "tracking-wider text-right font-black",
+              textClassName,
+            )}
             style={{ color: p.color }}
           >
             {p.name.toUpperCase()}
@@ -220,7 +226,7 @@ export function ProjectDescSlides({
           <span
             className={cn(
               "text-ink-body tracking-wide text-right leading-tight max-w-[90%]",
-              textClassName
+              textClassName,
             )}
           >
             {p.description.toUpperCase()}
@@ -279,7 +285,9 @@ export function ProjectRoleSlides({
       getKey={(p) => p.name}
       className={boxClassName}
       itemClassName="absolute inset-0 flex items-center justify-center"
-      renderItem={(p) => <span className={textClassName}>{p.role.toUpperCase()}</span>}
+      renderItem={(p) => (
+        <span className={textClassName}>{p.role.toUpperCase()}</span>
+      )}
     />
   );
 }

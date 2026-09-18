@@ -1,6 +1,7 @@
 "use client";
 import { Layers } from "lucide-react";
 import { LogoAnimated } from "../LogoAnimated";
+import { Button } from "../button";
 import { cn } from "@/lib/utils";
 import { SECTION_HEADING, SECTION_TAGLINE } from "@/components/site-primitives";
 import { BackdropGrid } from "@/components/backdrop-grid";
@@ -60,8 +61,8 @@ export default function About() {
           <div className="relative md:col-start-3 md:row-start-2 md:row-end-3 md:border-b-4 md:border-b-brand md:border-dashed px-6 py-6 md:px-10 md:py-8 flex items-center border-t-2 border-t-line border-dashed md:border-t-0 flex-1 md:flex-auto">
             <BackdropGrid />
             <p className="text-sm sm:text-base md:text-base text-ink-body leading-snug text-center md:text-left">
-              <span className="text-brand">- </span>This is the version 2 of
-              my portfolio and still working on the design and content. You may
+              <span className="text-brand">- </span>This is the version 2 of my
+              portfolio and still working on the design and content. You may
               check out my v0 portfolio{" "}
               <a
                 href="https://eydriannn-v0.vercel.app"
@@ -69,7 +70,9 @@ export default function About() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                here
+                <Button underline draw={false}>
+                  here
+                </Button>
               </a>
               .
             </p>

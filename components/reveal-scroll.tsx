@@ -10,6 +10,7 @@ import React, {
 } from "react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./theme-toggle";
+import { Button } from "./button";
 import gsap from "gsap";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 import { useSectionInputs } from "@/hooks/use-section-inputs";
@@ -50,7 +51,7 @@ export function useSectionScroll(index: number, handler: SectionScrollHandler) {
 export function useSectionProgress(
   index: number,
   step: number,
-  totalSteps: number
+  totalSteps: number,
 ) {
   const ctx = React.useContext(ScrollContext);
 
@@ -81,7 +82,7 @@ export default function RevealScroll({
     (i: number) => (el: HTMLDivElement | null) => {
       sectionRefs.current[i] = el;
     },
-    []
+    [],
   );
   const stackRef = useRef<HTMLDivElement>(null);
   const navBarRef = useRef<HTMLElement>(null);
@@ -160,7 +161,10 @@ export default function RevealScroll({
       const inY = dir === "down" ? "100%" : "-100%";
 
       const tl = gsap.timeline({
-        defaults: { duration: SECTION_TRANSITION_MS / 1000, ease: SECTION_EASE },
+        defaults: {
+          duration: SECTION_TRANSITION_MS / 1000,
+          ease: SECTION_EASE,
+        },
         onComplete: () => {
           snapRest();
           isAnimatingRef.current = false;
@@ -177,11 +181,11 @@ export default function RevealScroll({
           navBarRef.current,
           { y: showBar ? "-100%" : "0%" },
           { y: showBar ? "0%" : "-100%" },
-          0
+          0,
         );
       }
     },
-    [sectionCount, prefersReducedMotion, snapRest]
+    [sectionCount, prefersReducedMotion, snapRest],
   );
 
   const goNextSection = useCallback(() => {
@@ -214,7 +218,7 @@ export default function RevealScroll({
         onComplete: () => {
           isAnimatingRef.current = false;
         },
-      }
+      },
     );
   }, [prefersReducedMotion]);
 
@@ -240,9 +244,12 @@ export default function RevealScroll({
     });
   }, [prefersReducedMotion]);
 
-  const registerHandler = useCallback((index: number, handler: SectionScrollHandler) => {
-    handlersRef.current[index] = handler;
-  }, []);
+  const registerHandler = useCallback(
+    (index: number, handler: SectionScrollHandler) => {
+      handlersRef.current[index] = handler;
+    },
+    [],
+  );
 
   const unregisterHandler = useCallback((index: number) => {
     delete handlersRef.current[index];
@@ -255,16 +262,13 @@ export default function RevealScroll({
 
       setSectionProgressMap((prev) => {
         const existing = prev[index];
-        if (
-          existing?.step === safeStep &&
-          existing?.totalSteps === safeTotal
-        ) {
+        if (existing?.step === safeStep && existing?.totalSteps === safeTotal) {
           return prev;
         }
         return { ...prev, [index]: { step: safeStep, totalSteps: safeTotal } };
       });
     },
-    []
+    [],
   );
 
   const clearSectionProgress = useCallback((index: number) => {
@@ -296,7 +300,7 @@ export default function RevealScroll({
         goPrevSection();
       }
     },
-    [sectionCount, goNextSection, goPrevSection, openFooter, closeFooter]
+    [sectionCount, goNextSection, goPrevSection, openFooter, closeFooter],
   );
 
   // Lock body scroll so only section reveal is used
@@ -321,12 +325,12 @@ export default function RevealScroll({
     };
     window.addEventListener(
       "reveal-scroll-to" as keyof WindowEventMap,
-      handler as EventListener
+      handler as EventListener,
     );
     return () =>
       window.removeEventListener(
         "reveal-scroll-to" as keyof WindowEventMap,
-        handler as EventListener
+        handler as EventListener,
       );
   }, [goToSection]);
 
@@ -344,7 +348,7 @@ export default function RevealScroll({
       setSectionProgress,
       clearSectionProgress,
       currentIndex,
-    ]
+    ],
   );
 
   const sectionSteps = useMemo(
@@ -353,7 +357,7 @@ export default function RevealScroll({
         const sectionProgress = sectionProgressMap[index];
         return sectionProgress ? sectionProgress.totalSteps : 1;
       }),
-    [sectionCount, sectionProgressMap]
+    [sectionCount, sectionProgressMap],
   );
 
   const totalPositions = sectionSteps.reduce((sum, value) => sum + value, 0);
@@ -362,11 +366,13 @@ export default function RevealScroll({
     .reduce((sum, value) => sum + value, 0);
   const currentSectionStep = Math.min(
     Math.max(sectionProgressMap[currentIndex]?.step ?? 0, 0),
-    sectionSteps[currentIndex] - 1
+    sectionSteps[currentIndex] - 1,
   );
   const currentVirtualPosition = positionBeforeCurrent + currentSectionStep;
   const progressPercent =
-    totalPositions > 1 ? (currentVirtualPosition / (totalPositions - 1)) * 100 : 0;
+    totalPositions > 1
+      ? (currentVirtualPosition / (totalPositions - 1)) * 100
+      : 0;
   const showTopNav = currentIndex > 0 && navItems.length > 0;
 
   return (
@@ -376,6 +382,7 @@ export default function RevealScroll({
         className="bg-surface fixed inset-0 overflow-hidden touch-none"
         style={{ touchAction: "none" }}
       >
+        {/* Progress bar */}
         <div
           className="pointer-events-none absolute inset-x-0 top-0 z-100"
           aria-hidden="true"
@@ -414,11 +421,13 @@ export default function RevealScroll({
                         : "text-ink-muted hover:text-brand",
                     )}
                   >
-                    [ {item.label.toUpperCase()} ]
+                    <Button underline>
+                      [ {item.label.toUpperCase()} ]
+                    </Button>
                   </RevealScrollTo>
                 );
               })}
-            <div className="absolute right-4 sm:right-5 md:right-10">
+            <div className="absolute right-4 sm:right-5 md:right-10 pt-2">
               <ThemeToggle size={22} />
             </div>
           </div>
@@ -469,7 +478,7 @@ export function RevealScrollTo({
 } & Omit<React.HTMLAttributes<HTMLElement>, "onClick" | "onKeyDown">) {
   const go = useCallback(() => {
     window.dispatchEvent(
-      new CustomEvent("reveal-scroll-to", { detail: { index: to } })
+      new CustomEvent("reveal-scroll-to", { detail: { index: to } }),
     );
   }, [to]);
   return (

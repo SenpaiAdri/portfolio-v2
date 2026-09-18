@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils";
 import { MarqueeStrip } from "@/components/marquee-strip";
 import { BackdropGrid } from "@/components/backdrop-grid";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/button";
 import {
   INTRO_DURATION_S,
   INTRO_REDUCED_DURATION_S,
@@ -153,21 +154,23 @@ export default function Hero() {
                   HERO_DIVIDER_RIGHT_GRAY,
                 )}
               >
-                <div
+                <Button
+                  as="div"
                   className={cn(
                     "min-h-0 flex items-center justify-center",
                     HERO_DIVIDER_BOTTOM_RED,
                   )}
                 >
                   <ThemeToggle />
-                </div>
+                </Button>
                 {HERO_SOCIALS.map(({ href, label, Icon }) => (
-                  <div
+                  <Button
+                    as="div"
                     key={label}
                     className="min-h-0 flex items-center justify-center"
                   >
                     <SocialIconLink href={href} label={label} Icon={Icon} />
-                  </div>
+                  </Button>
                 ))}
               </div>
 

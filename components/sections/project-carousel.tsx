@@ -6,29 +6,30 @@ import Autoplay, { type AutoplayType } from "embla-carousel-autoplay";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
+import { Button } from "@/components/button";
+import { projects } from "@/data/projects";
 
 interface ProjectCarouselProps {
-  projectName: string;
-  accentColor: string;
   allImages: string[][];
   currentProject: number;
 }
 
 function ProjectCarouselInner({
   images,
-  projectName,
-  accentColor,
   projectIndex,
   currentProject,
   onImageClick,
 }: {
   images: string[];
-  projectName: string;
-  accentColor: string;
   projectIndex: number;
   currentProject: number;
-  onImageClick: (src: string) => void;
+  onImageClick: (src: string, projectName: string) => void;
 }) {
+  // Each slide keeps its own project's color/name so the outgoing slide
+  // doesn't snap to the incoming project's accent mid-transition.
+  const project = projects[projectIndex];
+  const accentColor = project?.color ?? "currentColor";
+  const projectName = project?.name ?? "";
   const isActive = projectIndex === currentProject;
   const prefersReducedMotion = usePrefersReducedMotion();
   const autoplayPlugin = useMemo(
@@ -42,11 +43,11 @@ function ProjectCarouselInner({
             }),
           ]
         : [],
-    [isActive, prefersReducedMotion]
+    [isActive, prefersReducedMotion],
   );
   const [emblaRef, emblaApi] = useEmbaCarousel(
     { loop: true, duration: 40 },
-    autoplayPlugin
+    autoplayPlugin,
   );
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -99,29 +100,26 @@ function ProjectCarouselInner({
           style={{ color: accentColor, borderColor: accentColor }}
           aria-label="Previous slide"
         >
-          <ChevronLeft className="w-[15px] h-[15px] sm:w-[20px] sm:h-[20px]" />
+          <ChevronLeft className="-translate-x-px w-[15px] h-[15px] sm:w-[20px] sm:h-[20px]" />
         </button>
 
-        <div
-          className="embla w-full h-full overflow-hidden"
-          ref={emblaRef}
-        >
+        <div className="embla w-full h-full overflow-hidden" ref={emblaRef}>
           <div className="embla__container w-full h-full flex">
             {images.map((src, imgIndex) => (
               <button
                 key={imgIndex}
                 type="button"
-                onClick={() => onImageClick(src)}
+                onClick={() => onImageClick(src, projectName)}
                 aria-label={`View full size: ${projectName} screenshot ${imgIndex + 1}`}
-                className="embla__slide w-full h-full flex-[0_0_100%] min-w-0 flex items-center justify-center p-2 cursor-pointer"
+                className="embla__slide group w-full h-full flex-[0_0_100%] min-w-0 flex items-center justify-center p-2 cursor-pointer"
               >
-                <span className="relative w-full h-full max-w-[90%] max-h-[90%] rounded-lg block">
+                <span className="relative w-full h-full max-w-[90%] max-h-[90%] rounded-lg block overflow-hidden">
                   <Image
                     src={src}
                     alt={`${projectName} screenshot ${imgIndex + 1}`}
                     fill
                     sizes="(max-width: 768px) 100vw, 62vw"
-                    className="object-contain rounded-lg"
+                    className="object-contain rounded-lg transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                   />
                 </span>
               </button>
@@ -135,7 +133,7 @@ function ProjectCarouselInner({
           style={{ color: accentColor, borderColor: accentColor }}
           aria-label="Next slide"
         >
-          <ChevronRight className="w-[15px] h-[15px] sm:w-[20px] sm:h-[20px]" />
+          <ChevronRight className="translate-x-px w-[15px] h-[15px] sm:w-[20px] sm:h-[20px]" />
         </button>
       </div>
 
@@ -160,19 +158,20 @@ function ProjectCarouselInner({
 
 function useEmbaCarousel(
   options: Parameters<typeof useEmblaCarousel>[0],
-  plugins: Parameters<typeof useEmblaCarousel>[1]
+  plugins: Parameters<typeof useEmblaCarousel>[1],
 ) {
   const [emblaRef, emblaApi] = useEmblaCarousel(options, plugins);
   return [emblaRef, emblaApi] as const;
 }
 
 export default function ProjectCarousel({
-  projectName,
-  accentColor,
   allImages,
   currentProject,
 }: ProjectCarouselProps) {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<{
+    src: string;
+    projectName: string;
+  } | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const focusReturnRef = useRef<HTMLElement | null>(null);
@@ -181,9 +180,9 @@ export default function ProjectCarousel({
     setSelectedImage(null);
   }, []);
 
-  const handleImageClick = (src: string) => {
+  const handleImageClick = (src: string, projectName: string) => {
     focusReturnRef.current = document.activeElement as HTMLElement | null;
-    setSelectedImage(src);
+    setSelectedImage({ src, projectName });
   };
 
   useEffect(() => {
@@ -205,8 +204,8 @@ export default function ProjectCarousel({
       if (e.key !== "Tab") return;
       const focusables = Array.from(
         modal.querySelectorAll<HTMLElement>(
-          'button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        )
+          'button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        ),
       ).filter((el) => el.offsetParent !== null);
       if (focusables.length === 0) return;
 
@@ -265,8 +264,6 @@ export default function ProjectCarousel({
         >
           <ProjectCarouselInner
             images={projectImages}
-            projectName={projectName}
-            accentColor={accentColor}
             projectIndex={projectIndex}
             currentProject={currentProject}
             onImageClick={handleImageClick}
@@ -279,7 +276,7 @@ export default function ProjectCarousel({
           ref={modalRef}
           role="dialog"
           aria-modal="true"
-          aria-label={`${projectName} full-size screenshot`}
+          aria-label={`${selectedImage.projectName} full-size screenshot`}
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 cursor-zoom-out"
           onClick={closeModal}
           onKeyDown={(e) => {
@@ -293,8 +290,8 @@ export default function ProjectCarousel({
             onClick={(e) => e.stopPropagation()}
           >
             <Image
-              src={selectedImage}
-              alt={projectName}
+              src={selectedImage.src}
+              alt={selectedImage.projectName}
               fill
               className="object-contain"
               priority
@@ -308,7 +305,9 @@ export default function ProjectCarousel({
             aria-label="Close image"
             className="absolute right-6 top-6 z-10 p-2 rounded-full border-2 border-dashed border-gray-600 text-gray-400 hover:border-brand hover:text-brand focus-visible:border-brand focus-visible:text-brand transition-colors"
           >
-            <X className="h-5 w-5" aria-hidden="true" />
+            <Button>
+              <X className="h-5 w-5" aria-hidden="true" />
+            </Button>
           </button>
         </div>
       )}
