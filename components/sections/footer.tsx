@@ -4,6 +4,7 @@ import { ArrowUp } from "lucide-react";
 import { useRef } from "react";
 import { SOCIALS } from "@/components/site-primitives";
 import { useMarqueeLoop } from "@/components/marquee-strip";
+import { BackdropGrid } from "@/components/backdrop-grid";
 
 type TitleBlockRow = {
   label: string;
@@ -29,26 +30,16 @@ export default function FooterStrip() {
     <footer className="relative flex h-full w-screen flex-col overflow-hidden bg-surface">
       <h2 className="sr-only">Footer — index sheet</h2>
 
-      {/* Grid lines background */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 select-none"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, var(--brand-grid-soft) 2px, transparent 2px),
-            linear-gradient(to bottom, var(--brand-grid-soft) 2px, transparent 2px)
-          `,
-          backgroundSize: "60px 60px",
-        }}
-      />
-
       {/* Top strip — name marquee */}
       <div className="relative z-10 flex items-center overflow-hidden border-b-2 md:border-b-4 border-dashed border-line py-2.5 md:py-4">
         <div className="relative whitespace-nowrap text-[10px] md:text-xs tracking-[0.35em] uppercase text-brand select-none will-change-transform w-full">
           <span ref={firstTextRef} className="inline-block">
             {"ADRIAN ADRIAN ".repeat(10)}
           </span>
-          <span ref={secondTextRef} className="absolute top-0 left-0 inline-block">
+          <span
+            ref={secondTextRef}
+            className="absolute top-0 left-0 inline-block"
+          >
             {"ADRIAN ADRIAN ".repeat(10)}
           </span>
         </div>
@@ -56,6 +47,8 @@ export default function FooterStrip() {
 
       {/* Middle: info rows | channels */}
       <div className="relative z-10 grid flex-1 min-h-0 grid-cols-1 md:grid-cols-[13fr_8fr]">
+        <BackdropGrid />
+
         <dl className="flex flex-col justify-center px-6 py-2 md:px-12 md:py-6 md:border-r-4 md:border-dashed md:border-r-brand lg:px-15">
           {TITLE_BLOCK_ROWS.map((row) => (
             <div
