@@ -194,6 +194,22 @@ body {
   color: #0a0a0a;
 }
 
+/* Theme toggle circle reveal (View Transitions API).
+   New theme wipes in as an expanding circle from the toggle button. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2147483646;
+}
+
 /* Honor reduced motion globally for CSS animations/transitions
    (GSAP tweens are gated separately in reveal-scroll.tsx) */
 @media (prefers-reduced-motion: reduce) {

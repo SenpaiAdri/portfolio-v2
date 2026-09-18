@@ -2,12 +2,21 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useSyncExternalStore } from "react";
+import { useCallback, useSyncExternalStore } from "react";
+import { flushSync } from "react-dom";
 import { cn } from "@/lib/utils";
 
 type ThemeToggleProps = {
   size?: number;
   className?: string;
+};
+
+type ViewTransitionDocument = Document & {
+  startViewTransition?: (callback: () => void) => {
+    ready: Promise<void>;
+    finished: Promise<void>;
+    updateCallbackDone: Promise<void>;
+  };
 };
 
 /**
@@ -28,6 +37,60 @@ export function ThemeToggle({ size = 35, className }: ThemeToggleProps) {
   );
 
   // Deterministic placeholder (same footprint) until hydrated.
+  const current = theme ?? resolvedTheme ?? "dark";
+  const isDark = current === "dark";
+
+  const handleToggle = useCallback(
+    async (e: React.MouseEvent<HTMLButtonElement>) => {
+      const next = isDark ? "light" : "dark";
+      const doc = document as ViewTransitionDocument;
+
+      // Fall back to an instant swap without the API or for reduced motion.
+      if (
+        !doc.startViewTransition ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        setTheme(next);
+        return;
+      }
+
+      // Keyboard activation reports 0,0 — fall back to the button center.
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x =
+        e.clientX || e.clientY ? e.clientX : rect.left + rect.width / 2;
+      const y =
+        e.clientX || e.clientY ? e.clientY : rect.top + rect.height / 2;
+
+      const transition = doc.startViewTransition(() => {
+        flushSync(() => setTheme(next));
+      });
+
+      try {
+        await transition.ready;
+        const endRadius = Math.hypot(
+          Math.max(x, window.innerWidth - x),
+          Math.max(y, window.innerHeight - y),
+        );
+        document.documentElement.animate(
+          {
+            clipPath: [
+              `circle(0px at ${x}px ${y}px)`,
+              `circle(${endRadius}px at ${x}px ${y}px)`,
+            ],
+          },
+          {
+            duration: 700,
+            easing: "ease-out",
+            pseudoElement: "::view-transition-new(root)",
+          },
+        );
+      } catch {
+        // Transition aborted — theme is already applied, nothing to do.
+      }
+    },
+    [isDark, setTheme],
+  );
+
   if (!mounted) {
     return (
       <span
@@ -38,13 +101,10 @@ export function ThemeToggle({ size = 35, className }: ThemeToggleProps) {
     );
   }
 
-  const current = theme ?? resolvedTheme ?? "dark";
-  const isDark = current === "dark";
-
   return (
     <button
       type="button"
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={handleToggle}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       title={isDark ? "Switch to light mode" : "Switch to dark mode"}
       className={cn(
