@@ -148,10 +148,10 @@ export default function Projects() {
       <div className="hidden md:flex flex-1 flex-row border-b-2 md:border-b-4 border-line border-dashed">
         <ProjectInfoPanel
           current={currentProject}
-          panelClassName="relative w-[calc(13/21*100%)] h-full flex flex-col border-r-line border-r-2 md:border-r-4 border-dashed py-5 md:py-10 px-8 md:px-12 lg:px-15"
-          titleBoxClassName="relative flex-[.2] overflow-hidden"
+          panelClassName="relative w-[calc(13/21*100%)] h-full flex flex-col border-r-line border-r-2 md:border-r-4 border-dashed py-5 md:py-10 px-5 lg:px-15"
+          titleBoxClassName="relative flex-[.16] overflow-hidden"
           titleTextClassName="text-xl md:text-2xl lg:text-[2.2rem]"
-          descBoxClassName="relative flex-[.2] mt-5 overflow-hidden"
+          descBoxClassName="relative flex-[.3] lg:flex-[.2] mt-10 overflow-hidden"
           descTextClassName="text-sm md:text-lg lg:text-xl"
           dateBoxClassName="relative h-10 md:h-12 lg:h-14"
           dateTextClassName="text-ink-body text-xs md:text-sm lg:text-base tracking-widest"
@@ -198,7 +198,7 @@ export default function Projects() {
             <ProjectRoleSlides
               current={currentProject}
               boxClassName="h-12 md:h-14 lg:h-16 w-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden"
-              textClassName="text-lg md:text-2xl lg:text-3xl text-ink-body"
+              textClassName="text-lg md:text-2xl lg:text-3xl text-center text-ink-body"
             />
           </div>
         </div>

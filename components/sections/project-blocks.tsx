@@ -267,7 +267,7 @@ export function ProjectDescSlides({
         <div className="flex justify-end">
           <span
             className={cn(
-              "text-ink-body tracking-wide text-right leading-tight max-w-[90%]",
+              "text-ink-body tracking-wide text-right leading-tight ",
               textClassName,
             )}
           >

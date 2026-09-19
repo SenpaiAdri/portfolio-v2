@@ -13,7 +13,7 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    name: "Pasada [Driver Side]",
+    name: "Pasada [Driver]",
     description:
       "Ride hailing and fleet management platform for modernized jeepney services",
     logo: "/pasada_driver/pasada_driver_logo.svg",
