@@ -37,7 +37,6 @@ export const skillCategories: SkillCategory[] = [
       { name: "Firebase" },
       { name: "Cloudflare" },
       { name: "GitHub Actions" },
-      { name: "Docker" },
     ],
     
   },

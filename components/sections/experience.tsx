@@ -120,7 +120,7 @@ export default function Experience() {
                   {skillCategories.map((cat, i) => (
                     <div
                       key={i}
-                      className="w-full border-l-2 border-b-2 md:border-l-4 md:border-b-4 border-line border-dashed p-4 lg:pl-6 lg:pb-6 rounded"
+                      className="w-full border-l-2 border-b-2 md:border-l-4 md:border-b-4 border-line border-dashed pl-4 pb-4 lg:pl-8 lg:pb-6 rounded"
                     >
                       <h3 className="text-brand text-xs font-bold tracking-[0.3em] uppercase mb-2 ml-2 lg:mb-4">
                         {cat.category}

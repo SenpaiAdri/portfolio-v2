@@ -57,7 +57,7 @@ export const HERO_NAV_LINK_CLASS =
 
 /** Centered section heading, e.g. Experience / Skills titles. */
 export const SECTION_HEADING =
-  "text-sm lg:text-2xl lg:font-black tracking-[0.5em] text-ink-muted uppercase text-center";
+  "text-base sm:text-xl lg:text-2xl lg:font-black tracking-[0.5em] text-ink-muted uppercase text-center";
 
 /** Muted icon tagline row, e.g. "Work History" / "Full Stack Developer". */
 export const SECTION_TAGLINE =
