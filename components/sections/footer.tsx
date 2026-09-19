@@ -35,13 +35,13 @@ export default function FooterStrip() {
       <div className="relative z-10 flex items-center overflow-hidden border-b-2 md:border-b-4 border-dashed border-line py-2.5 md:py-4">
         <div className="relative whitespace-nowrap text-[10px] md:text-xs tracking-[0.35em] uppercase text-brand select-none will-change-transform w-full">
           <span ref={firstTextRef} className="inline-block">
-            {"ADRIAN ADRIAN ".repeat(10)}
+            {"ADRIAN ADRIAN\u00A0".repeat(10)}
           </span>
           <span
             ref={secondTextRef}
             className="absolute top-0 left-0 inline-block"
           >
-            {"ADRIAN ADRIAN ".repeat(10)}
+            {"ADRIAN ADRIAN\u00A0".repeat(10)}
           </span>
         </div>
       </div>

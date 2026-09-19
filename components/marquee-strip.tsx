@@ -48,7 +48,7 @@ export function useMarqueeLoop(
  * For custom presentations, use `useMarqueeLoop` directly.
  */
 export function MarqueeStrip({
-  text = "ADRIAN ",
+  text = "ADRIAN\u00A0",
   repeat = 4,
   className,
 }: {
