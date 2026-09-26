@@ -54,7 +54,9 @@ export default function Experience() {
           <div
             className="hidden md:flex md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-2 border-b-4 border-b-brand border-dashed items-center justify-center"
             aria-hidden="true"
-          />
+          >
+            <h2 className={SECTION_HEADING}> Skills </h2>
+          </div>
 
           {/* Main content - Experience entries */}
           <div
