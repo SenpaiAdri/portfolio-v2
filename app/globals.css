@@ -43,7 +43,7 @@ body {
   --track: rgba(0, 0, 0, 0.1); /* contribution graph level-0 swatch */
   --brand: #9b7c39; /* site accent */
   --brand-hover: #9b7c39; /* accent hover */
-  --brand-grid: rgba(220, 38, 38, 0.1); /* red grid backdrops */
+  --brand-grid: rgba(220, 38, 38, 0.05); /* red grid backdrops */
   --brand-grid-soft: rgba(220, 38, 38, 0.08); /* faint red grid (footer) */
   --background: oklch(0.97 0.02 95);
   --foreground: oklch(0.3 0.025 70);
@@ -96,7 +96,7 @@ body {
   --track: rgba(255, 255, 255, 0.07); /* = white/[0.07] */
   --brand: #dc2626;
   --brand-hover: #ef4444;
-  --brand-grid: rgba(220, 38, 38, 0.1);
+  --brand-grid: rgba(220, 38, 38, 0.05);
   --brand-grid-soft: rgba(220, 38, 38, 0.08);
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
