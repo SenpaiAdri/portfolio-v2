@@ -36,7 +36,7 @@ export const projects: Project[] = [
     date: "September 2024 - November 2025",
     role: "Mobile Developer",
     color: "#00CC58",
-    website: "https://www.pasadaapp.com/",
+    website: "", // https://www.pasadaapp.com/
     github: "https://github.com/ultraelectronica/Pasada_Driver",
   },
   {
