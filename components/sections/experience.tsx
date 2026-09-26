@@ -81,16 +81,16 @@ export default function Experience() {
                         <h3
                           className="text-base md:text-lg text-brand font-bold tracking-[0.2em] uppercase"
                         >
-                          {exp.company}
+                          {exp.role}
                         </h3>
-                        <span className="hidden md:block text-ink-body text-xs md:text-sm tracking-wider uppercase">
+                        <span className="hidden md:block text-ink-body text-xs md:text-sm tracking-widest uppercase">
                           {exp.date}
                         </span>
                       </div>
                       <p className="text-ink-body text-sm md:text-base mb-2 uppercase">
-                        {exp.role}
+                        {exp.company}
                       </p>
-                      <span className="md:hidden text-ink-body text-xs md:text-sm tracking-wider uppercase">
+                      <span className="md:hidden text-ink-body text-xs md:text-sm tracking-widest uppercase">
                         {exp.date}
                       </span>
                     </div>
