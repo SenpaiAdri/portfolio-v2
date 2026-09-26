@@ -75,13 +75,11 @@ export default function Experience() {
                   {experiences.map((exp, i) => (
                     <div
                       key={i}
-                      className="border-l-2 md:border-l-4 border-b-2 md:border-b-4 border-line border-dashed p-4 md:p-6"
-                      style={{ borderColor: exp.color + "80" }}
+                      className="border-l-2 border-brand md:border-l-4 border-b-2 md:border-b-4 border-dashed p-4 md:p-6"
                     >
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-4">
                         <h3
-                          className="text-base md:text-lg font-bold tracking-[0.2em] uppercase"
-                          style={{ color: exp.color }}
+                          className="text-base md:text-lg text-brand font-bold tracking-[0.2em] uppercase"
                         >
                           {exp.company}
                         </h3>
