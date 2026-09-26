@@ -225,7 +225,7 @@ const of = p.dataset.origFill ?? "";
   return (
     <div
       ref={containerRef}
-      className={`flex items-center justify-center ${className ?? ""}`}
+      className={`flex items-center justify-center z-50 ${className ?? ""}`}
       style={{ width: currentWidth, height: currentHeight }}
       role="img"
       aria-label="profile logo"
