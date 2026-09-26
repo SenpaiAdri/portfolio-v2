@@ -114,7 +114,7 @@ export function ProjectLinkField({
   return (
     <Button as="div" className="flex items-center gap-2">
       <Icon
-        size={16}
+        size={25}
         className="shrink-0"
         style={{
           color: projects[current].color,
@@ -141,7 +141,7 @@ export function ProjectLinkField({
               </Button>
             </a>
           ) : (
-            <span className="text-ink-faint select-none">{label}</span>
+            <span className="text-ink-faint line-through decoration-2 select-none">{label}</span>
           )
         }
       />
