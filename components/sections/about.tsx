@@ -37,14 +37,14 @@ export default function About() {
             aria-hidden="true"
           >
             <LogoAnimated width={{ base: 150, md: 200, lg: 250 }} />
-            <BackdropGrid />
+            {/* <BackdropGrid /> */}
           </div>
 
           {/* MOBILE: About section */}
           {/* DESKTOP: About text center */}
           <div className="relative md:col-start-2 md:row-start-2 md:row-end-3 md:border-b-4 md:border-b-brand md:border-r-4 md:border-r-line md:border-dashed px-6 py-6 md:px-10 md:py-8 flex items-center flex-1 md:flex-auto">
             <div className="space-y-3 max-w-xl mx-auto md:ml-auto md:mr-0 text-center md:text-right">
-              <BackdropGrid />
+              {/* <BackdropGrid /> */}
               <p className="text-xl sm:text-2xl md:text-2xl tracking-[0.25em] text-brand uppercase">
                 -- [About]
               </p>
@@ -58,12 +58,10 @@ export default function About() {
 
           {/* MOBILE: Right panel text */}
           {/* DESKTOP: Row 2 - Right panel */}
-          <div className="relative md:col-start-3 md:row-start-2 md:row-end-3 md:border-b-4 md:border-b-brand md:border-dashed px-6 py-6 md:px-10 md:py-8 flex items-center border-t-2 border-t-line border-dashed md:border-t-0 flex-1 md:flex-auto">
-            <BackdropGrid />
+          <div className="relative md:col-start-3 md:row-start-2 md:row-end-3 md:border-b-4 md:border-b-brand md:border-dashed px-6 py-6 md:px-10 md:py-8 flex items-center border-t-2 border-t-line border-dashed md:border-t-0 flex-1 md:flex-auto z-10">
+            {/* <BackdropGrid /> */}
             <p className="text-sm sm:text-base md:text-base text-ink-body leading-snug text-center md:text-left">
-              <span className="text-brand">- </span>This is the version 2 of my
-              portfolio and still working on the design and content. You may
-              check out my v0 portfolio{" "}
+              <span className="text-brand">- </span> Check out my previous portfolio {" "}
               <a
                 href="https://eydriannn-v0.vercel.app"
                 className="text-brand underline decoration-dashed underline-offset-4 hover:text-brand-hover"
@@ -76,6 +74,10 @@ export default function About() {
               </a>
               .
             </p>
+          </div>
+
+          <div className="relative md:col-start-1 md:col-end-4 md:row-start-2 md:row-end-3">
+            <BackdropGrid />
           </div>
 
           {/* MOBILE: Hidden | DESKTOP: Bottom-left empty area (only first column) */}
