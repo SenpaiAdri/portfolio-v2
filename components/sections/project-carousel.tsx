@@ -37,7 +37,7 @@ function ProjectCarouselInner({
       isActive && !prefersReducedMotion
         ? [
             Autoplay({
-              delay: 3000,
+              delay: 4000,
               stopOnInteraction: false,
               stopOnMouseEnter: false,
             }),
@@ -303,7 +303,7 @@ export default function ProjectCarousel({
             type="button"
             onClick={closeModal}
             aria-label="Close image"
-            className="absolute right-6 top-6 z-10 p-2 rounded-full border-2 border-dashed border-gray-600 text-gray-400 hover:border-brand hover:text-brand focus-visible:border-brand focus-visible:text-brand transition-colors"
+            className="absolute flex h-10 w-10 items-center justify-center right-8 top-20 z-10 p-4 rounded-full border-2 border-dashed border-gray-600 text-gray-400 hover:border-brand hover:text-brand focus-visible:border-brand focus-visible:text-brand transition-colors"
           >
             <Button>
               <X className="h-5 w-5" aria-hidden="true" />
