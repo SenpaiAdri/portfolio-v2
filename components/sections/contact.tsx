@@ -80,6 +80,9 @@ export default function Contact() {
         className="relative h-full w-full grid grid-cols-1 md:grid-cols-[13fr_8fr]
           md:grid-rows-[5fr_3fr_5fr]"
       >
+        <div className="hidden md:block relative md:col-start-2 md:row-start-1 md:row-end-4">
+          <BackdropGrid />
+        </div>
         {/* Mobile top title strip */}
         <div className={`px-6 py-10 ${DIVIDER_ROW} md:hidden`}>
           <h2 className="text-lg tracking-[0.35em] text-center text-brand uppercase">
@@ -135,12 +138,12 @@ export default function Contact() {
           />
         </div>
         <div className="relative hidden md:flex md:row-start-1 md:col-start-2">
-          <BackdropGrid />
+          {/* <BackdropGrid /> */}
         </div>
         <div
           className={`relative hidden md:flex px-6 md:px-10 py-6 md:py-8 ${DIVIDER_ROW} items-center justify-center md:row-start-2 md:col-start-2`}
         >
-          <BackdropGrid />
+          {/* <BackdropGrid /> */}
           <SocialIconList variant="desktop" />
         </div>
 
@@ -219,7 +222,7 @@ export default function Contact() {
         <div
           className={`relative hidden md:flex px-6 md:px-10 py-6 md:py-8 ${DIVIDER_ROW} items-center justify-center md:row-start-3 md:col-start-2`}
         >
-          <BackdropGrid />
+          {/* <BackdropGrid /> */}
           <div className="w-full max-w-xs flex flex-col items-center gap-4">
             <a
               href="/RESUME.pdf"
