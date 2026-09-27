@@ -25,7 +25,7 @@ export function BackdropGrid({
 }: BackdropGridProps) {
   const style: CSSProperties = color
     ? ({
-        "--grid-color": `${color}26`,
+        "--grid-color": `${color}15`,
         backgroundImage: `
               linear-gradient(to right, var(--grid-color) 2px, transparent 2px),
               linear-gradient(to bottom, var(--grid-color) 2px, transparent 2px)
