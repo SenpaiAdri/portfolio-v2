@@ -82,10 +82,10 @@ function ContributionGrid({
     <div
       role="img"
       aria-label="GitHub contribution activity"
-      className="flex gap-0.75 lg:gap-1.5 "
+      className="flex gap-0.75 lg:gap-1"
     >
       {weeks.map((week, w) => (
-        <div key={w} className="flex flex-col gap-0.75 lg:gap-1.5">
+        <div key={w} className="flex flex-col gap-0.75 lg:gap-1">
           {week.map((day, d) =>
             day === null ? (
               <span
@@ -157,6 +157,10 @@ export function GithubContributionGraph({ className }: { className?: string }) {
           : failed
             ? "GitHub contribution graph unavailable"
             : "Loading GitHub contribution graph"}
+      </span>
+
+      <span className="self-start text-xs lg:text-sm text-ink-muted">
+        Github Contribution
       </span>
 
       <div className={cn(loading && "animate-pulse", failed && "opacity-60")}>
