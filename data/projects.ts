@@ -61,6 +61,27 @@ export const projects: Project[] = [
     website: "https://ai-blogpost.vercel.app/",
     github: "https://github.com/SenpaiAdri/AI-Blogpost",
   },
+  {
+    name: "Unique-Co",
+    description:
+      "Responsive marketing + catalog site for a local bouquet/gift shop",
+    logo: "/unique_co/logo-white-nobg.svg",
+    logoDark: "/unique_co/logo-dark-nobg.svg",
+    images: [
+      "/unique_co/hero.png",
+      "/unique_co/showcase-1.png",
+      "/unique_co/showcase-2.png",
+      "/unique_co/product-page-1.png",
+      "/unique_co/product-page-2.png",
+      "/unique_co/about-page-1.png",
+      "/unique_co/about-page-2.png",
+    ],
+    date: "February 2026 - Present",
+    role: "Full Stack Developer",
+    color: "#bd7d7d",
+    website: "https://unique-co.pages.dev",
+    github: "",
+  },
   // {
   //   name: "Lootbx",
   //   description: "A Live Streaming Platform",
